@@ -1,7 +1,9 @@
+
 /**
  * Typography
  * --------------------------------------------------
  */
+
 
 // Body text
 // -------------------------
@@ -9,6 +11,7 @@
 p {
   margin: 0 0 ($line-height-computed / 2);
 }
+
 
 // Emphasis & misc
 // -------------------------
@@ -20,6 +23,7 @@ small {
 cite {
   font-style: normal;
 }
+
 
 // Alignment
 // -------------------------
@@ -35,6 +39,7 @@ cite {
 .text-center {
   text-align: center;
 }
+
 
 // Headings
 // -------------------------
@@ -127,12 +132,10 @@ h4 small, .h4 small {
 dl {
   margin-bottom: $line-height-computed;
 }
-
 dt,
 dd {
   line-height: $line-height-base;
 }
-
 dt {
   font-weight: bold;
 }

@@ -33,13 +33,13 @@ select,
 textarea {
   @include font-shorthand($font-size-base, normal, $line-height-base); // Set size, weight, line-height here
 }
-
 input,
 button,
 select,
 textarea {
   font-family: $font-family-base; // And only set font-family here for those that need it (note the missing label element)
 }
+
 
 // Input List
 // -------------------------------
@@ -79,7 +79,6 @@ textarea {
     min-width: 14px;
   }
 }
-
 // prevent flex-shrink on WP
 .platform-windowsphone .item-input input {
   flex-shrink: 1;
@@ -152,7 +151,6 @@ textarea {
   border: none;
   background-color: $input-bg;
 }
-
 .item-stacked-label input {
   overflow: hidden;
   height: $line-height-computed + $font-size-base + 12px;
@@ -308,7 +306,6 @@ select[readonly] {
   background-color: $input-bg-disabled;
   cursor: not-allowed;
 }
-
 // Explicitly reset the colors here
 input[type="radio"][disabled],
 input[type="checkbox"][disabled],

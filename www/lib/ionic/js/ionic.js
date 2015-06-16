@@ -81,7 +81,7 @@
             if (index !== -1) {
               instances.splice(index, 1);
             }
-          };
+        };
         };
         DelegateService.prototype.$getByHandle = function (handle) {
           return new DelegateInstance(this._instances, handle);
@@ -103,8 +103,8 @@
                 //Only return the value from the first call
                 if (foundInstancesCount === 1) {
                   returnValue = ret;
-                }
               }
+            }
             });
 
             if (!foundInstancesCount && handle) {
@@ -136,7 +136,7 @@
       isDomReady = true;
       for (var x = 0; x < readyCallbacks.length; x++) {
         ionic.requestAnimationFrame(readyCallbacks[x]);
-      }
+    }
       readyCallbacks = [];
       document.removeEventListener('DOMContentLoaded', domReady);
     }
@@ -171,19 +171,19 @@
      */
     ionic.DomUtil = {
       //Call with proper context
-      /**
-       * @ngdoc method
-       * @name ionic.DomUtil#requestAnimationFrame
-       * @alias ionic.requestAnimationFrame
-       * @description Calls
-       *   [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame), or a
-       *   polyfill if not available.
-       * @param {function} callback The function to call when the next frame
-       * happens.
-       */
-      requestAnimationFrame: function (cb) {
-        return window._rAF(cb);
-      },
+    /**
+     * @ngdoc method
+     * @name ionic.DomUtil#requestAnimationFrame
+     * @alias ionic.requestAnimationFrame
+     * @description Calls
+     *   [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame), or a
+     *   polyfill if not available.
+     * @param {function} callback The function to call when the next frame
+     * happens.
+     */
+    requestAnimationFrame: function (cb) {
+      return window._rAF(cb);
+    },
 
       cancelAnimationFrame: function (requestId) {
         cancelAnimationFrame(requestId);
@@ -215,7 +215,7 @@
               cb.apply(context, args);
               isQueued = false;
             });
-          }
+        }
         };
       },
 
@@ -292,8 +292,8 @@
                 width: rect.width,
                 height: rect.height
               };
-            }
           }
+        }
         }
         return null;
       },
@@ -317,10 +317,10 @@
             if (c.nodeName && c.nodeName.toLowerCase() == type) {
               if (c == element) {
                 return k;
-              }
-              k++;
             }
+              k++;
           }
+        }
         }
         return Array.prototype.slice.call(element.parentNode.children).indexOf(element);
       },
@@ -354,7 +354,7 @@
         while (e.parentNode && depth--) {
           if (e.parentNode.classList && e.parentNode.classList.contains(className)) {
             return e.parentNode;
-          }
+        }
           e = e.parentNode;
         }
         return null;
@@ -372,7 +372,7 @@
         while (e && depth--) {
           if (e.classList && e.classList.contains(className)) {
             return e;
-          }
+        }
           e = e.parentNode;
         }
         return null;
@@ -419,10 +419,10 @@
             if (ele[dataKey] !== value) {
               ele.setAttribute(key, value);
               ele[dataKey] = value;
-            }
+          }
           } else if (typeof ele[dataKey] == 'undefined') {
             ele[dataKey] = ele.getAttribute(key);
-          }
+        }
           return ele[dataKey];
         }
       },
@@ -433,9 +433,9 @@
           for (var prop in styles) {
             if (ele['$style-' + prop] !== styles[prop]) {
               ele.style[prop] = ele['$style-' + prop] = styles[prop];
-            }
           }
         }
+      }
       }
 
     };
@@ -471,7 +471,7 @@
             bubbles: false,
             cancelable: false,
             detail: undefined
-          };
+      };
         try {
           evt = document.createEvent("CustomEvent");
           evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
@@ -498,28 +498,28 @@
     ionic.EventController = {
       VIRTUALIZED_EVENTS: ['tap', 'swipe', 'swiperight', 'swipeleft', 'drag', 'hold', 'release'],
 
-      /**
-       * @ngdoc method
-       * @name ionic.EventController#trigger
-       * @alias ionic.trigger
-       * @param {string} eventType The event to trigger.
-       * @param {object} data The data for the event. Hint: pass in
-       * `{target: targetElement}`
-       * @param {boolean=} bubbles Whether the event should bubble up the DOM.
-       * @param {boolean=} cancelable Whether the event should be cancelable.
-       */
-      // Trigger a new event
-      trigger: function (eventType, data, bubbles, cancelable) {
-        var event = new ionic.CustomEvent(eventType, {
-          detail: data,
-          bubbles: !!bubbles,
-          cancelable: !!cancelable
-        });
+    /**
+     * @ngdoc method
+     * @name ionic.EventController#trigger
+     * @alias ionic.trigger
+     * @param {string} eventType The event to trigger.
+     * @param {object} data The data for the event. Hint: pass in
+     * `{target: targetElement}`
+     * @param {boolean=} bubbles Whether the event should bubble up the DOM.
+     * @param {boolean=} cancelable Whether the event should be cancelable.
+     */
+    // Trigger a new event
+    trigger: function (eventType, data, bubbles, cancelable) {
+      var event = new ionic.CustomEvent(eventType, {
+        detail: data,
+        bubbles: !!bubbles,
+        cancelable: !!cancelable
+      });
 
-        // Make sure to trigger the event on the given target, or dispatch it from
-        // the window if we don't have an event target
-        data && data.target && data.target.dispatchEvent && data.target.dispatchEvent(event) || window.dispatchEvent(event);
-      },
+      // Make sure to trigger the event on the given target, or dispatch it from
+      // the window if we don't have an event target
+      data && data.target && data.target.dispatchEvent && data.target.dispatchEvent(event) || window.dispatchEvent(event);
+    },
 
       /**
        * @ngdoc method
@@ -539,7 +539,7 @@
             var gesture = new ionic.Gesture(element);
             gesture.on(type, callback);
             return gesture;
-          }
+        }
         }
 
         // Otherwise bind a normal event
@@ -632,17 +632,17 @@
    */
   (function (ionic) {
 
-    /**
-     * ionic.Gestures
-     * use this to create instances
-     * @param   {HTMLElement}   element
-     * @param   {Object}        options
-     * @returns {ionic.Gestures.Instance}
-     * @constructor
-     */
-    ionic.Gesture = function (element, options) {
-      return new ionic.Gestures.Instance(element, options || {});
-    };
+  /**
+   * ionic.Gestures
+   * use this to create instances
+   * @param   {HTMLElement}   element
+   * @param   {Object}        options
+   * @returns {ionic.Gestures.Instance}
+   * @constructor
+   */
+  ionic.Gesture = function (element, options) {
+    return new ionic.Gestures.Instance(element, options || {});
+  };
 
     ionic.Gestures = {};
 
@@ -707,7 +707,7 @@
       for (var name in ionic.Gestures.gestures) {
         if (ionic.Gestures.gestures.hasOwnProperty(name)) {
           ionic.Gestures.detection.register(ionic.Gestures.gestures[name]);
-        }
+      }
       }
 
       // Add touch events on the document
@@ -736,7 +736,7 @@
       if (element === null) {
         void 0;
         return this;
-      }
+    }
 
       // setup ionic.GesturesJS window events and register all gestures
       // this also sets up the default options
@@ -761,7 +761,7 @@
       ionic.Gestures.event.onTouch(element, ionic.Gestures.EVENT_START, function (ev) {
         if (self.enabled) {
           ionic.Gestures.detection.startDetect(self, ev);
-        }
+      }
       });
 
       // return instance
@@ -781,7 +781,7 @@
         for (var t = 0; t < gestures.length; t++) {
           this.element.addEventListener(gestures[t], handler, false);
         }
-        return this;
+      return this;
       },
 
 
@@ -859,112 +859,112 @@
 
 
     ionic.Gestures.event = {
-      /**
-       * simple addEventListener
-       * @param   {HTMLElement}   element
-       * @param   {String}        type
-       * @param   {Function}      handler
-       */
-      bindDom: function (element, type, handler) {
-        var types = type.split(' ');
-        for (var t = 0; t < types.length; t++) {
-          element.addEventListener(types[t], handler, false);
+    /**
+     * simple addEventListener
+     * @param   {HTMLElement}   element
+     * @param   {String}        type
+     * @param   {Function}      handler
+     */
+    bindDom: function (element, type, handler) {
+      var types = type.split(' ');
+      for (var t = 0; t < types.length; t++) {
+        element.addEventListener(types[t], handler, false);
+      }
+    },
+
+
+    /**
+     * touch events with mouse fallback
+     * @param   {HTMLElement}   element
+     * @param   {String}        eventType        like ionic.Gestures.EVENT_MOVE
+     * @param   {Function}      handler
+     */
+    onTouch: function onTouch(element, eventType, handler) {
+      var self = this;
+
+      this.bindDom(element, ionic.Gestures.EVENT_TYPES[eventType], function bindDomOnTouch(ev) {
+        var sourceEventType = ev.type.toLowerCase();
+
+        // onmouseup, but when touchend has been fired we do nothing.
+        // this is for touchdevices which also fire a mouseup on touchend
+        if (sourceEventType.match(/mouse/) && touch_triggered) {
+          return;
         }
-      },
+
+        // mousebutton must be down or a touch event
+        else if (sourceEventType.match(/touch/) ||   // touch events are always on screen
+          sourceEventType.match(/pointerdown/) || // pointerevents touch
+          (sourceEventType.match(/mouse/) && ev.which === 1)   // mouse is pressed
+        ) {
+          enable_detect = true;
+        }
+
+        // mouse isn't pressed
+        else if (sourceEventType.match(/mouse/) && ev.which !== 1) {
+          enable_detect = false;
+        }
 
 
-      /**
-       * touch events with mouse fallback
-       * @param   {HTMLElement}   element
-       * @param   {String}        eventType        like ionic.Gestures.EVENT_MOVE
-       * @param   {Function}      handler
-       */
-      onTouch: function onTouch(element, eventType, handler) {
-        var self = this;
+        // we are in a touch event, set the touch triggered bool to true,
+        // this for the conflicts that may occur on ios and android
+        if (sourceEventType.match(/touch|pointer/)) {
+          touch_triggered = true;
+        }
 
-        this.bindDom(element, ionic.Gestures.EVENT_TYPES[eventType], function bindDomOnTouch(ev) {
-          var sourceEventType = ev.type.toLowerCase();
+        // count the total touches on the screen
+        var count_touches = 0;
 
-          // onmouseup, but when touchend has been fired we do nothing.
-          // this is for touchdevices which also fire a mouseup on touchend
-          if (sourceEventType.match(/mouse/) && touch_triggered) {
-            return;
+        // when touch has been triggered in this detection session
+        // and we are now handling a mouse event, we stop that to prevent conflicts
+        if (enable_detect) {
+          // update pointerevent
+          if (ionic.Gestures.HAS_POINTEREVENTS && eventType != ionic.Gestures.EVENT_END) {
+            count_touches = ionic.Gestures.PointerEvent.updatePointer(eventType, ev);
+          }
+          // touch
+          else if (sourceEventType.match(/touch/)) {
+            count_touches = ev.touches.length;
+          }
+          // mouse
+          else if (!touch_triggered) {
+            count_touches = sourceEventType.match(/up/) ? 0 : 1;
           }
 
-          // mousebutton must be down or a touch event
-          else if (sourceEventType.match(/touch/) ||   // touch events are always on screen
-            sourceEventType.match(/pointerdown/) || // pointerevents touch
-            (sourceEventType.match(/mouse/) && ev.which === 1)   // mouse is pressed
-          ) {
-            enable_detect = true;
+          // if we are in a end event, but when we remove one touch and
+          // we still have enough, set eventType to move
+          if (count_touches > 0 && eventType == ionic.Gestures.EVENT_END) {
+            eventType = ionic.Gestures.EVENT_MOVE;
+          }
+          // no touches, force the end event
+          else if (!count_touches) {
+            eventType = ionic.Gestures.EVENT_END;
           }
 
-          // mouse isn't pressed
-          else if (sourceEventType.match(/mouse/) && ev.which !== 1) {
-            enable_detect = false;
+          // store the last move event
+          if (count_touches || last_move_event === null) {
+            last_move_event = ev;
           }
 
+          // trigger the handler
+          handler.call(ionic.Gestures.detection, self.collectEventData(element, eventType, self.getTouchList(last_move_event, eventType), ev));
 
-          // we are in a touch event, set the touch triggered bool to true,
-          // this for the conflicts that may occur on ios and android
-          if (sourceEventType.match(/touch|pointer/)) {
-            touch_triggered = true;
+          // remove pointerevent from list
+          if (ionic.Gestures.HAS_POINTEREVENTS && eventType == ionic.Gestures.EVENT_END) {
+            count_touches = ionic.Gestures.PointerEvent.updatePointer(eventType, ev);
           }
+        }
 
-          // count the total touches on the screen
-          var count_touches = 0;
+        //debug(sourceEventType +" "+ eventType);
 
-          // when touch has been triggered in this detection session
-          // and we are now handling a mouse event, we stop that to prevent conflicts
-          if (enable_detect) {
-            // update pointerevent
-            if (ionic.Gestures.HAS_POINTEREVENTS && eventType != ionic.Gestures.EVENT_END) {
-              count_touches = ionic.Gestures.PointerEvent.updatePointer(eventType, ev);
-            }
-            // touch
-            else if (sourceEventType.match(/touch/)) {
-              count_touches = ev.touches.length;
-            }
-            // mouse
-            else if (!touch_triggered) {
-              count_touches = sourceEventType.match(/up/) ? 0 : 1;
-            }
-
-            // if we are in a end event, but when we remove one touch and
-            // we still have enough, set eventType to move
-            if (count_touches > 0 && eventType == ionic.Gestures.EVENT_END) {
-              eventType = ionic.Gestures.EVENT_MOVE;
-            }
-            // no touches, force the end event
-            else if (!count_touches) {
-              eventType = ionic.Gestures.EVENT_END;
-            }
-
-            // store the last move event
-            if (count_touches || last_move_event === null) {
-              last_move_event = ev;
-            }
-
-            // trigger the handler
-            handler.call(ionic.Gestures.detection, self.collectEventData(element, eventType, self.getTouchList(last_move_event, eventType), ev));
-
-            // remove pointerevent from list
-            if (ionic.Gestures.HAS_POINTEREVENTS && eventType == ionic.Gestures.EVENT_END) {
-              count_touches = ionic.Gestures.PointerEvent.updatePointer(eventType, ev);
-            }
-          }
-
-          //debug(sourceEventType +" "+ eventType);
-
-          // on the end we reset everything
-          if (!count_touches) {
-            last_move_event = null;
-            enable_detect = false;
-            touch_triggered = false;
-            ionic.Gestures.PointerEvent.reset();
-          }
-        });
-      },
+        // on the end we reset everything
+        if (!count_touches) {
+          last_move_event = null;
+          enable_detect = false;
+          touch_triggered = false;
+          ionic.Gestures.PointerEvent.reset();
+        }
+      });
+    },
 
 
       /**
@@ -1074,7 +1074,7 @@
            */
           stopDetect: function () {
             return ionic.Gestures.detection.stopDetect();
-          }
+        }
         };
       }
     };
@@ -1109,7 +1109,7 @@
       updatePointer: function (type, pointerEvent) {
         if (type == ionic.Gestures.EVENT_END) {
           this.pointers = {};
-        }
+      }
         else {
           pointerEvent.identifier = pointerEvent.pointerId;
           this.pointers[pointerEvent.pointerId] = pointerEvent;
@@ -1169,7 +1169,7 @@
         for (var key in src) {
           if (dest[key] !== undefined && merge) {
             continue;
-          }
+        }
           dest[key] = src[key];
         }
         return dest;
@@ -1187,7 +1187,7 @@
         while (node) {
           if (node == parent) {
             return true;
-          }
+        }
           node = node.parentNode;
         }
         return false;
@@ -1331,7 +1331,7 @@
           element.onselectstart = function () {
             return false;
           };
-        }
+      }
       }
     };
 
@@ -1400,8 +1400,8 @@
             if (gesture.handler.call(gesture, eventData, this.current.inst) === false) {
               this.stopDetect();
               break;
-            }
           }
+        }
         }
 
         // store as previous event event
@@ -1453,7 +1453,7 @@
           startEv.touches = [];
           for (var i = 0, len = ev.touches.length; i < len; i++) {
             startEv.touches.push(ionic.Gestures.utils.extend({}, ev.touches[i]));
-          }
+        }
         }
 
         var delta_time = ev.timeStamp - startEv.timeStamp,
@@ -1653,21 +1653,21 @@
               if (ionic.Gestures.detection.current.name == 'hold') {
                 ionic.tap.cancelClick();
                 inst.trigger('hold', ev);
-              }
+            }
             }, inst.options.hold_timeout);
             break;
 
           // when you move or end we clear the timer
           case ionic.Gestures.EVENT_MOVE:
             if (ev.distance > inst.options.hold_threshold) {
-              clearTimeout(this.timer);
+            clearTimeout(this.timer);
             }
             break;
 
           case ionic.Gestures.EVENT_END:
             clearTimeout(this.timer);
             break;
-        }
+      }
       }
     };
 
@@ -1712,8 +1712,8 @@
           if (!did_doubletap || inst.options.tap_always) {
             ionic.Gestures.detection.current.name = 'tap';
             inst.trigger('tap', ev);
-          }
         }
+      }
       }
     };
 
@@ -1747,7 +1747,7 @@
             inst.trigger(this.name, ev);
             inst.trigger(this.name + ev.direction, ev);
           }
-        }
+      }
       }
     };
 
@@ -1793,7 +1793,7 @@
         } else if (!this.preventedFirstMove && ev.srcEvent.type == 'touchmove') {
           if (inst.options.prevent_default_directions.indexOf(ev.direction) != -1) {
             ev.srcEvent.preventDefault();
-          }
+        }
           this.preventedFirstMove = true;
         }
 
@@ -1837,7 +1837,7 @@
 
                 // recalculate event data using new start point
                 ev = ionic.Gestures.detection.extendEventData(ev);
-              }
+            }
             }
 
             // lock drag to axis?
@@ -1849,10 +1849,10 @@
               // keep direction on the axis that the drag gesture started on
               if (ionic.Gestures.utils.isVertical(last_direction)) {
                 ev.direction = (ev.deltaY < 0) ? ionic.Gestures.DIRECTION_UP : ionic.Gestures.DIRECTION_DOWN;
-              }
+            }
               else {
                 ev.direction = (ev.deltaX < 0) ? ionic.Gestures.DIRECTION_LEFT : ionic.Gestures.DIRECTION_RIGHT;
-              }
+            }
             }
 
             // first time, trigger dragstart event
@@ -1882,7 +1882,7 @@
 
             this.triggered = false;
             break;
-        }
+      }
       }
     };
 
@@ -1972,7 +1972,7 @@
 
             this.triggered = false;
             break;
-        }
+      }
       }
     };
 
@@ -2008,7 +2008,7 @@
 
         if (ev.eventType == ionic.Gestures.EVENT_START) {
           inst.trigger(this.name, ev);
-        }
+      }
       }
     };
 
@@ -2024,7 +2024,7 @@
       handler: function releaseGesture(ev, inst) {
         if (ev.eventType == ionic.Gestures.EVENT_END) {
           inst.trigger(this.name, ev);
-        }
+      }
       }
     };
   })(window.ionic);
@@ -2050,7 +2050,7 @@
      * @description
      * A set of utility methods that can be used to retrieve the device ready state and
      * various other information such as what kind of platform the app is currently installed on.
-     *
+   *
      * @usage
      * ```js
      * angular.module('PlatformApp', ['ionic'])
@@ -2085,7 +2085,7 @@
        * @ngdoc property
        * @name ionic.Platform#isReady
        * @returns {boolean} Whether the device is ready.
-       */
+     */
       isReady: false,
       /**
        * @ngdoc property
@@ -2142,7 +2142,7 @@
           // only add to the body class if we got platform info
           for (var i = 0; i < self.platforms.length; i++) {
             document.body.classList.add('platform-' + self.platforms[i]);
-          }
+        }
         });
       },
 
@@ -2202,7 +2202,7 @@
               v = v.replace('.', '_');
             } else {
               v += '_0';
-            }
+          }
             self.platforms.push(platform + v.split('_')[0]);
             self.platforms.push(platform + v);
 
@@ -2210,8 +2210,8 @@
               grade = (version < 4 ? 'c' : 'b');
             } else if (self.isWindowsPhone()) {
               grade = 'b';
-            }
           }
+        }
         }
 
         self.setGrade(grade);
@@ -2312,7 +2312,7 @@
           if (!isNaN(v)) {
             platformVersion = v;
             return;
-          }
+        }
         }
 
         platformVersion = 0;
@@ -2328,7 +2328,7 @@
           v = self.ua.match(versionMatch[pName]);
           if (v && v.length > 2) {
             platformVersion = parseFloat(v[1] + '.' + v[2]);
-          }
+        }
         }
       },
 
@@ -2339,7 +2339,7 @@
         if (self.platforms) {
           for (var x = 0; x < self.platforms.length; x++) {
             if (self.platforms[x] === type) return true;
-          }
+        }
         }
         // exact match
         var pName = self.platform();
@@ -2384,7 +2384,7 @@
               window.StatusBar && window.StatusBar.hide();
               document.body.classList.add('status-bar-hide');
             }
-          });
+        });
         });
       },
 
@@ -2410,7 +2410,7 @@
             } else {
               document.body.classList.remove('fullscreen');
             }
-          });
+        });
           // showStatusBar: default is false if no param provided
           self.showStatusBar((showStatusBar === true));
         });
@@ -2429,11 +2429,11 @@
         // the window and scripts are fully loaded, and a cordova/phonegap
         // object exists then let's listen for the deviceready
         document.addEventListener("deviceready", onPlatformReady, false);
-      } else {
+    } else {
         // the window and scripts are fully loaded, but the window object doesn't have the
         // cordova/phonegap object, so its just a browser, not a webview wrapped w/ cordova
         onPlatformReady();
-      }
+    }
       if (windowLoadListenderAttached) {
         window.removeEventListener("load", onWindowLoad, false);
       }
@@ -2453,7 +2453,7 @@
       for (var x = 0; x < readyCallbacks.length; x++) {
         // fire off all the callbacks that were added before the platform was ready
         readyCallbacks[x]();
-      }
+    }
       readyCallbacks = [];
       ionic.trigger('platformready', {target: document});
 
@@ -2480,7 +2480,7 @@
         if (document.documentElement.style[keys[i]] !== undefined) {
           ionic.CSS.TRANSFORM = keys[i];
           break;
-        }
+      }
       }
 
       // transition
@@ -2489,7 +2489,7 @@
         if (document.documentElement.style[keys[i]] !== undefined) {
           ionic.CSS.TRANSITION = keys[i];
           break;
-        }
+      }
       }
 
       // The only prefix we care about is webkit for transitions.
@@ -2757,7 +2757,7 @@
           if (focusInput.isContentEditable) {
             clonedInput.contentEditable = focusInput.contentEditable;
             clonedInput.innerHTML = focusInput.innerHTML;
-          }
+        }
           focusInput.parentElement.insertBefore(clonedInput, focusInput);
           focusInput.classList.add('previous-input-focus');
 
@@ -2784,7 +2784,7 @@
           previousInputFocus[x].classList.remove('previous-input-focus');
           previousInputFocus[x].style.top = '';
           if (ionic.keyboard.isOpen && !ionic.keyboard.isClosing) previousInputFocus[x].focus();
-        }
+      }
       });
     },
 
@@ -2809,9 +2809,9 @@
         while (element) {
           if ((element.dataset ? element.dataset.tapDisabled : element.getAttribute('data-tap-disabled')) == 'true') {
             return true;
-          }
-          element = element.parentElement;
         }
+          element = element.parentElement;
+      }
       }
       return false;
     },
@@ -2837,8 +2837,8 @@
         if (e) {
           c.x = e.clientX || e.pageX || 0;
           c.y = e.clientY || e.pageY || 0;
-        }
       }
+    }
       return c;
     }
 
@@ -2849,7 +2849,7 @@
       tapDoc.addEventListener(type, tapEventListeners[type], useCapture);
     } else {
       tapDoc.removeEventListener(type, tapEventListeners[type]);
-    }
+  }
   }
 
   function tapClick(e) {
@@ -2881,7 +2881,7 @@
     if (e.target.type == 'submit' && e.detail === 0) {
       // do not prevent click if it came from an "Enter" or "Go" keypress submit
       return null;
-    }
+  }
 
     // do not allow through any click events that were not created by ionic.tap
     if ((ionic.scroll.isScrolling && ionic.tap.containsOrIsTextInput(e.target)) ||
@@ -2892,9 +2892,9 @@
       if (!ionic.tap.isLabelWithTextInput(e.target)) {
         // labels clicks from native should not preventDefault othersize keyboard will not show on input focus
         e.preventDefault();
-      }
-      return false;
     }
+      return false;
+  }
   }
 
 // MOUSE
@@ -2912,7 +2912,7 @@
         // input the 300ms delay can change focus on inputs after the keyboard shows up.
         // The focusin event handles the chance of focus changing after the keyboard shows.
         e.preventDefault();
-      }
+    }
 
       return false;
     }
@@ -2930,7 +2930,7 @@
       e.stopPropagation();
       e.preventDefault();
       return false;
-    }
+  }
 
     if (tapIgnoreEvent(e) || (/^(select|option)$/i).test(e.target.tagName)) return false;
 
@@ -2944,11 +2944,11 @@
 
   function tapMouseMove(e) {
     if (tapHasPointerMoved(e)) {
-      tapEventListener('mousemove', false);
-      ionic.activator.end();
+    tapEventListener('mousemove', false);
+    ionic.activator.end();
       tapPointerMoved = true;
       return false;
-    }
+  }
   }
 
 
@@ -2975,8 +2975,8 @@
       if (textInput !== tapActiveEle) {
         // don't preventDefault on an already focused input or else iOS's text caret isn't usable
         e.preventDefault();
-      }
     }
+  }
   }
 
   function tapTouchEnd(e) {
@@ -2989,8 +2989,8 @@
 
       if ((/^(select|option)$/i).test(e.target.tagName)) {
         e.preventDefault();
-      }
     }
+  }
 
     tapLastTouchTarget = e.target;
     tapTouchCancel();
@@ -2999,10 +2999,10 @@
   function tapTouchMove(e) {
     if (tapHasPointerMoved(e)) {
       tapPointerMoved = true;
-      tapEventListener(tapTouchMoveListener, false);
-      ionic.activator.end();
+    tapEventListener(tapTouchMoveListener, false);
+    ionic.activator.end();
       return false;
-    }
+  }
   }
 
   function tapTouchCancel() {
@@ -3026,7 +3026,7 @@
     if (ionic.scroll.isScrolling && ionic.tap.containsOrIsTextInput(e.target)) {
       e.preventDefault();
       return true;
-    }
+  }
   }
 
   function tapHandleFocus(ele) {
@@ -3050,18 +3050,18 @@
       ele.value = ele.value;
       if (tapEnabledTouchEvents) {
         tapTouchFocusedInput = ele;
-      }
+    }
 
     } else {
       tapFocusOutActive();
-    }
+  }
 
     if (triggerFocusIn) {
       tapActiveElement(ele);
       ionic.trigger('ionic.focusin', {
         target: ele
       }, true);
-    }
+  }
   }
 
   function tapFocusOutActive() {
@@ -3091,7 +3091,7 @@
       void 0;
       tapTouchFocusedInput.focus();
       tapTouchFocusedInput = null;
-    }
+  }
     ionic.scroll.isScrolling = false;
   }
 
@@ -3103,14 +3103,14 @@
   function tapActiveElement(ele) {
     if (arguments.length) {
       tapActiveEle = ele;
-    }
+  }
     return tapActiveEle || document.activeElement;
   }
 
   function tapHasPointerMoved(endEvent) {
     if (!endEvent || endEvent.target.nodeType !== 1 || !tapPointerStart || (tapPointerStart.x === 0 && tapPointerStart.y === 0)) {
       return false;
-    }
+  }
     var endCoordinates = ionic.tap.pointerCoord(endEvent);
 
     var hasClassList = !!(endEvent.target.classList && endEvent.target.classList.contains &&
@@ -3129,7 +3129,7 @@
       if (!climbEle) break;
       if (climbEle.tagName === 'LABEL') return climbEle;
       climbEle = climbEle.parentElement;
-    }
+  }
     if (allowSelf !== false) return ele;
   }
 
@@ -3141,8 +3141,8 @@
       if (ele.querySelector) {
         var control = ele.querySelector('input,textarea,select');
         if (control) return control;
-      }
     }
+  }
     return ele;
   }
 
@@ -3182,7 +3182,7 @@
             if (eleToActivate && ele.classList && ele.classList.contains('item')) {
               eleToActivate = ele;
               break;
-            }
+          }
             if (ele.tagName == 'A' || ele.tagName == 'BUTTON' || ele.hasAttribute('ng-click')) {
               eleToActivate = ele;
               break;
@@ -3232,8 +3232,8 @@
         if (queueElements[key]) {
           queueElements[key].classList.add(ACTIVATED_CLASS);
           activeElements[key] = queueElements[key];
-        }
       }
+    }
       queueElements = {};
     }
 
@@ -3247,8 +3247,8 @@
         if (activeElements[key]) {
           activeElements[key].classList.remove(ACTIVATED_CLASS);
           delete activeElements[key];
-        }
       }
+    }
     }
 
   })(document, ionic);
@@ -3269,7 +3269,7 @@
           var k = newIndex - arr.length;
           while ((k--) + 1) {
             arr.push(undefined);
-          }
+        }
         }
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
         return arr;
@@ -3305,8 +3305,8 @@
             } else {
               timeout = null;
               if (!immediate) result = func.apply(context, args);
-            }
-          };
+          }
+        };
           var callNow = immediate && !timeout;
           if (!timeout) {
             timeout = setTimeout(later, wait);
@@ -3338,12 +3338,12 @@
           args = arguments;
           if (remaining <= 0) {
             clearTimeout(timeout);
-            timeout = null;
+          timeout = null;
             previous = now;
-            result = func.apply(context, args);
+          result = func.apply(context, args);
           } else if (!timeout && options.trailing !== false) {
             timeout = setTimeout(later, remaining);
-          }
+        }
           return result;
         };
       },
@@ -3437,7 +3437,7 @@
 
         if (scope.$root === scope) {
           return; // we can't disconnect the root node;
-        }
+      }
         if (!scope.$$disconnected) {
           return;
         }
@@ -3608,82 +3608,82 @@
    */
   ionic.keyboard = {
 
-    /**
-     * Whether the keyboard is open or not.
-     */
-    isOpen: false,
+  /**
+   * Whether the keyboard is open or not.
+   */
+  isOpen: false,
 
-    /**
-     * Whether the keyboard is closing or not.
-     */
-    isClosing: false,
+  /**
+   * Whether the keyboard is closing or not.
+   */
+  isClosing: false,
 
-    /**
-     * Whether the keyboard is opening or not.
-     */
-    isOpening: false,
+  /**
+   * Whether the keyboard is opening or not.
+   */
+  isOpening: false,
 
-    /**
-     * The height of the keyboard in pixels, as reported by the keyboard plugin.
-     * If the plugin is not available, calculated as the difference in
-     * window.innerHeight after the keyboard has shown.
-     */
-    height: 0,
+  /**
+   * The height of the keyboard in pixels, as reported by the keyboard plugin.
+   * If the plugin is not available, calculated as the difference in
+   * window.innerHeight after the keyboard has shown.
+   */
+  height: 0,
 
-    /**
-     * Whether the device is in landscape orientation or not.
-     */
-    isLandscape: false,
+  /**
+   * Whether the device is in landscape orientation or not.
+   */
+  isLandscape: false,
 
-    /**
-     * Whether the keyboard event listeners have been added or not
-     */
-    isInitialized: false,
+  /**
+   * Whether the keyboard event listeners have been added or not
+   */
+  isInitialized: false,
 
-    /**
-     * Hide the keyboard, if it is open.
-     */
-    hide: function () {
-      if (keyboardHasPlugin()) {
-        cordova.plugins.Keyboard.close();
-      }
-      keyboardActiveElement && keyboardActiveElement.blur();
-    },
+  /**
+   * Hide the keyboard, if it is open.
+   */
+  hide: function () {
+    if (keyboardHasPlugin()) {
+      cordova.plugins.Keyboard.close();
+    }
+    keyboardActiveElement && keyboardActiveElement.blur();
+  },
 
-    /**
-     * An alias for cordova.plugins.Keyboard.show(). If the keyboard plugin
-     * is installed, show the keyboard.
-     */
-    show: function () {
-      if (keyboardHasPlugin()) {
-        cordova.plugins.Keyboard.show();
-      }
-    },
+  /**
+   * An alias for cordova.plugins.Keyboard.show(). If the keyboard plugin
+   * is installed, show the keyboard.
+   */
+  show: function () {
+    if (keyboardHasPlugin()) {
+      cordova.plugins.Keyboard.show();
+    }
+  },
 
-    /**
-     * Remove all keyboard related event listeners, effectively disabling Ionic's
-     * keyboard adjustments.
-     */
-    disable: function () {
-      if (keyboardHasPlugin()) {
-        window.removeEventListener('native.keyboardshow', debouncedKeyboardNativeShow);
-        window.removeEventListener('native.keyboardhide', keyboardFocusOut);
-      } else {
-        document.body.removeEventListener('focusout', keyboardFocusOut);
-      }
+  /**
+   * Remove all keyboard related event listeners, effectively disabling Ionic's
+   * keyboard adjustments.
+   */
+  disable: function () {
+    if (keyboardHasPlugin()) {
+      window.removeEventListener('native.keyboardshow', debouncedKeyboardNativeShow);
+      window.removeEventListener('native.keyboardhide', keyboardFocusOut);
+    } else {
+      document.body.removeEventListener('focusout', keyboardFocusOut);
+    }
 
-      document.body.removeEventListener('ionic.focusin', debouncedKeyboardFocusIn);
-      document.body.removeEventListener('focusin', debouncedKeyboardFocusIn);
+    document.body.removeEventListener('ionic.focusin', debouncedKeyboardFocusIn);
+    document.body.removeEventListener('focusin', debouncedKeyboardFocusIn);
 
-      window.removeEventListener('orientationchange', keyboardOrientationChange);
+    window.removeEventListener('orientationchange', keyboardOrientationChange);
 
-      if (window.navigator.msPointerEnabled) {
-        document.removeEventListener("MSPointerDown", keyboardInit);
-      } else {
-        document.removeEventListener('touchstart', keyboardInit);
-      }
-      ionic.keyboard.isInitialized = false;
-    },
+    if (window.navigator.msPointerEnabled) {
+      document.removeEventListener("MSPointerDown", keyboardInit);
+    } else {
+      document.removeEventListener('touchstart', keyboardInit);
+    }
+    ionic.keyboard.isInitialized = false;
+  },
 
     /**
      * Alias for keyboardInit, initialize all keyboard related event listeners.
@@ -3788,7 +3788,7 @@
     if (!ionic.keyboard.isOpen || ionic.keyboard.isClosing) {
       ionic.keyboard.isOpening = true;
       ionic.keyboard.isClosing = false;
-    }
+  }
 
     // attempt to prevent browser from natively scrolling input into view while
     // we are trying to do the same (while we are scrolling) if the user taps the
@@ -3815,7 +3815,7 @@
 
     } else if (ionic.keyboard.isOpen) {
       keyboardShow();
-    }
+  }
   }
 
   /**
@@ -3849,7 +3849,7 @@
         } else {
           keyboardWaitForResize(keyboardHide, false);
         }
-      });
+    });
     }, 50);
   }
 
@@ -3885,9 +3885,9 @@
     if (ionic.Platform.isAndroid()) {
       if (!ionic.keyboard.isOpen || !keyboardHasPlugin()) {
         keyboardWaitForResize(keyboardUpdateViewportHeight, false);
-      } else {
+    } else {
         wasOrientationChange = true;
-      }
+    }
     }
   }
 
@@ -3899,7 +3899,7 @@
   function keyboardOnKeyDown(e) {
     if (ionic.scroll.isScrolling) {
       keyboardPreventDefault(e);
-    }
+  }
   }
 
   /**
@@ -3909,7 +3909,7 @@
   function keyboardPreventDefault(e) {
     if (e.target.tagName !== 'TEXTAREA') {
       e.preventDefault();
-    }
+  }
   }
 
   /* Private API */
@@ -3949,7 +3949,7 @@
       maxCount = 10;
     } else {
       maxCount = 1;
-    }
+  }
 
     // poll timer
     waitForResizeTimer = setInterval(function () {
@@ -3961,17 +3961,17 @@
       if (++count < maxCount &&
         ((!isPortraitViewportHeight(viewportHeight) && !isLandscapeViewportHeight(viewportHeight)) || !ionic.keyboard.height)) {
         return;
-      }
+    }
 
       // infer the keyboard height from the resize if not using the keyboard plugin
       if (!keyboardHasPlugin()) {
         ionic.keyboard.height = Math.abs(initialHeight - window.innerHeight);
-      }
+    }
 
       // set to true if we were waiting for the keyboard to open
       ionic.keyboard.isOpen = isOpening;
 
-      clearInterval(waitForResizeTimer);
+    clearInterval(waitForResizeTimer);
       //var end = Date.now();
       //console.log("waitForResize count: " + count);
       //console.log("end: " + end);
@@ -4022,7 +4022,7 @@
       // focus and keyboard can re-appear on subsequent taps (like scrolling)
       if (keyboardHasPlugin()) cordova.plugins.Keyboard.close();
       keyboardActiveElement && keyboardActiveElement.blur();
-    }
+  }
 
     keyboardActiveElement = null;
   }
@@ -4102,10 +4102,10 @@
 
       if (!ionic.Platform.isWebView()) {
         return 216;
-      }
+    }
 
       return 260;
-    }
+  }
 
     // safe guess
     return 275;
@@ -4134,17 +4134,17 @@
     } else if (!ionic.keyboard.isLandscape && !keyboardPortraitViewportHeight) {
       //console.log("saved portrait: " + keyboardCurrentViewportHeight);
       keyboardPortraitViewportHeight = keyboardCurrentViewportHeight;
-    }
+  }
 
     if (keyboardActiveElement) {
       ionic.trigger('resetScrollView', {
         target: keyboardActiveElement
       }, true);
-    }
+  }
 
     if (ionic.keyboard.isOpen && ionic.tap.isTextInput(keyboardActiveElement)) {
       keyboardShow();
-    }
+  }
   }
 
   function keyboardInitViewportHeight() {
@@ -4177,7 +4177,7 @@
       (ionic.keyboard.isOpen || ionic.keyboard.isOpening) && !ionic.keyboard.isClosing) {
 
       return windowHeight + keyboardGetHeight();
-    }
+  }
     return windowHeight;
   }
 
@@ -4185,9 +4185,9 @@
     while (ele) {
       if (ele.classList.contains(SCROLL_CONTAINER_CSS)) {
         return ele;
-      }
-      ele = ele.parentElement;
     }
+      ele = ele.parentElement;
+  }
     return null;
   }
 
@@ -4207,8 +4207,8 @@
 
      if (ionic.Platform.isAndroid()) {
      //TODO: onbackpressed to detect keyboard close without focusout or plugin
-     }
-     }
+    }
+  }
      */
 
     // if orientation changes while app is in background, update on resuming
@@ -4255,7 +4255,7 @@
       if (document.head.children[x].name == 'viewport') {
         viewportTag = document.head.children[x];
         break;
-      }
+    }
     }
 
     if (viewportTag) {
@@ -4265,10 +4265,10 @@
         if (props[x]) {
           keyValue = props[x].split('=');
           viewportProperties[keyValue[0]] = (keyValue.length > 1 ? keyValue[1] : '_');
-        }
       }
-      viewportUpdate();
     }
+      viewportUpdate();
+  }
   }
 
   function viewportUpdate() {
@@ -4308,13 +4308,13 @@
           } else if (version == 7) {
             // iPad <= 7.0 WebView Portait
             viewportProperties.height = DEVICE_HEIGHT;
-          }
+        }
         } else {
           // iPad <= 6.1 Browser
           if (version < 7) {
             viewportProperties.height = '0';
           }
-        }
+      }
       }
 
     } else if (p.isIOS()) {
@@ -4344,10 +4344,10 @@
           // iPhone <= 6.1 Browser
           // if height was set it needs to get removed with this hack for <= 6.1
           if (initHeight) viewportProperties.height = '0';
-        }
       }
-
     }
+
+  }
 
     // only update the viewport tag if there was a change
     if (initWidth !== viewportProperties.width || initHeight !== viewportProperties.height) {
@@ -4361,7 +4361,7 @@
       if (viewportProperties[key]) {
         props.push(key + (viewportProperties[key] == '_' ? '' : '=' + viewportProperties[key]));
       }
-    }
+  }
 
     viewportTag.content = props.join(', ');
   }
@@ -4479,7 +4479,7 @@
                 if (currentRequests.hasOwnProperty(key)) {
                   currentRequests[key](time);
                   lastActive = time;
-                }
+              }
               }
 
               // Disable the timeout when nothing happens for a certain
@@ -4558,7 +4558,7 @@
           var newRunning = {};
           for (var usedId in running) {
             newRunning[usedId] = true;
-          }
+        }
           running = newRunning;
         }
 
@@ -4588,7 +4588,7 @@
             for (var j = 0; j < Math.min(droppedFrames, 4); j++) {
               step(true);
               dropCounter++;
-            }
+          }
 
           }
 
@@ -4597,7 +4597,7 @@
             percent = (now - start) / duration;
             if (percent > 1) {
               percent = 1;
-            }
+          }
           }
 
           // Execute step callback, then...
@@ -5105,7 +5105,7 @@
               // update D if we shrunk
               if (self.isShrunkForKeyboard && !alreadyShrunk) {
                 scrollBottomOffsetToTop = container.getBoundingClientRect().bottom;
-              }
+          }
 
               // middle of the scrollview, this is where we want to scroll to
               // (D - A) / 2
@@ -5212,7 +5212,7 @@
               Math.abs(self.startCoordinates.x - currentCoordinates.x) > 20) {
               // user slid the text input's caret on its x axis, disable any future y scrolling
               self.__enableScrollY = false;
-              self.__isSelectable = true;
+          self.__isSelectable = true;
             }
 
             if (self.__enableScrollY && Math.abs(self.startCoordinates.y - currentCoordinates.y) > 10) {
@@ -5311,7 +5311,7 @@
           self.mouseMove = function (e) {
             if (self.options.freeze || !mousedown || (!mousedown && e.defaultPrevented)) {
               return;
-            }
+        }
 
             self.doTouchMove(getEventTouches(e), e.timeStamp);
 
@@ -5556,7 +5556,7 @@
             if (self.__indicatorY.originProp !== 'center top') {
               self.__indicatorY.indicator.style[self.__transformOriginProperty] = 'center top';
               self.__indicatorY.originProp = 'center top';
-            }
+        }
 
           } else if (heightDiff > 0) {
 
@@ -5569,7 +5569,7 @@
             if (self.__indicatorY.originProp !== 'center bottom') {
               self.__indicatorY.indicator.style[self.__transformOriginProperty] = 'center bottom';
               self.__indicatorY.originProp = 'center bottom';
-            }
+        }
 
           } else {
 
@@ -5686,11 +5686,11 @@
             if (translate3d !== self.contentTransform) {
               content.style[transformProperty] = translate3d;
               self.contentTransform = translate3d;
-            }
+        }
             self.__repositionScrollbars();
             if (!wasResize) {
               self.triggerScrollEvent();
-            }
+        }
           };
 
         } else if (helperElem.style[transformProperty] !== undef) {
@@ -5700,7 +5700,7 @@
             self.__repositionScrollbars();
             if (!wasResize) {
               self.triggerScrollEvent();
-            }
+        }
           };
 
         } else {
@@ -5712,7 +5712,7 @@
             self.__repositionScrollbars();
             if (!wasResize) {
               self.triggerScrollEvent();
-            }
+        }
           };
 
         }
@@ -5874,7 +5874,7 @@
             self.__refreshActive = false;
             if (self.__refreshDeactivate) {
               self.__refreshDeactivate();
-            }
+        }
             if (self.__refreshHide) {
               self.__refreshHide();
             }
@@ -6312,7 +6312,7 @@
                   } else {
                     self.__refreshHide();
                     self.__refreshHidden = true;
-                  }
+              }
 
                   if (!self.__refreshActive && scrollTop <= -self.__refreshHeight) {
 
@@ -6344,7 +6344,7 @@
               // if a positive scroll value and the refresher is still not hidden, hide it
               self.__refreshHide();
               self.__refreshHidden = true;
-            }
+        }
           }
 
           // Keep list from growing infinitely (holding min 10, max 20 measure points)
@@ -6454,11 +6454,11 @@
                 // Deactivate pull-to-refresh when decelerating
                 if (!self.__refreshActive) {
                   self.__startDeceleration(timeStamp);
-                }
-              }
+            }
+          }
             } else {
               self.__scrollingComplete();
-            }
+        }
           } else if ((timeStamp - self.__lastTouchMove) > 100) {
             self.__scrollingComplete();
           }
@@ -6497,7 +6497,7 @@
 
             if (self.__interruptedAnimation || self.__isDragging) {
               self.__scrollingComplete();
-            }
+        }
             self.scrollTo(self.__scrollLeft, self.__scrollTop, true, self.__zoomLevel);
 
             // Directly signalize deactivation (nothing todo on refresh?)
@@ -6565,12 +6565,12 @@
               self.__scrollTop = oldTop + (diffTop * percent);
               self.__zoomLevel = oldZoom + (diffZoom * percent);
 
-              // Push values out
-              if (self.__callback) {
-                self.__callback(self.__scrollLeft, self.__scrollTop, self.__zoomLevel, wasResize);
-              }
+          // Push values out
+          if (self.__callback) {
+            self.__callback(self.__scrollLeft, self.__scrollTop, self.__zoomLevel, wasResize);
+          }
 
-            }
+        }
           };
 
           var verify = function (id) {
@@ -6587,7 +6587,7 @@
 
             if (self.options.zooming) {
               self.__computeScrollMax();
-            }
+        }
           };
 
           // When continuing based on previous animation we choose an ease-out animation instead of ease-in-out
@@ -6836,14 +6836,14 @@
             var isHeadingOutwardsX = scrollOutsideX * self.__decelerationVelocityX <= self.__minDecelerationScrollLeft;
             if (isHeadingOutwardsX) {
               self.__decelerationVelocityX += scrollOutsideX * penetrationDeceleration;
-            }
+        }
             var isStoppedX = Math.abs(self.__decelerationVelocityX) <= self.__minVelocityToKeepDecelerating;
             //If we're not heading outwards, or if the above statement got us below minDeceleration, go back towards
             // bounds
             if (!isHeadingOutwardsX || isStoppedX) {
               self.__decelerationVelocityX = scrollOutsideX * penetrationAcceleration;
             }
-          }
+      }
 
           if (scrollOutsideY !== 0) {
             var isHeadingOutwardsY = scrollOutsideY * self.__decelerationVelocityY <= self.__minDecelerationScrollTop;
@@ -6937,19 +6937,19 @@
           self.options[key] = options[key];
         }
 
-        /**
-         * Sets isScrolling to true, and automatically deactivates if not called again in 80ms.
-         */
-        self.onScroll = function () {
-          if (!ionic.scroll.isScrolling) {
-            ionic.scroll.isScrolling = true;
-          }
+      /**
+       * Sets isScrolling to true, and automatically deactivates if not called again in 80ms.
+       */
+      self.onScroll = function () {
+        if (!ionic.scroll.isScrolling) {
+          ionic.scroll.isScrolling = true;
+        }
 
-          clearTimeout(self.scrollTimer);
-          self.scrollTimer = setTimeout(function () {
-            ionic.scroll.isScrolling = false;
-          }, 80);
-        };
+        clearTimeout(self.scrollTimer);
+        self.scrollTimer = setTimeout(function () {
+          ionic.scroll.isScrolling = false;
+        }, 80);
+      };
 
         self.freeze = NOOP;
 
@@ -7139,7 +7139,7 @@
 
             if (fromY != Y) {
               self.el.scrollTop = parseInt((easedT * (Y - fromY)) + fromY, 10);
-            }
+          }
             if (fromX != X) {
               self.el.scrollLeft = parseInt((easedT * (X - fromX)) + fromX, 10);
             }
@@ -7151,7 +7151,7 @@
               // done
               self.resize();
             }
-          }
+        }
 
           // start scroll loop
           ionic.requestAnimationFrame(animateScrollStep);
@@ -7326,7 +7326,7 @@
         buttonsWidth: buttonsWidth,
         content: content,
         startOffsetX: offsetX
-      };
+    };
     };
 
     /**
@@ -7388,7 +7388,7 @@
         if (newX < -buttonsWidth) {
           // Calculate the new X position, capped at the top of the buttons
           newX = Math.min(-buttonsWidth, -buttonsWidth + (((e.gesture.deltaX + buttonsWidth) * 0.4)));
-        }
+      }
 
         this._currentDrag.content.$$ionicOptionsOpen = newX !== 0;
 
@@ -7420,7 +7420,7 @@
 
         } else if (e.gesture.direction == "right") {
           restingPoint = 0;
-        }
+      }
 
       }
 
@@ -7504,7 +7504,7 @@
         placeholder: placeholder,
         scrollHeight: scroll,
         list: placeholder.parentNode
-      };
+    };
 
       this._moveElement(e);
     };
@@ -7540,12 +7540,12 @@
         if (e.gesture.deltaY > 0 && pixelsPastBottom > 0) {
           if (scrollY < this.scrollView.getScrollMax().top) {
             this.scrollView.scrollBy(null, pixelsPastBottom);
-            //Trigger another drag so the scrolling keeps going
+          //Trigger another drag so the scrolling keeps going
             ionic.requestAnimationFrame(function () {
-              self.drag(e);
-            });
-          }
+            self.drag(e);
+          });
         }
+      }
       }
 
       // Check if we should start dragging. Check if we've dragged past the threshold,
@@ -7578,8 +7578,8 @@
         el = siblings[i];
         if (i === len - 1) {
           if (dragOffsetTop > el.offsetTop) {
-            return i;
-          }
+          return i;
+        }
         } else if (i === 0) {
           if (dragOffsetTop < el.offsetTop + el.offsetHeight) {
             return i;
@@ -7587,7 +7587,7 @@
         } else if (dragOffsetTop > el.offsetTop - el.offsetHeight / 2 &&
           dragOffsetTop < el.offsetTop + el.offsetHeight) {
           return i;
-        }
+      }
       }
       return self._currentDrag.startIndex;
     };
@@ -7613,7 +7613,7 @@
       this._currentDrag = {
         placeholder: null,
         content: null
-      };
+    };
       this._currentDrag = null;
       doneCallback && doneCallback();
     };
@@ -7634,7 +7634,7 @@
           virtualAddThreshold: 200,
           canSwipe: function () {
             return true;
-          }
+        }
         }, opts);
 
         ionic.extend(self, opts);
@@ -7729,7 +7729,7 @@
           for (var i = 0; i < this._virtualItemsToRemove.length; i++) {
             //el.parentNode.removeChild(el);
             this.didHideItem && this.didHideItem(i);
-          }
+        }
           // Once scrolling stops, check if we need to remove old items
 
         }
@@ -7761,7 +7761,7 @@
         while (target) {
           if (target.classList && target.classList.contains(ITEM_CLASS)) {
             return target;
-          }
+        }
           target = target.parentNode;
         }
         return null;
@@ -7797,7 +7797,7 @@
             });
             self._dragOp.start(e);
             e.preventDefault();
-          }
+        }
         }
 
         // Or check if this is a swipe to the side drag
@@ -7814,7 +7814,7 @@
             self._dragOp.start(e);
             e.preventDefault();
             self.isScrollFreeze = self.scrollView.freeze(true);
-          }
+        }
         }
 
         // If we had a last drag operation and this is a new one on a different item, clean that last one
@@ -7861,7 +7861,7 @@
         // No drag still, pass it up
         if (!self._dragOp) {
           return;
-        }
+      }
 
         e.gesture.srcEvent.preventDefault();
         self._dragOp.drag(e);
@@ -7897,7 +7897,7 @@
             var input = self.el.querySelector('input, textarea');
             input && input.focus && input.focus();
           }, self.focusFirstDelay);
-        }
+      }
       },
       hide: function () {
         // Unfocus all elements
@@ -7942,7 +7942,7 @@
       bringUp: function () {
         if (this.el.style.zIndex !== '0') {
           this.el.style.zIndex = '0';
-        }
+      }
       },
       pushDown: function () {
         if (this.el.style.zIndex !== '-1') {
@@ -8424,7 +8424,7 @@
                     move(circle(index + 1), width, 0);
                     move(circle(index - 2), -width, 0);
 
-                  } else {
+              } else {
                     move(index + 1, width, 0);
                   }
 
@@ -8444,12 +8444,12 @@
                   move(index, 0, speed);
                   move(circle(index + 1), width, speed);
 
-                } else {
+            } else {
 
                   move(index - 1, -width, speed);
                   move(index, 0, speed);
                   move(index + 1, width, speed);
-                }
+            }
 
               }
 
@@ -8616,7 +8616,7 @@
               setup();
             }; // to play nice with old IE
 
-          }
+      }
         };
 
       }
@@ -8714,7 +8714,7 @@
               self.setOpenPercent(0);
             } else if (px > self._dragInfo.triggerX) {
               self.setOpenPercent(100);
-            }
+          }
           } else {
             // The initial state was off, so "tend towards" off
             if (px < self._dragInfo.triggerX) {
@@ -8752,7 +8752,7 @@
             var openPixel = Math.round((openPercent / 100) * this.track.offsetWidth - (this.handle.offsetWidth));
             openPixel = (openPixel < 1 ? 0 : openPixel);
             this.handle.style[ionic.CSS.TRANSFORM] = 'translate3d(' + openPixel + 'px,0,0)';
-          }
+        }
         }
       },
 
@@ -8760,11 +8760,11 @@
         if (value === true || value === false) {
           if (this.handle.style[ionic.CSS.TRANSFORM] !== "") {
             this.handle.style[ionic.CSS.TRANSFORM] = "";
-          }
+        }
           this.checkbox.checked = value;
           this.openPercent = (value ? 100 : 0);
           this.onChange && this.onChange();
-        }
+      }
         return this.checkbox.checked;
       }
 

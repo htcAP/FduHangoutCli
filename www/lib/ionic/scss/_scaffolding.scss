@@ -1,3 +1,4 @@
+
 /**
  * Scaffolding
  * --------------------------------------------------
@@ -73,7 +74,7 @@ body.grade-c {
   height: auto;
 }
 
-.menu .scroll-content.scroll-content-false {
+.menu .scroll-content.scroll-content-false{
   z-index: $z-index-scroll-content-false;
 }
 
@@ -96,26 +97,21 @@ body.grade-c {
   @include text-size-adjust(none);
   @include transform-origin(left, top);
 }
-
 /**
  * Set ms-viewport to prevent MS "page squish" and allow fluid scrolling
  * https://msdn.microsoft.com/en-us/library/ie/hh869615(v=vs.85).aspx
  */
-@-ms-viewport {
-  width: device-width;
-}
+@-ms-viewport { width: device-width; }
 
 // Scroll bar styles
 .scroll-bar {
   position: absolute;
   z-index: $z-index-scroll-bar;
 }
-
 // hide the scroll-bar during animations
 .ng-animate .scroll-bar {
   visibility: hidden;
 }
-
 .scroll-bar-h {
   right: 2px;
   bottom: 3px;
@@ -137,11 +133,10 @@ body.grade-c {
     width: 100%;
   }
 }
-
 .scroll-bar-indicator {
   position: absolute;
   border-radius: 4px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0,0,0,0.3);
   opacity: 1;
   @include transition(opacity .3s linear);
 
@@ -149,12 +144,10 @@ body.grade-c {
     opacity: 0;
   }
 }
-
 .platform-android .scroll-bar-indicator {
   // android doesn't have rounded ends on scrollbar
   border-radius: 0;
 }
-
 .grade-b .scroll-bar-indicator,
 .grade-c .scroll-bar-indicator {
   // disable rgba background and border radius for low end devices
@@ -181,15 +174,15 @@ ion-infinite-scroll {
     color: $scroll-refresh-icon-color;
   }
   .icon:before,
-  .spinner {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+  .spinner{
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
   }
-  &:not(.active) {
+  &:not(.active){
     .spinner,
-    .icon:before {
-      -webkit-transform: translate3d(-1000px, 0, 0);
-      transform: translate3d(-1000px, 0, 0);
+    .icon:before{
+      -webkit-transform: translate3d(-1000px,0,0);
+      transform: translate3d(-1000px,0,0);
     }
   }
 }
@@ -207,9 +200,10 @@ ion-infinite-scroll {
   .scroll {
     position: static;
     height: 100%;
-    -webkit-transform: translate3d(0, 0, 0); // fix iOS bug where relative children of scroller disapear while scrolling.  see: http://stackoverflow.com/questions/9807620/ipad-safari-scrolling-causes-html-elements-to-disappear-and-reappear-with-a-dela
+    -webkit-transform: translate3d(0, 0, 0);   // fix iOS bug where relative children of scroller disapear while scrolling.  see: http://stackoverflow.com/questions/9807620/ipad-safari-scrolling-causes-html-elements-to-disappear-and-reappear-with-a-dela
   }
 }
+
 
 // Pad top/bottom of content so it doesn't hide behind .bar-title and .bar-tab.
 // Note: For these to work, content must come after both bars in the markup
@@ -217,7 +211,6 @@ ion-infinite-scroll {
 .has-header {
   top: $bar-height;
 }
-
 // Force no header
 .no-header {
   top: 0;
@@ -226,11 +219,9 @@ ion-infinite-scroll {
 .has-subheader {
   top: $bar-height + $bar-subheader-height;
 }
-
 .has-tabs-top {
   top: $bar-height + $tabs-height;
 }
-
 .has-header.has-subheader.has-tabs-top {
   top: $bar-height + $bar-subheader-height + $tabs-height;
 }
@@ -238,7 +229,6 @@ ion-infinite-scroll {
 .has-footer {
   bottom: $bar-footer-height;
 }
-
 .has-subfooter {
   bottom: $bar-footer-height + $bar-subfooter-height;
 }
@@ -246,9 +236,9 @@ ion-infinite-scroll {
 .has-tabs,
 .bar-footer.has-tabs {
   bottom: $tabs-height;
-  &.pane {
+  &.pane{
     bottom: $tabs-height;
-    height: auto;
+    height:auto;
   }
 }
 
@@ -258,15 +248,13 @@ ion-infinite-scroll {
 
 // A full screen section with a solid background
 .pane {
-  @include translate3d(0, 0, 0);
+  @include translate3d(0,0,0);
   @include transition-duration(0);
   z-index: $z-index-pane;
 }
-
 .view {
   z-index: $z-index-view;
 }
-
 .pane,
 .view {
   position: absolute;
@@ -279,7 +267,6 @@ ion-infinite-scroll {
   background-color: $base-background-color;
   overflow: hidden;
 }
-
 .view-container {
   position: absolute;
   display: block;
