@@ -1,0 +1,33 @@
+<ion-view ng-controller="AddFriendController"
+          cache-view="false">
+
+    <ion-nav-title>添加好友</ion-nav-title>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-clear"
+                ng-click="addFriend()">
+            确认
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+        <ion-item class="item-divider"></ion-item>
+
+        <ion-item class="item-avatar-left">
+            <img ly-src="{{data.image_url}}">
+
+            <h2>{{data.name}}</h2>
+
+            <p>{{data.email}}</p>
+        </ion-item>
+
+        <ion-item class="item-input text">
+            <textarea placeholder="附加留言"
+                      rows="5"
+                      ng-model="data.msg"
+                      ly-auto-focus>
+            </textarea>
+        </ion-item>
+    </ion-content>
+
+</ion-view>

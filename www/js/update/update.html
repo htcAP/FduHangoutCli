@@ -1,0 +1,43 @@
+<ion-modal-view>
+    <ion-header-bar class="nav-title-slide-ios7 bar-positive">
+        <h1 class="title">检查更新</h1>
+
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeCheckUpdate()">关闭</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <ion-list>
+            <ion-item ng-if="updateInfo.newestVersion!=updateInfo.currentVersion">
+                发现新版本！
+                <div ng-bind-html="updateInfo.changeLogHTML"></div>
+            </ion-item>
+            <ion-item ng-if="updateInfo.newestVersion==updateInfo.currentVersion">
+                您的App已经是最新版本
+            </ion-item>
+            <ion-item style="color:#006400">
+                最新版本：{{updateInfo.newestVersion}}
+            </ion-item>
+            <ion-item style="color: orangered" ng-if="updateInfo.newestVersion!=updateInfo.currentVersion">
+                您的版本：{{updateInfo.currentVersion}}
+            </ion-item>
+            <ion-item>
+                发布日期：{{updateInfo.releaseDate}}
+            </ion-item>
+            <ion-item ng-if="updateInfo.newestVersion!=updateInfo.currentVersion">
+                <button class="button button-positive button-block ion-android-download icon-left"
+                        ng-click="updateApp(updateInfo.link)">
+                    立刻更新！
+                </button>
+                <button class="button button-calm button-block ion-android-time icon-left"
+                        ng-click="closeCheckUpdate()">
+                    下次提醒我
+                </button>
+                <button class="button button-dark button-block ion-minus icon-left"
+                        ng-click="skipUpdate(updateInfo.newestVersion)">
+                    跳过本次更新
+                </button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>

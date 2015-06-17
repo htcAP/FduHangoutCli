@@ -1,0 +1,83 @@
+<style>
+    .input-label {
+        border-left: 3px solid #f27405;
+        font-weight: bold;
+        font-size: 12px;
+        padding: 0 6px 0 6px !important;
+    }
+
+    input {
+        margin: 0 10px 0 10px;
+    }
+
+    input[type=text], textarea {
+        font-size: 14px;
+        color: #333333;
+    }
+
+    .item-checkbox {
+        height: 80px;
+        padding-left: 90px !important;
+    }
+
+    .avatar {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        max-width: 60px;
+        max-height: 60px;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+</style>
+<ion-modal-view>
+    <ion-header-bar class="nav-title-slide-ios7 bar-positive">
+        <h1 class="title">邀请好友参加</h1>
+
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeInvite()">关闭</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div>
+
+            <ion-list>
+                <li class="item item-checkbox item-checkbox-right" ng-repeat="friend in data.friends">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-click="toggleFriendSelection(friend)"
+                               ng-checked="data.friendsToInvite.indexOf(friend.id)!=-1">
+                    </label>
+                    <img ly-src="{{friend.image_url}}" class="avatar"/>
+
+                    <h2>{{friend.name}}</h2>
+
+                    <p>{{friend.email}}</p>
+                </li>
+
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">信件标题</span>
+                    <input type="text" placeholder="信件标题" ng-model="data.invite_title">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">信件内容</span>
+                    <textarea placeholder="信件内容" style="height: 160px;" ng-model="data.invite_content"></textarea>
+                </label>
+            </ion-list>
+            <ion-list>
+                <ion-item class="ly-no-border-bottom">
+                    <button class="button ion-star icon-left button-positive button-block"
+                            ng-click="doInvite()">
+                        确定邀请
+                    </button>
+                    <button class="button ion-android-cancel icon-left button-clam button-block"
+                            ng-click="closeInvite()">
+                        取消
+                    </button>
+                </ion-item>
+            </ion-list>
+
+        </div>
+    </ion-content>
+</ion-modal-view>

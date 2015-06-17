@@ -1,0 +1,35 @@
+<ion-view ng-controller="SearchFriendController"
+          cache-view="false">
+
+    <ion-nav-title>搜索用户</ion-nav-title>
+
+    <ion-content>
+        <div class="bar bar-header item-input-inset">
+            <label class="item-input-wrapper">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input id="search-input"
+                       type="search"
+                       placeholder="关键字"
+                       ng-model="data.keyword"
+                       ly-auto-focus>
+            </label>
+            <a class="button button-positive"
+               ng-click="doSearch()">
+                搜索
+            </a>
+        </div>
+
+        <ion-list>
+            <ion-item class="item-avatar"
+                      ng-repeat="user in data.result"
+                      ng-click="addFriend(user)">
+                <img ly-src="{{::user.image}}">
+
+                <h2>{{::user.name}}</h2>
+
+                <p>{{::user.email}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

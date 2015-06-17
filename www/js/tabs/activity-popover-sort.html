@@ -1,0 +1,35 @@
+<ion-popover-view style="width: 200px;height: 280px">
+
+    <ion-header-bar>
+        <h1 class="title">
+            排序
+        </h1>
+
+    </ion-header-bar>
+    <ion-content>
+        <!--<div>-->
+        <!--<ion-radio ng-repeat="item in sorts"-->
+        <!--ng-value="item"-->
+        <!--ng-model="data.sortBy" ng-change="sortConfirm()" >-->
+        <!--{{ ::item.name }}-->
+        <!--</ion-radio>-->
+        <!--</div>-->
+        <div class="list">
+            <label class="item item-radio" ng-repeat="item in sorts">
+                <input type="radio" name="sortGroup" ng-checked="data.sortBy==item.id" ng-value="item.id">
+
+                <div class="item-content" ng-click="sortConfirm(item.id)">
+                    {{item.name}}
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+        </div>
+
+        <!--<ion-radio ng-repeat="item in sorts"-->
+        <!--ng-value="item"-->
+        <!--ng-model="data.sortBy" ng-change="sortConfirm()">-->
+        <!--{{ ::item.name }}-->
+        <!--</ion-radio>-->
+
+    </ion-content>
+</ion-popover-view>

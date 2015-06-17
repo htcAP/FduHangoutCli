@@ -1,0 +1,34 @@
+<ion-view title="好友"
+          ng-controller="FriendsController">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-plus-round"
+                ui-sref="search-friend">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <ion-refresher
+            pulling-text="刷新"
+            on-refresh="refresh()">
+        </ion-refresher>
+
+        <ion-list>
+            <ion-item class="item-avatar-left"
+                      ng-repeat="friend in data.friends"
+                      ui-sref="user-info({id: friend.id})">
+                <img ly-src="{{friend.image_url}}"/>
+
+                <h2>{{friend.name}}</h2>
+
+                <p>{{friend.description}}</p>
+            </ion-item>
+
+            <ion-item ng-if="!data.friends.length" style="text-align: center;color: #808080;font-size: 11px">
+                您还没有好友...
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

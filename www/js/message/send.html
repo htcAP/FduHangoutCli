@@ -1,0 +1,46 @@
+<ion-view ng-controller="MessageSendController">
+
+    <ion-nav-title>站内信</ion-nav-title>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-clear"
+                ng-click="send()">
+            发送
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <ion-list>
+            <ion-item class="item-divider">
+                发送至
+            </ion-item>
+
+            <ion-item class="item-avatar-left">
+                <img ly-src="{{data.peer.image_url}}"/>
+
+                <h2>{{data.peer.name}}</h2>
+
+                <p>{{data.peer.email}}</p>
+            </ion-item>
+
+            <ion-item class="item-input">
+                <input type="text"
+                       ng-model="data.title"
+                       placeholder="标题"
+                       style="font-size: 16px; line-height: 30px"
+                       ly-auto-focus>
+            </ion-item>
+
+            <ion-item class="item-input text">
+            <textarea placeholder="内容"
+                      rows="5"
+                      ng-model="data.content">
+            </textarea>
+            </ion-item>
+
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

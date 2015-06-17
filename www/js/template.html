@@ -1,0 +1,23 @@
+<ion-view ng-controller="Controller">
+
+    <ion-nav-title></ion-nav-title>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-clear"
+                ui-sref="">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <ion-refresher
+            pulling-text="刷新"
+            on-refresh="refresh(1)">
+        </ion-refresher>
+
+        <ion-list>
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

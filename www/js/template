@@ -1,0 +1,13 @@
+FduHangoutApp
+  .config(function($stateProvider) {
+
+    $stateProvider.state('', {
+      url: '/',
+      templateUrl: 'js/'
+    })
+  })
+
+  .controller('Controller',
+  function ($scope) {
+
+  });

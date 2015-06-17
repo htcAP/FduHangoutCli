@@ -1,0 +1,31 @@
+<style type="text/css">
+    .fulllength p {
+        white-space: normal;
+    }
+</style>
+<ion-view ng-controller="TabRatingController">
+    <ion-nav-title>评价</ion-nav-title>
+
+    <ion-content class="has-header">
+        <ion-list>
+            <ion-item ng-if="data.ratingData.length==0">
+                暂时还没有任何评论哦
+            </ion-item>
+            <ion-item ng-repeat="rating in data.ratingData" class="item item-avatar">
+                <img ly-src="{{rating.user_img}}" alt=""/>
+
+                <h2>{{rating.user_name}}
+                    <span style="font-size: 8px;color: #808080">{{rating.created_at}}</span>
+                </h2>
+
+                <p style="font-size: 8px;margin-top:-2px">
+                    评分
+                    <rating ng-model="rating.rating" max="5"></rating>
+                </p>
+                <p>{{rating.comment}}</p>
+
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-view>

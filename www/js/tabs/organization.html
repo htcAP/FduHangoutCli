@@ -1,0 +1,33 @@
+<style type="text/css">
+    .fulllength p {
+        white-space: normal;
+    }
+</style>
+<ion-view ng-controller="TabOrganizationController">
+
+    <ion-nav-title>组织详情</ion-nav-title>
+    <ion-content class="has-header">
+        <ion-list>
+            <!--<ion-item style="text-align: center">-->
+            <!--&lt;!&ndash;<img ly-src="{{data.event_pic}}">&ndash;&gt;-->
+            <!--</ion-item>-->
+
+            <ion-item>
+                <h2>组织名</h2>
+
+                <p>{{data.name}}</p>
+            </ion-item>
+            <ion-item>
+                <h2>组织介绍</h2>
+
+                <div ng-bind-html="data.info_html" class="fulllength"></div>
+            </ion-item>
+            <ion-item>
+                <h2>联系方式</h2>
+
+                <div ng-bind-html="data.contact_html" class="fulllength"></div>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-view>

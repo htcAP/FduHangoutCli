@@ -1,0 +1,39 @@
+<ion-popover-view style="width: 300px;height: 500px">
+
+    <ion-header-bar>
+        <h1 class="title">
+            {{categories[data.filterBy].name}}
+        </h1>
+
+    </ion-header-bar>
+    <ion-content>
+        <div>
+            <ion-toggle style="background-color: #EFEFEF;font-weight: bold;text-align: left;font-size: 12px"
+                        ng-change="filterConfirm(data.filterBy)" ng-model="data.availableOnly"
+                        toggle-class="toggle-positive">
+                只显示可以报名的
+            </ion-toggle>
+        </div>
+
+        <div class="list">
+            <label class="item item-radio" ng-repeat="item in categories">
+                <input type="radio" name="filterGroup" ng-checked="(data.filterBy)==(item.id)" ng-value="item.id">
+
+                <div class="item-content" ng-click="filterConfirm(item.id)">
+                    {{item.name}}
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+        </div>
+
+        <!--<div>-->
+        <!--<ion-radio ng-repeat="item in categories"-->
+        <!--ng-value="item"-->
+        <!--ng-model="data.chosen" ng-change="filterConfirm()">-->
+        <!--{{ ::item.name }}-->
+        <!--</ion-radio>-->
+        <!--</div>-->
+
+
+    </ion-content>
+</ion-popover-view>

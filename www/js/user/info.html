@@ -1,0 +1,157 @@
+<ion-view title="详细资料"
+          cache-view="false"
+          ng-controller="UserInfoController">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-clear"
+                ui-sref="profile-edit" ng-if="data.type === 'self'">
+            编辑
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+        <ion-refresher
+            pulling-text="刷新"
+            on-refresh="refresh(1)">
+        </ion-refresher>
+
+        <ion-list>
+
+            <ion-item class="item-thumbnail-left item-text-wrap">
+                <img class="icon" ly-src="{{data.user.image_url}}"/>
+
+                <h2>{{data.user.name}} {{getSexDesc(data.user.sex)}}</h2>
+
+                <p style="height: 52px;white-space: normal;overflow: hidden;">
+                    {{data.user.description || '(还没有自我介绍)'}}
+                </p>
+            </ion-item>
+
+            <ion-item class="item-divider"></ion-item>
+            <ion-item ui-sref="tweet-flow({id: data.user.id })">
+                {{ data.type === 'self' ? '我' : ( data.user.sex ? (data.user.gender == 1 ? '他' : '她') : 'ta' )}}
+                的新鲜事
+            </ion-item>
+            <ion-item class="item-divider"></ion-item>
+
+            <ion-item>
+                <span class="ly-title"> 积分 </span>
+                <span class="ly-value">{{ data.user.points }}</span>
+            </ion-item>
+
+            <ion-item>
+                <span class="ly-title"> 等级 </span>
+                <span class="ly-value" ng-bind-html="data.user.levelHTML"></span>
+            </ion-item>
+
+            <ion-item>
+                <span class="ly-title"> 已做志愿者时间 </span>
+                <span class="ly-value">{{ data.user.hours }} 小时</span>
+            </ion-item>
+
+            <ion-item>
+                <span class="ly-title"> 报名次数 </span>
+                <span class="ly-value">{{ data.user.book_count }}</span>
+            </ion-item>
+
+            <ion-item>
+                <span class="ly-title"> 缺席次数 </span>
+                <span class="ly-value">{{ data.user.absent_count }}</span>
+            </ion-item>
+
+            <ion-item>
+                <span class="ly-title"> 平均活动评分 </span>
+                <span class="ly-value">{{ data.user.average_rating }}</span>
+            </ion-item>
+
+            <ion-item>
+                <span class="ly-title"> 被评价次数 </span>
+                <span class="ly-value">{{ data.user.rating_count }}</span>
+            </ion-item>
+
+
+            <ion-item class="item-divider"></ion-item>
+
+            <ion-item>
+                <span class="ly-title"> 生日 </span>
+                <span class="ly-value">{{ data.user.birthday }}</span>
+            </ion-item>
+
+            <ion-item>
+                <span class="ly-title"> 学校 </span>
+                <span class="ly-value">{{ data.user.school_name }}</span>
+            </ion-item>
+
+            <ion-item ng-click="openQQ()">
+                <span class="ly-title"> QQ </span>
+                <span class="ly-value">{{ data.user.qq }}</span>
+            </ion-item>
+
+            <ion-item>
+                <span class="ly-title"> 微信 </span>
+                <span class="ly-value">{{ data.user.wechat }}</span>
+            </ion-item>
+
+            <ion-item>
+                <span class="ly-title"> 邮箱 </span>
+                <span class="ly-value">{{ data.user.email }}</span>
+            </ion-item>
+
+            <ion-item class="item-divider"></ion-item>
+
+            <ion-item ng-if="data.type.endsWith('Request')">
+                <h2> 附加留言 </h2>
+
+                <p>{{data.info.message}}</p>
+            </ion-item>
+
+            <ion-item ng-if="data.type.endsWith('Request')"
+                      class="item-divider">
+            </ion-item>
+
+            <ion-item class="ly-no-border-bottom">
+                <div
+                    ng-if="(data.type === 'addFriend' || (data.user.sensorInfo && data.type !== 'self')) && data.type !== 'handleRequest'">
+                    <button ng-if="(data.info.ok || data.user.sensorInfo)&&(data.type != 'cancelRequest')"
+                            ui-sref="add-friend({id: {{data.user.id}} })"
+                            class="button button-block button-positive icon-left ion-person-add">
+                        添加好友
+                    </button>
+
+                    <!--<button ng-if="!data.info.ok"-->
+                    <!--class="button button-block button-assertive icon-left ion-alert">-->
+                    <!--{{data.info.msg}}-->
+                    <!--</button>-->
+
+                </div>
+                <div ng-if="data.type === 'cancelRequest'">
+                    <button class="button button-block button-assertive icon-left ion-minus"
+                            ng-click="data.info.revoke()">
+                        取消好友请求
+                    </button>
+                </div>
+
+                <div ng-if="data.type === 'handleRequest'">
+                    <button ng-click="data.info.accept()"
+                            class="button button-block button-positive icon-left ion-person-add">
+                        接受好友请求
+                    </button>
+
+                    <button ng-click="data.info.reject()"
+                            class="button button-block button-light icon-left ion-minus">
+                        忽略好友请求
+                    </button>
+                </div>
+
+                <div ng-if="data.type !== 'self'">
+                    <button class="button button-block button-calm icon-left ion-android-mail"
+                            ui-sref="message-send({id: data.id})">
+                        发站内信
+                    </button>
+                </div>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

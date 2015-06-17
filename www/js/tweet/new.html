@@ -1,0 +1,31 @@
+<ion-view ng-controller="NewTweetController">
+
+    <ion-nav-title>新鲜事</ion-nav-title>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-clear"
+                ng-click="submit()">
+            发布
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <ion-list>
+
+            <ion-item>
+
+            <textarea placeholder="说点什么吧"
+                      rows="5"
+                      ng-model="data.content"
+                      ly-auto-focus>
+            </textarea>
+
+            </ion-item>
+
+
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

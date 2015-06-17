@@ -1,0 +1,75 @@
+<ion-modal-view>
+    <ion-header-bar class="nav-title-slide-ios7 bar-positive">
+        <h1 class="title">评价活动</h1>
+
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeRate()">关闭</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <style>
+            .ratingDiv .rating .ion-ios-star, .ratingDiv .rating .ion-ios-star-outline {
+                font-size: 50px;
+                color: #F27405;
+            }
+
+            .input-label {
+                border-left: 3px solid #f27405;
+                font-weight: bold;
+                font-size: 12px;
+                padding: 0 6px 0 6px !important;
+            }
+
+            input {
+                margin: 0 10px 0 10px;
+            }
+
+            input[type=text], textarea {
+                font-size: 14px;
+                color: #333333;
+            }
+        </style>
+        <div>
+
+            <ion-list>
+                <!--<ion-item style="text-align: center">-->
+                <!--<img ly-src="{{data.event_pic}}">-->
+                <!--</ion-item>-->
+
+                <ion-item style="white-space: normal;">
+                    <div style="text-align: left;width: 100%;margin-bottom:6px;">
+                        请您对本次活动作出评价，<br>您的评价对组织方与其他用户都很有意义！<br>写15字以上评论还可以获得5积分的额外奖励哦！
+                    </div>
+                </ion-item>
+
+                <ion-item class="ratingDiv">
+
+                    <label class="item item-input item-stacked-label" style="text-align: center">
+
+                        <rating ng-model="data.myRate.rating" max="5" style="font-size: 30px"></rating>
+                    </label>
+                </ion-item>
+
+                <ion-item>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">评价内容</span>
+                        <textarea placeholder="评价内容" style="height: 160px;" ng-model="data.myRate.comment"></textarea>
+                    </label>
+                </ion-item>
+
+            </ion-list>
+            <ion-list>
+                <ion-item class="ly-no-border-bottom">
+                    <button class="button ion-checkmark-round icon-left button-positive button-block"
+                            ng-click="submitRate()">
+                        提交
+                    </button>
+                    <button class="button ion-minus icon-left button-clam button-block" ng-click="closeRate()">
+                        取消
+                    </button>
+                </ion-item>
+            </ion-list>
+
+        </div>
+    </ion-content>
+</ion-modal-view>

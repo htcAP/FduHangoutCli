@@ -1,0 +1,35 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view has-bouncing="true"
+          cache-view="false"
+          ng-controller="NewsDetailController">
+
+    <ion-nav-title>{{data.news_title}}</ion-nav-title>
+
+    <ion-content>
+        <img ly-src="{{data.news_pic}}" alt="" style="text-align: center;width: 100%"/>
+
+        <div ng-bind-html="data.news_content_html" style="margin: 20px"></div>
+        <div class="list">
+            <a class="item item-thumbnail-left" ng-click="showActivityDetail(data.event_series_id)"
+               ng-if="data.event_name"
+               style="display:block;border-radius: 12px;padding: 12px;margin: 16px;background-color: #EEEEEE">
+                <img ly-src="{{data.event_img_url}}"/>
+
+                <div style="margin-left: 86px">
+                    <h2>{{data.event_name}} </h2>
+
+                    <p ng-bind-html="eventStatusDescription"></p>
+
+                    <p>
+                        {{data.event_abstract}}
+                    </p>
+                </div>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

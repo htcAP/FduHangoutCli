@@ -1,0 +1,50 @@
+<ion-view view-title="乐益"
+          ng-controller="RegisterController as ctrl">
+
+    <ion-content>
+        <ion-list>
+
+            <ion-item class="item-divider">
+            </ion-item>
+
+            <ion-item class="item-input">
+                <input type="text"
+                       ng-model="data.name"
+                       title="真实姓名"
+                       placeholder="真实姓名"
+                       ly-auto-focus>
+            </ion-item>
+
+            <ion-item class="item-input">
+                <input type="number"
+                       ng-model="data.phone"
+                       title="手机号"
+                       placeholder="手机号">
+            </ion-item>
+
+            <ion-item class="item item-input">
+                <input type="password"
+                       ng-model="data.password"
+                       title="密码"
+                       placeholder="密码">
+            </ion-item>
+
+            <ion-item class="item item-input">
+                <input type="password"
+                       ng-model="data.passwordRepeat"
+                       title="重复密码"
+                       placeholder="重复密码">
+            </ion-item>
+
+
+            <ion-item class="ly-no-border-bottom">
+                <button class="button button-block button-calm ion-plus icon-left"
+                        ng-click="register()">
+                    注册
+                </button>
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+
+</ion-view>

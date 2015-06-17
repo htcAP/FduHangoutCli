@@ -1,0 +1,23 @@
+<ion-view cache-view="false"
+          ng-controller="SelectController as ctrl">
+
+    <ion-nav-title>
+        {{data.title}}
+    </ion-nav-title>
+
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item ng-repeat="item in data.list"
+                      ng-click="selectItem(item)">
+                <pre>{{item.name}}</pre>
+
+                <div ng-if="item.distance"
+                     style="position: absolute;right: 14px;top: 16px;font-size: 12px;color: #696969">
+                    距您{{item.distance|number:2}}km
+                </div>
+                <p ng-bind-html="item.html" ng-if="item.html"></p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

@@ -1,14 +1,24 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
-
-  .run(function ($ionicPlatform) {
+FduHangoutApp = angular.module('FduHangoutApp', [
+  'leyiPlugin',
+  'ionic',
+  'ngResource',
+  'ngSanitize',
+  'ngTouch',
+  'jrCrop',
+  'ionic.rating',
+  'ngCordova'
+])
+  .run(function ($ionicPlatform, routeService, accountService, geoLocationService, testPlugin, updateService, $q) {
     $ionicPlatform.ready(function () {
+      if (typeof String.prototype.startsWith !== 'function') {
+        String.prototype.startsWith = function (str) {
+          return this.slice(0, str.length) == str;
+        };
+      }
+      //updateService.checkForUpdate(false);
+      geoLocationService.getGeoLocation();
+      //accountService.tryAutoLogin(function (successful) {
+      //});
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -18,66 +28,41 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         // org.apache.cordova.statusbar required
         StatusBar.styleLightContent();
       }
+
+      //testPlugin.test(' a').then(function(ret) {
+      //  console.log(ret);
+      //}, function(reason) {
+      //  console.log(reason);
+      //}).finally(function() {
+      //  console.log('plugin call complete');
+      //});
+
+      angular.extend(window, {
+        $q: $q
+      })
     });
   })
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider, $compileProvider) {
 
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
-    $stateProvider
+    $ionicConfigProvider.platform.android.tabs.position("bottom");
+    $ionicConfigProvider.tabs.position("bottom");
+    $ionicConfigProvider.platform.android.backButton.icon("ion-chevron-left");
+    $ionicConfigProvider.backButton.icon("ion-chevron-left");
 
-      // setup an abstract state for the tabs directive
-      .state('tab', {
-        url: "/tab",
-        abstract: true,
-        templateUrl: "templates/tabs.html"
-      })
+    $ionicConfigProvider.views.maxCache(2);
 
-      // Each tab has its own nav history stack:
+// if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/main/rec');
 
-      .state('tab.dash', {
-        url: '/dash',
-        views: {
-          'tab-dash': {
-            templateUrl: 'templates/tab-dash.html',
-            controller: 'DashCtrl'
-          }
-        }
-      })
+    // disable cache
+    var headers = $httpProvider.defaults.headers;
+    if (!headers.get) {
+      headers.get = {};
+    }
 
-      .state('tab.chats', {
-        url: '/chats',
-        views: {
-          'tab-chats': {
-            templateUrl: 'templates/tab-chats.html',
-            controller: 'ChatsCtrl'
-          }
-        }
-      })
-      .state('tab.chat-detail', {
-        url: '/chats/:chatId',
-        views: {
-          'tab-chats': {
-            templateUrl: 'templates/chat-detail.html',
-            controller: 'ChatDetailCtrl'
-          }
-        }
-      })
+    headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+    headers.get['Cache-Control'] = 'no-cache';
 
-      .state('tab.account', {
-        url: '/account',
-        views: {
-          'tab-account': {
-            templateUrl: 'templates/tab-account.html',
-            controller: 'AccountCtrl'
-          }
-        }
-      });
-
-    // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/dash');
-
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|geo|file|tel):/);
   });

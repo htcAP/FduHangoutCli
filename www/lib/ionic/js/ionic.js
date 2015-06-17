@@ -175,9 +175,7 @@
      * @ngdoc method
      * @name ionic.DomUtil#requestAnimationFrame
      * @alias ionic.requestAnimationFrame
-     * @description Calls
-     *   [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame), or a
-     *   polyfill if not available.
+     * @description Calls [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame), or a polyfill if not available.
      * @param {function} callback The function to call when the next frame
      * happens.
      */
@@ -480,7 +478,7 @@
           evt = document.createEvent("Event");
           for (var param in params) {
             evt[param] = params[param];
-          }
+        }
           evt.initEvent(event, params.bubbles, params.cancelable);
         }
         return evt;
@@ -611,9 +609,7 @@
     ionic.off = function () {
       ionic.EventController.off.apply(ionic.EventController, arguments);
     };
-    ionic.trigger = ionic.EventController.trigger;//function() {
-                                                  // ionic.EventController.trigger.apply(ionic.EventController.trigger,
-                                                  // arguments); };
+    ionic.trigger = ionic.EventController.trigger;//function() { ionic.EventController.trigger.apply(ionic.EventController.trigger, arguments); };
     ionic.onGesture = function () {
       return ionic.EventController.onGesture.apply(ionic.EventController.onGesture, arguments);
     };
@@ -824,15 +820,15 @@
       },
 
 
-      /**
-       * enable of disable hammer.js detection
-       * @param   {Boolean}   state
-       * @returns {ionic.Gestures.Instance}
-       */
-      enable: function enable(state) {
-        this.enabled = state;
-        return this;
-      }
+    /**
+     * enable of disable hammer.js detection
+     * @param   {Boolean}   state
+     * @returns {ionic.Gestures.Instance}
+     */
+    enable: function enable(state) {
+      this.enabled = state;
+      return this;
+    }
     };
 
     /**
@@ -1540,6 +1536,7 @@
    *     inst.trigger(this.name, ev);
    *   }
    * }
+
      * @param   {String}    name
      * this should be the name of the gesture, lowercase
      * it is also being used to disable/enable the gesture per instance config.
@@ -1571,12 +1568,15 @@
      *          velocityX   {Number}        the velocity on the x
      *          velocityY   {Number}        the velocity on y
      *          angle       {Number}        the angle we are moving
-     *          direction   {String}        the direction we are moving. matches
-     *   ionic.Gestures.DIRECTION_UP|DOWN|LEFT|RIGHT distance    {Number}        the distance we haved moved scale
-     *    {Number}        scaling of the touches, needs 2 touches rotation    {Number}        rotation of the touches,
-     *   needs 2 touches * eventType   {String}        matches ionic.Gestures.EVENT_START|MOVE|END srcEvent    {Object}
-     *          the source event, like TouchStart or MouseDown * startEvent  {Object}        contains the same
-     *   properties as above, but from the first touch. this is used to calculate distances, deltaTime, scaling etc
+     *          direction   {String}        the direction we are moving. matches ionic.Gestures.DIRECTION_UP|DOWN|LEFT|RIGHT
+     *          distance    {Number}        the distance we haved moved
+     *          scale       {Number}        scaling of the touches, needs 2 touches
+     *          rotation    {Number}        rotation of the touches, needs 2 touches *
+     *          eventType   {String}        matches ionic.Gestures.EVENT_START|MOVE|END
+     *          srcEvent    {Object}        the source event, like TouchStart or MouseDown *
+     *          startEvent  {Object}        contains the same properties as above,
+     *                                      but from the first touch. this is used to calculate
+     *                                      distances, deltaTime, scaling etc
      *
      *      @param  {ionic.Gestures.Instance}    inst
      *      the instance we are doing the detection for. you can get the options from
@@ -1828,9 +1828,9 @@
             if (ionic.Gestures.detection.current.name != this.name) {
               ionic.Gestures.detection.current.name = this.name;
               if (inst.options.correct_for_drag_min_distance) {
-                // When a drag is triggered, set the event center to drag_min_distance pixels from the original event
-                // center. Without this correction, the dragged distance would jumpstart at drag_min_distance pixels
-                // instead of at 0. It might be useful to save the original start point somewhere
+                // When a drag is triggered, set the event center to drag_min_distance pixels from the original event center.
+                // Without this correction, the dragged distance would jumpstart at drag_min_distance pixels instead of at 0.
+                // It might be useful to save the original start point somewhere
                 var factor = Math.abs(inst.options.drag_min_distance / ev.distance);
                 ionic.Gestures.detection.current.startEvent.center.pageX += ev.deltaX * factor;
                 ionic.Gestures.detection.current.startEvent.center.pageY += ev.deltaY * factor;
@@ -2134,7 +2134,7 @@
 
       /**
        * @private
-       */
+     */
       detect: function () {
         self._checkPlatforms();
 
@@ -2160,7 +2160,7 @@
         requestAnimationFrame(function () {
           if (oldGrade) {
             document.body.classList.remove('grade-' + oldGrade);
-          }
+        }
           document.body.classList.add('grade-' + grade);
         });
       },
@@ -2185,7 +2185,7 @@
             self.platforms.push('cordova');
           } else if (window.forge) {
             self.platforms.push('trigger');
-          }
+        }
         } else {
           self.platforms.push('browser');
         }
@@ -2365,8 +2365,7 @@
       /**
        * @ngdoc method
        * @name ionic.Platform#showStatusBar
-       * @description Shows or hides the device status bar (in Cordova). Requires `cordova plugin add
-       *   org.apache.cordova.statusbar`
+       * @description Shows or hides the device status bar (in Cordova). Requires `cordova plugin add org.apache.cordova.statusbar`
        * @param {boolean} shouldShow Whether or not to show the status bar.
        */
       showStatusBar: function (val) {
@@ -2393,8 +2392,7 @@
        * @name ionic.Platform#fullScreen
        * @description
        * Sets whether the app is fullscreen or not (in Cordova).
-       * @param {boolean=} showFullScreen Whether or not to set the app to fullscreen. Defaults to true. Requires
-       *   `cordova plugin add org.apache.cordova.statusbar`
+       * @param {boolean=} showFullScreen Whether or not to set the app to fullscreen. Defaults to true. Requires `cordova plugin add org.apache.cordova.statusbar`
        * @param {boolean=} showStatusBar Whether or not to show the device's status bar. Defaults to false.
        */
       fullScreen: function (showFullScreen, showStatusBar) {
@@ -2436,7 +2434,7 @@
     }
       if (windowLoadListenderAttached) {
         window.removeEventListener("load", onWindowLoad, false);
-      }
+    }
     }
 
     if (document.readyState === 'complete') {
@@ -2602,8 +2600,7 @@
    * - Works with labels surrounding inputs
    * - Does not fire off a click if the user moves the pointer too far
    * - Adds and removes an 'activated' css class
-   * - Multiple [unit tests](https://github.com/driftyco/ionic/blob/master/test/unit/utils/tap.unit.js) for each
-   *   scenario
+   * - Multiple [unit tests](https://github.com/driftyco/ionic/blob/master/test/unit/utils/tap.unit.js) for each scenario
    *
    */
   /*
@@ -2707,8 +2704,7 @@
         (/^(file|range)$/i).test(e.target.type) ||
         (e.target.dataset ? e.target.dataset.preventScroll : e.target.getAttribute('data-prevent-scroll')) == 'true' || // manually set within an elements attributes
         (!!(/^(object|embed)$/i).test(e.target.tagName)) ||  // flash/movie/object touches should not try to scroll
-        ionic.tap.isElementTapDisabled(e.target); // check if this element, or an ancestor, has `data-tap-disabled`
-                                                  // attribute
+        ionic.tap.isElementTapDisabled(e.target); // check if this element, or an ancestor, has `data-tap-disabled` attribute
     },
 
     isTextInput: function (ele) {
@@ -2778,7 +2774,7 @@
 
         for (x = 0; x < clonedInputs.length; x++) {
           clonedInputs[x].parentElement.removeChild(clonedInputs[x]);
-        }
+      }
 
         for (x = 0; x < previousInputFocus.length; x++) {
           previousInputFocus[x].classList.remove('previous-input-focus');
@@ -2936,7 +2932,7 @@
 
     if (!tapHasPointerMoved(e)) {
       tapClick(e);
-    }
+  }
     tapEventListener('mousemove', false);
     ionic.activator.end();
     tapPointerMoved = false;
@@ -3069,7 +3065,7 @@
     if (ele && ((/^(input|textarea|select)$/i).test(ele.tagName) || ele.isContentEditable)) {
       void 0;
       ele.blur();
-    }
+  }
     tapActiveElement(null);
   }
 
@@ -3151,7 +3147,7 @@
     //do nothing for e2e tests
     if (!ng || (ng && !ng.scenario)) {
       ionic.tap.register(document);
-    }
+  }
   });
 
   (function (document, ionic) {
@@ -3186,7 +3182,7 @@
             if (ele.tagName == 'A' || ele.tagName == 'BUTTON' || ele.hasAttribute('ng-click')) {
               eleToActivate = ele;
               break;
-            }
+          }
             if (ele.classList.contains('button')) {
               eleToActivate = ele;
               break;
@@ -3241,7 +3237,7 @@
       if (ionic.transition && ionic.transition.isActive) {
         setTimeout(deactivateElements, 400);
         return;
-      }
+    }
 
       for (var key in activeElements) {
         if (activeElements[key]) {
@@ -3459,7 +3455,7 @@
         while (climbScope) {
           if (climbScope.$$disconnected) return true;
           climbScope = climbScope.$parent;
-        }
+      }
         return false;
       }
     };
@@ -3723,7 +3719,7 @@
       document.removeEventListener("MSPointerDown", keyboardInit);
     } else {
       document.removeEventListener('touchstart', keyboardInit);
-    }
+  }
 
     ionic.keyboard.isInitialized = true;
   }
@@ -3752,7 +3748,7 @@
       keyboardWaitForResize(keyboardUpdateViewportHeight, true);
     } else {
       keyboardWaitForResize(keyboardShow, true);
-    }
+  }
   }
 
   /**
@@ -3781,8 +3777,8 @@
     document.body.scrollTop = 0;
     scrollView.scrollTop = 0;
     ionic.requestAnimationFrame(function () {
-      document.body.scrollTop = 0;
-      scrollView.scrollTop = 0;
+    document.body.scrollTop = 0;
+    scrollView.scrollTop = 0;
     });
 
     if (!ionic.keyboard.isOpen || ionic.keyboard.isClosing) {
@@ -3888,7 +3884,7 @@
     } else {
         wasOrientationChange = true;
     }
-    }
+  }
   }
 
   /**
@@ -4014,7 +4010,7 @@
       document.removeEventListener("MSPointerMove", keyboardPreventDefault);
     } else {
       document.removeEventListener('touchmove', keyboardPreventDefault);
-    }
+  }
     document.removeEventListener('keydown', keyboardOnKeyDown);
 
     if (ionic.Platform.isAndroid()) {
@@ -4076,13 +4072,13 @@
     // check if we already have a keyboard height from the plugin or resize calculations
     if (ionic.keyboard.height) {
       return ionic.keyboard.height;
-    }
+  }
 
     if (ionic.Platform.isAndroid()) {
       // should be using the plugin, no way to know how big the keyboard is, so guess
       if (ionic.Platform.isFullScreen) {
         return 275;
-      }
+    }
       // otherwise just calculate it
       var contentHeight = window.innerHeight;
       if (contentHeight < keyboardCurrentViewportHeight) {
@@ -4098,7 +4094,7 @@
     if (ionic.Platform.isIOS()) {
       if (ionic.keyboard.isLandscape) {
         return 206;
-      }
+    }
 
       if (!ionic.Platform.isWebView()) {
         return 216;
@@ -4153,7 +4149,7 @@
     // can't just use window.innerHeight in case the keyboard is opened immediately
     if ((viewportHeight / window.innerWidth) < 1) {
       ionic.keyboard.isLandscape = true;
-    }
+  }
     //console.log("ionic.keyboard.isLandscape is: " + ionic.keyboard.isLandscape);
 
     // initialize or update the current viewport height values
@@ -4162,7 +4158,7 @@
       keyboardLandscapeViewportHeight = keyboardCurrentViewportHeight;
     } else if (!ionic.keyboard.isLandscape && !keyboardPortraitViewportHeight) {
       keyboardPortraitViewportHeight = keyboardCurrentViewportHeight;
-    }
+  }
   }
 
   function getViewportHeight() {
@@ -4352,7 +4348,7 @@
     // only update the viewport tag if there was a change
     if (initWidth !== viewportProperties.width || initHeight !== viewportProperties.height) {
       viewportTagUpdate();
-    }
+  }
   }
 
   function viewportTagUpdate() {
@@ -5127,7 +5123,7 @@
                 if (ionic.Platform.isIOS()) ionic.tap.cloneFocusedInput(container, self);
                 self.scrollBy(0, scrollTop, true);
                 self.onScroll();
-              }
+          }
             });
           }
 
@@ -5796,18 +5792,12 @@
        * the official Twitter client.
        *
        * @param height {Integer} Height of pull-to-refresh zone on top of rendered list
-       * @param activateCallback {Function} Callback to execute on activation. This is for signalling the user about a
-       *   refresh is about to happen when he release.
-       * @param deactivateCallback {Function} Callback to execute on deactivation. This is for signalling the user
-       *   about the refresh being cancelled.
-       * @param startCallback {Function} Callback to execute to start the real async refresh action. Call {@link
-       *   #finishPullToRefresh} after finish of refresh.
-       * @param showCallback {Function} Callback to execute when the refresher should be shown. This is for showing the
-       *   refresher during a negative scrollTop.
-       * @param hideCallback {Function} Callback to execute when the refresher should be hidden. This is for hiding the
-       *   refresher when it's behind the nav bar.
-       * @param tailCallback {Function} Callback to execute just before the refresher returns to it's original state.
-       *   This is for zooming out the refresher.
+       * @param activateCallback {Function} Callback to execute on activation. This is for signalling the user about a refresh is about to happen when he release.
+       * @param deactivateCallback {Function} Callback to execute on deactivation. This is for signalling the user about the refresh being cancelled.
+       * @param startCallback {Function} Callback to execute to start the real async refresh action. Call {@link #finishPullToRefresh} after finish of refresh.
+       * @param showCallback {Function} Callback to execute when the refresher should be shown. This is for showing the refresher during a negative scrollTop.
+       * @param hideCallback {Function} Callback to execute when the refresher should be hidden. This is for hiding the refresher when it's behind the nav bar.
+       * @param tailCallback {Function} Callback to execute just before the refresher returns to it's original state. This is for zooming out the refresher.
        * @param pullProgressCallback Callback to state the progress while pulling to refresh
        */
       activatePullToRefresh: function (height, refresherMethods) {
@@ -5842,8 +5832,7 @@
        */
       triggerPullToRefresh: function () {
         // Use publish instead of scrollTo to allow scrolling to out of boundary position
-        // We don't need to normalize scrollLeft, zoomLevel, etc. here because we only y-scrolling when pull-to-refresh
-        // is enabled
+        // We don't need to normalize scrollLeft, zoomLevel, etc. here because we only y-scrolling when pull-to-refresh is enabled
         this.__publish(this.__scrollLeft, -this.__refreshHeight, this.__zoomLevel, true);
 
         var d = new Date();
@@ -5877,7 +5866,7 @@
         }
             if (self.__refreshHide) {
               self.__refreshHide();
-            }
+        }
 
             self.scrollTo(self.__scrollLeft, self.__scrollTop, true);
           }, self.__refreshTailTime);
@@ -6285,7 +6274,7 @@
 
                 scrollLeft = 0;
 
-              }
+          }
             }
           }
 
@@ -6326,7 +6315,7 @@
                     self.__refreshActive = false;
                     if (self.__refreshDeactivate) {
                       self.__refreshDeactivate();
-                    }
+                }
 
                   }
                 }
@@ -6339,12 +6328,12 @@
 
                 scrollTop = 0;
 
-              }
+          }
             } else if (self.__refreshHeight && !self.__refreshHidden) {
               // if a positive scroll value and the refresher is still not hidden, hide it
               self.__refreshHide();
               self.__refreshHidden = true;
-        }
+            }
           }
 
           // Keep list from growing infinitely (holding min 10, max 20 measure points)
@@ -6481,8 +6470,7 @@
           if (self.__refreshActive && self.__refreshStart) {
 
             // Use publish instead of scrollTo to allow scrolling to out of boundary position
-            // We don't need to normalize scrollLeft, zoomLevel, etc. here because we only y-scrolling when
-            // pull-to-refresh is enabled
+            // We don't need to normalize scrollLeft, zoomLevel, etc. here because we only y-scrolling when pull-to-refresh is enabled
             self.__publish(self.__scrollLeft, -self.__refreshHeight, self.__zoomLevel, true);
 
             var d = new Date();
@@ -6506,9 +6494,9 @@
               self.__refreshActive = false;
               if (self.__refreshDeactivate) {
                 self.__refreshDeactivate();
-              }
+          }
 
-            }
+        }
           }
         }
 
@@ -6668,8 +6656,8 @@
           var clientWidth = self.__clientWidth;
           var clientHeight = self.__clientHeight;
 
-          // We limit deceleration not to the min/max values of the allowed range, but to the size of the visible
-          // client area. Each page should have exactly the size of the client area.
+          // We limit deceleration not to the min/max values of the allowed range, but to the size of the visible client area.
+          // Each page should have exactly the size of the client area.
           self.__minDecelerationScrollLeft = Math.floor(scrollLeft / clientWidth) * clientWidth;
           self.__minDecelerationScrollTop = Math.floor(scrollTop / clientHeight) * clientHeight;
           self.__maxDecelerationScrollLeft = Math.ceil(scrollLeft / clientWidth) * clientWidth;
@@ -6734,8 +6722,7 @@
       /**
        * Called on every step of the animation
        *
-       * @param inMemory {Boolean} Whether to not render the current step, but keep it in memory only. Used internally
-       *   only!
+       * @param inMemory {Boolean} Whether to not render the current step, but keep it in memory only. Used internally only!
        */
       __stepThroughDeceleration: function (render) {
         var self = this;
@@ -6838,8 +6825,7 @@
               self.__decelerationVelocityX += scrollOutsideX * penetrationDeceleration;
         }
             var isStoppedX = Math.abs(self.__decelerationVelocityX) <= self.__minVelocityToKeepDecelerating;
-            //If we're not heading outwards, or if the above statement got us below minDeceleration, go back towards
-            // bounds
+            //If we're not heading outwards, or if the above statement got us below minDeceleration, go back towards bounds
             if (!isHeadingOutwardsX || isStoppedX) {
               self.__decelerationVelocityX = scrollOutsideX * penetrationAcceleration;
             }
@@ -6849,10 +6835,9 @@
             var isHeadingOutwardsY = scrollOutsideY * self.__decelerationVelocityY <= self.__minDecelerationScrollTop;
             if (isHeadingOutwardsY) {
               self.__decelerationVelocityY += scrollOutsideY * penetrationDeceleration;
-            }
+        }
             var isStoppedY = Math.abs(self.__decelerationVelocityY) <= self.__minVelocityToKeepDecelerating;
-            //If we're not heading outwards, or if the above statement got us below minDeceleration, go back towards
-            // bounds
+            //If we're not heading outwards, or if the above statement got us below minDeceleration, go back towards bounds
             if (!isHeadingOutwardsY || isStoppedY) {
               self.__decelerationVelocityY = scrollOutsideY * penetrationAcceleration;
             }
@@ -7119,10 +7104,10 @@
             fromX = self.el.scrollLeft;
 
           if (fromY === Y && fromX === X) {
-            self.resize();
+          self.resize();
             return;
             /* Prevent scrolling to the Y point if already there */
-          }
+        }
 
           // decelerating to zero velocity
           function easeOutCubic(t) {
@@ -7142,7 +7127,7 @@
           }
             if (fromX != X) {
               self.el.scrollLeft = parseInt((easedT * (X - fromX)) + fromX, 10);
-            }
+          }
 
             if (time < 1) {
               ionic.requestAnimationFrame(animateScrollStep);
@@ -7433,7 +7418,7 @@
           }, 250);
         } else {
           self._currentDrag.content.style[ionic.CSS.TRANSFORM] = 'translate3d(' + restingPoint + 'px,0,0)';
-        }
+      }
         self._currentDrag.content.style[ionic.CSS.TRANSITION] = '';
 
 
@@ -7582,7 +7567,7 @@
         }
         } else if (i === 0) {
           if (dragOffsetTop < el.offsetTop + el.offsetHeight) {
-            return i;
+          return i;
           }
         } else if (dragOffsetTop > el.offsetTop - el.offsetHeight / 2 &&
           dragOffsetTop < el.offsetTop + el.offsetHeight) {
@@ -7856,7 +7841,7 @@
         // start one
         if (!self.isDragging && !self._dragOp) {
           self._startDrag(e);
-        }
+      }
 
         // No drag still, pass it up
         if (!self._dragOp) {
@@ -7909,7 +7894,7 @@
               inputs[i].blur && inputs[i].blur();
             }
           });
-        }
+      }
       }
     });
 
@@ -7947,7 +7932,7 @@
       pushDown: function () {
         if (this.el.style.zIndex !== '-1') {
           this.el.style.zIndex = '-1';
-        }
+      }
       }
     });
 
@@ -8140,8 +8125,7 @@
             move(index, width * direction, slideSpeed || speed);
             move(to, 0, slideSpeed || speed);
 
-            if (options.continuous) move(circle(to - direction), -(width * direction), 0); // we need to get the next
-                                                                                           // in place
+            if (options.continuous) move(circle(to - direction), -(width * direction), 0); // we need to get the next in place
 
           } else {
 
@@ -8721,7 +8705,7 @@
               self.setOpenPercent(0);
             } else if (px > mx) {
               self.setOpenPercent(100);
-            }
+          }
           }
         });
       },

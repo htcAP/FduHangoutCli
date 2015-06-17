@@ -1,0 +1,30 @@
+<ion-side-menus class="fh-side-nav">
+
+    <ion-side-menu side="left" id="slide-out" class="side-nav">
+        <ul>
+            <li><a href="http://www.baidu.com"> First Sidebar Link</a></li>
+            <li><a href="http://www.google.com">Second Sidebar Link</a></li>
+        </ul>
+    </ion-side-menu>
+
+
+    <ion-side-menu-content>
+
+        <ion-nav-bar class="bar-assertive">
+
+            <ion-nav-buttons side="left" class="nav-wrapper">
+                <button data-activates="slide-out" class="button-icon ion-navicon waves-effect waves-light"
+                        fh-side-nav-button
+                        style="line-height: 100%; font-size: 20px; height: 35px; width: 35px; border-radius: 50%">
+                </button>
+            </ion-nav-buttons>
+
+        </ion-nav-bar>
+
+        <ion-nav-view name="mainContent">
+        </ion-nav-view>
+
+    </ion-side-menu-content>
+
+</ion-side-menus>
+

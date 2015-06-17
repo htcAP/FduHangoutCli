@@ -1,0 +1,66 @@
+<ion-modal-view>
+    <ion-header-bar class="nav-title-slide-ios7 bar-positive">
+        <h1 class="title">确认临时取消</h1>
+
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeCancelSignup()">关闭</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div>
+
+            <ion-list>
+                <!--<ion-item style="text-align: center">-->
+                <!--<img ly-src="{{data.event_pic}}">-->
+                <!--</ion-item>-->
+
+                <ion-item style="white-space: normal;">
+                    <div style="text-align: left;width: 100%;font-weight: bold;margin-bottom:6px;">
+                        您确定要确认临时取消本次活动吗？
+                    </div>
+                    <div style="font-size: 10px;margin-left: 10px;margin-right: 10px;">
+                        <ul class="list-unstyled">
+                            <li>
+                                本活动报名截止时间为<b>{{data.signupDeadline}}
+                                晚10点</b>，您报名后，在此时间点之前可“临时取消”，但会扣除<span
+                                style="font-weight: bold;color:orangered">10</span>点积分。
+                            </li>
+                            <li>
+                                若您报名了活动，没有临时取消，却没参加活动，视为缺席，每次扣除<span
+                                style="font-weight: bold;color:orangered">50</span>点积分作为惩罚，且将会影响您的出勤率。
+                            </li>
+                        </ul>
+                    </div>
+
+                </ion-item>
+
+                <ion-item class="item-icon-left">
+
+                    <i class="icon ion-calendar"></i>
+                    时间：
+                    {{data.datetime}}
+                </ion-item>
+
+
+                <ion-item class="item-icon-left item-text-wrap">
+                    <i class="icon ion-location"></i>
+                    地点：
+                    {{data.location}}
+                </ion-item>
+
+            </ion-list>
+            <ion-list>
+                <ion-item class="ly-no-border-bottom">
+                    <button class="button ion-android-cancel icon-left button-assertive button-block"
+                            ng-click="cancelSignupEvent()">
+                        取消报名
+                    </button>
+                    <button class="button ion-minus icon-left button-clam button-block" ng-click="closeCancelSignup()">
+                        返回
+                    </button>
+                </ion-item>
+            </ion-list>
+
+        </div>
+    </ion-content>
+</ion-modal-view>

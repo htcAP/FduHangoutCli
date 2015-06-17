@@ -1,0 +1,53 @@
+<ion-view ng-controller="TweetFlowController">
+
+    <ion-nav-title>{{data.name}}的新鲜事</ion-nav-title>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-plus"
+                ng-if="data.isSelf"
+                ui-sref="new-tweet">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content delegate-handle="flowScroll">
+
+        <ion-refresher
+            pulling-text="刷新"
+            on-refresh="refresh(1)">
+        </ion-refresher>
+
+        <ion-list>
+            <ion-item class="ly-tweet item-avatar"
+                      ng-repeat="tweet in data.tweets">
+                <img ly-src="{{tweet.sender.image_url}}">
+
+                <h2>
+                    <span ui-sref="user-info({id: tweet.sender.id})">{{tweet.sender.name}}</span>
+                    <span class="ly-value">{{tweet.datetime | parseDatetime}}</span>
+                </h2>
+
+                <p bind-html-compile="tweet.text" ng-if="!tweet.image_link"></p>
+
+                <div class="content-with-img" ng-if="tweet.image_link" ng-click="urlParse(tweet.link)">
+                    <img class="image-link" ly-src="{{tweet.image_link}}">
+
+                    <p bind-html-compile="tweet.text"></p>
+                </div>
+            </ion-item>
+
+
+            <ion-infinite-scroll ng-if="data.moreDataCanBeLoaded"
+                                 on-infinite="loadMore()"
+                                 distance="10%">
+            </ion-infinite-scroll>
+
+            <ion-item class="item"
+                      ng-if="!data.moreDataCanBeLoaded"
+                      align="center">
+                {{data.loading ? '加载中...' : '没有更多新鲜事了'}}
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

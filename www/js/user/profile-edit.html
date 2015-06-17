@@ -1,0 +1,109 @@
+<ion-view title="编辑资料"
+          ng-controller="ProfileEditController">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-clear"
+                ng-click="submit()">
+            确认
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+        <ion-refresher
+            pulling-text="刷新"
+            on-refresh="refresh()">
+        </ion-refresher>
+
+        <ion-list>
+            <ion-item class="item-divider"></ion-item>
+
+            <ion-item class="item-thumbnail-right"
+                      ng-click="selectPic()"
+                      style="vertical-align: middle">
+                <img class="icon" ly-src="{{data.image_url}}"/>
+                <span class=".col-50">头像</span>
+            </ion-item>
+
+            <ion-item ng-click="inputName()">
+                <span class="ly-title">姓名</span>
+                <span class="ly-value">{{ data.name || '(无)' }}</span>
+            </ion-item>
+
+            <ion-item ng-click="inputDescription()">
+                <span class="ly-title">个性签名</span>
+                <span class="ly-value">{{ data.description || '(无)' }}</span>
+            </ion-item>
+
+            <ion-item class="item-divider"></ion-item>
+
+            <ion-item ng-click="selectGender()">
+                <span class="ly-title"> 性别 </span>
+                <span class="ly-value">{{ getSexDesc(data.gender) }}</span>
+            </ion-item>
+
+            <ion-item ng-click="selectBirthday()">
+                <span class="ly-title"> 生日 </span>
+                <span class="ly-value">{{ data.birthday || '(无)' }}</span>
+            </ion-item>
+
+            <ion-item ng-click="inputSchool()">
+                <span class="ly-title"> 学校 </span>
+                <span class="ly-value">{{ data.school || '(无)' }}</span>
+            </ion-item>
+
+            <!--<ion-item ng-click="inputClassroom()">-->
+            <!--<span class="ly-title"> 班级 </span>-->
+            <!--<span class="ly-value">{{ data.classroom || '(无)' }}</span>-->
+            <!--</ion-item>-->
+
+            <ion-item ng-click="inputQQ()">
+                <span class="ly-title"> QQ </span>
+                <span class="ly-value">{{ data.qq || '(无)'}}</span>
+            </ion-item>
+
+            <ion-item ng-click="inputWechat()">
+                <span class="ly-title"> 微信 </span>
+                <span class="ly-value">{{ data.wechat || '(无)' }}</span>
+            </ion-item>
+
+            <ion-item class="item-divider"></ion-item>
+
+            <ion-item ng-click="inputEmail()">
+                <span class="ly-title"> 邮箱 </span>
+                <span class="ly-value">{{ data.email || '(无)' }}</span>
+            </ion-item>
+
+            <ion-item ng-click="selectMail()">
+                <span class="ly-title"> 邮件设置 </span>
+                <span class="ly-value">{{ getMailDesc(data.mailOption) }}</span>
+            </ion-item>
+
+            <ion-item ng-click="selectSMS()">
+                <span class="ly-title"> 短信设置 </span>
+                <span class="ly-value">{{ getSMSDesc(data.smsOption) }}</span>
+            </ion-item>
+
+            <!--<ion-toggle ng-model="data.receiveMail">-->
+            <!--接收邮件-->
+            <!--</ion-toggle>-->
+
+            <!--<ion-toggle ng-model="data.receiveImportantMail">-->
+            <!--接收紧急邮件-->
+            <!--</ion-toggle>-->
+
+            <ion-item class="item-divider">
+            </ion-item>
+
+            <ion-item>
+                <button class="button button-positive icon-left ion-checkmark" ng-click="submit()" style="width:62%">
+                    提交
+                </button>
+                <button class="button button-positive button-outline icon-left ion-key"
+                        ui-sref="change-password" style="width:38%">
+                    修改密码
+                </button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

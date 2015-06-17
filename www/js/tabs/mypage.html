@@ -1,0 +1,96 @@
+<ion-view view-title="我"
+          ng-controller="TabMypageController">
+
+    <ion-content>
+
+        <ion-refresher
+            pulling-text="刷新"
+            on-refresh="refresh()">
+        </ion-refresher>
+
+        <ion-list>
+            <ion-item class="item-thumbnail-left item-text-wrap"
+                      ui-sref="user-info({id: data.user.id, type: 'self'})">
+                <img ly-src="{{data.user.image_url}}"/>
+
+                <h2>{{data.user.name}}</h2>
+
+                <p>{{data.user.description || "(还没有自我介绍...)"}}</p>
+            </ion-item>
+
+            <ion-item class="item-divider"></ion-item>
+
+            <ion-item class="item-icon-left"
+                      ui-sref="my-activities">
+                <i class="icon ion-android-calendar"></i>
+                我的活动
+            </ion-item>
+
+            <ion-item class="item-icon-left"
+                      ui-sref="friends">
+                <i class="icon ion-person-stalker"></i>
+                我的好友
+            </ion-item>
+
+            <ion-item class="item-divider"></ion-item>
+
+            <ion-item class="item-icon-left"
+                      ui-sref="message-list({unread: data.notify.unreadMessageCount })">
+                <i class="icon ion-email"></i>
+                站内信
+                <span class="badge badge-assertive"
+                      ng-if="data.notify.unreadMessageCount">
+                    {{data.notify.unreadMessageCount}}
+                </span>
+            </ion-item>
+
+            <ion-item class="item-icon-left"
+                      ui-sref="add-friend-requests">
+                <i class="icon ion-person-add"></i>
+                好友请求
+                <span class="badge badge-assertive"
+                      ng-if="data.notify.friendRequestCount">
+                    {{data.notify.friendRequestCount}}
+                </span>
+            </ion-item>
+
+
+            <ion-item class="item-icon-left"
+                      ui-sref="tweet-flow">
+                <i class="icon ion-cube"></i>
+                新鲜事
+                <span class="badge badge-assertive"
+                      ng-if="data.notify.tweetCount">
+                    {{data.notify.tweetCount}}
+                </span>
+            </ion-item>
+
+
+            <ion-item class="item-icon-left"
+                      ui-sref="profile-edit"
+                      ng-if="data.notify.fillInfoCount">
+                <i class="icon ion-compose"></i>
+                编辑补全个人资料，获20积分
+                <span class="badge badge-assertive"
+                      ng-if="data.notify.fillInfoCount">
+                    {{data.notify.fillInfoCount}}
+                </span>
+            </ion-item>
+
+            <ion-item class="item-divider"></ion-item>
+
+            <ion-item ng-click="checkForUpdate()"
+                      class="item-icon-left">
+                <i class="icon ion-android-sync"></i>
+                检查更新
+            </ion-item>
+            <ion-item class="item-divider"></ion-item>
+
+            <ion-item class="ly-no-border-bottom">
+                <button class="button button-block button-assertive ion-log-out icon-left" ng-click="logout()">
+                    退出登录
+                </button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
