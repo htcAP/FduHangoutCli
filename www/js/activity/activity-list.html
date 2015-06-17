@@ -1,0 +1,37 @@
+<ion-view ng-controller="ActivityListController">
+
+    <ion-nav-title>活动</ion-nav-title>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-clear">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-header-bar class="bar-subheader" style="display: none">
+
+    </ion-header-bar>
+
+    <ion-tabs>
+        <ul class="tabs amber z-depth-1">
+            <li class="tab col s3 waves-effect waves-yellow"><a href="#test1">Test 1</a></li>
+            <li class="tab col s3 waves-effect waves-yellow"><a class="active" href="#test2">Test 2</a></li>
+            <li class="tab col s3 waves-effect waves-yellow"><a href="#test3">Test 3</a></li>
+            <li class="tab col s3 waves-effect waves-yellow"><a href="#test4">Test 4</a></li>
+        </ul>
+
+    </ion-tabs>
+
+    <ion-content class="has-subheader">
+
+        <ion-refresher
+            pulling-text="刷新"
+            on-refresh="refresh(1)">
+        </ion-refresher>
+
+
+        <ion-list>
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

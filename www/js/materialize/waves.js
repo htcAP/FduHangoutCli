@@ -55,7 +55,7 @@
   var Effect = {
 
     // Effect delay
-    duration: 750,
+    duration: 300,
 
     show: function (e, element) {
 

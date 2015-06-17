@@ -1,4 +1,5 @@
-nav, ion-header-bar {
+nav, ion-header-bar.bar {
+  padding: 0;
   color: #fff;
   @extend .z-depth-1;
   background-color: $primary-color;
@@ -37,6 +38,7 @@ nav, ion-header-bar {
       font-size: 2.7rem;
       height: $navbar-height-mobile;
       line-height: $navbar-height-mobile;
+      margin-left: 16px;
     }
   }
 

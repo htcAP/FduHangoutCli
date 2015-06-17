@@ -39,7 +39,11 @@ FduHangoutApp = angular.module('FduHangoutApp', [
 
       angular.extend(window, {
         $q: $q
-      })
+      });
+
+      setTimeout(function () {
+        navigator.splashscreen.hide();
+      }, 0);
     });
   })
 
@@ -53,7 +57,7 @@ FduHangoutApp = angular.module('FduHangoutApp', [
     $ionicConfigProvider.views.maxCache(2);
 
 // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/main/rec');
+    $urlRouterProvider.otherwise('/activity-list');
 
     // disable cache
     var headers = $httpProvider.defaults.headers;

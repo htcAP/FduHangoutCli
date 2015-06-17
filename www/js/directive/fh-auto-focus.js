@@ -1,4 +1,4 @@
-FduHangoutApp.directive('lyAutoFocus', function ($timeout) {
+FduHangoutApp.directive('fhAutoFocus', function ($timeout) {
   return {
     restrict: 'A',
     link: function (scope, element, attrs) {

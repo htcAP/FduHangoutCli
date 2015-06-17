@@ -19,7 +19,7 @@
     width: 15%;
 
     a {
-      color: $tabs-text-color;
+      color: rgba(255, 255, 255, 0.7);
       display: block;
       width: 100%;
       height: 100%;
@@ -27,6 +27,10 @@
       &:hover {
         color: lighten($tabs-text-color, 20%);
       }
+    }
+
+    a.active {
+      color: #FFF;
     }
   }
   .indicator {

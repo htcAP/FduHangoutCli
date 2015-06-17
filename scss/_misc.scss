@@ -1,0 +1,13 @@
+.nav-bar-has-subheader ion-header-bar {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+ion-tabs > .tabs {
+  top: 56px;
+}
+
+ul.tabs, .tab-nav.tabs {
+  border: 0 !important;
+  padding: 0 !important;
+}
