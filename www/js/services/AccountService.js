@@ -11,17 +11,6 @@ FduHangoutApp.service('accountService',
 
       userInfo: {},
 
-      notify: {
-        tweetCount: 0,
-        friendRequestCount: 0,
-        unreadMessageCount: 0,
-        fillInfoCount: 0,
-        totalCount: 0
-      },
-
-      /**
-       * 刷新用户模型信息
-       */
       getSelfInfo: function () {
         if (!self.token)
           return $q.reject(null);
@@ -37,19 +26,13 @@ FduHangoutApp.service('accountService',
         });
       },
 
-      /**
-       *  判断是否登陆
-       */
       loggedIn: function () {
         var token = self.token;
         return !(token === 'undefined' || token === 'null' || token === undefined || token === null || token === '');
       },
 
-      /**
-       *  用户登录操作
-       */
       login: function (phone, password) {
-        return apiService.request('login', {}, '登录', {
+        return apiService.request('user/login/common', '登录', {
           phone: phone,
           password: password
         }).then(function (data) {

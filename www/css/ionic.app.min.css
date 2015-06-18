@@ -5403,9 +5403,14 @@ ion-tabs.tabs-color-active-dark .tab-item.activated, ion-tabs.tabs-color-active-
 }
 
 .modal {
+    display: block;
+    position: absolute;
     top: 0;
+    z-index: 10;
     overflow: hidden;
-    min-height: 100%
+    min-height: 100%;
+    width: 100%;
+    background-color: #fff
 }
 
 @media (min-width: 680px) {
@@ -6152,12 +6157,12 @@ a.item-content {
     position: absolute;
     top: 0;
     height: 100%;
-    font-size: 32px
+    font-size: 26px
 }
 
 .item-icon-left .icon:before, .item-icon-right .icon:before {
     display: block;
-    width: 32px;
+    width: 26px;
     text-align: center
 }
 
@@ -6239,8 +6244,8 @@ a.item-content {
     position: absolute;
     top: 8px;
     left: 11px;
-    min-width: 34px;
-    min-height: 34px;
+    min-width: 28px;
+    min-height: 28px;
     font-size: 18px;
     line-height: 32px
 }
@@ -6249,12 +6254,12 @@ a.item-content {
     position: relative;
     left: auto;
     width: auto;
-    line-height: 31px
+    line-height: 25px
 }
 
 .item-button-left .item-content > .button > .button, .item-button-left > .button > .button {
     margin: 0 2px;
-    min-height: 34px;
+    min-height: 28px;
     font-size: 18px;
     line-height: 32px
 }
@@ -6278,8 +6283,8 @@ a.item-content {
     position: absolute;
     top: 8px;
     right: 16px;
-    min-width: 34px;
-    min-height: 34px;
+    min-width: 28px;
+    min-height: 28px;
     font-size: 18px;
     line-height: 32px
 }
@@ -6288,13 +6293,13 @@ a.item-content {
     position: relative;
     left: auto;
     width: auto;
-    line-height: 31px
+    line-height: 25px
 }
 
 .item-button-right .item-content > .button > .button, .item-button-right .item-content > .buttons > .button, .item-button-right > .button > .button, .item-button-right > .buttons > .button {
     margin: 0 2px;
-    min-width: 34px;
-    min-height: 34px;
+    min-width: 28px;
+    min-height: 28px;
     font-size: 18px;
     line-height: 32px
 }
@@ -12067,7 +12072,7 @@ ul li {
     box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)
 }
 
-.modal, .z-depth-4 {
+.z-depth-4 {
     -webkit-box-shadow: 0 16px 28px 0 rgba(0, 0, 0, .22), 0 25px 55px 0 rgba(0, 0, 0, .21);
     -moz-box-shadow: 0 16px 28px 0 rgba(0, 0, 0, .22), 0 25px 55px 0 rgba(0, 0, 0, .21);
     box-shadow: 0 16px 28px 0 rgba(0, 0, 0, .22), 0 25px 55px 0 rgba(0, 0, 0, .21)
@@ -16131,7 +16136,8 @@ ion-header-bar.bar .button-collapse, nav .button-collapse {
     float: left;
     position: relative;
     z-index: 1;
-    height: 56px
+    height: 56px;
+    width: 56px
 }
 
 ion-header-bar.bar .button-collapse i, nav .button-collapse i {
@@ -16248,7 +16254,7 @@ ion-header-bar.bar .input-field label.active, nav .input-field label.active {
 .navbar-fixed {
     position: relative;
     height: 56px;
-    z-index: 998
+    z-index: 8
 }
 
 .navbar-fixed nav {
@@ -17193,7 +17199,7 @@ button.btn-floating {
 }
 
 .waves-effect.waves-yellow .waves-ripple {
-    background-color: rgba(255, 160, 0, .3)
+    background-color: rgba(255, 179, 0, .3)
 }
 
 .waves-effect.waves-orange .waves-ripple {
@@ -17255,97 +17261,6 @@ button.btn-floating {
 
 a.waves-effect .waves-ripple {
     z-index: -1
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    left: 0;
-    right: 0;
-    background-color: #fafafa;
-    padding: 0;
-    max-height: 70%;
-    width: 55%;
-    margin: auto;
-    overflow-y: auto;
-    z-index: 1000;
-    border-radius: 2px;
-    -webkit-transform: translate(0);
-    -moz-transform: translate(0);
-    -ms-transform: translate(0);
-    -o-transform: translate(0);
-    transform: translate(0);
-    will-change: top, opacity
-}
-
-@media only screen and (max-width: 992px) {
-    .modal {
-        width: 80%
-    }
-}
-
-.modal h1, .modal h2, .modal h3, .modal h4 {
-    margin-top: 0
-}
-
-.modal .modal-content {
-    padding: 24px
-}
-
-.modal .modal-footer {
-    border-radius: 0 0 2px 2px;
-    background-color: #fafafa;
-    padding: 4px 6px;
-    height: 56px;
-    width: 100%
-}
-
-.modal .modal-footer .btn, .modal .modal-footer .btn-flat, .modal .modal-footer .btn-large {
-    float: right;
-    margin: 6px 0
-}
-
-#lean-overlay {
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 115%;
-    width: 100%;
-    background: #000;
-    display: none;
-    will-change: opacity
-}
-
-.modal.modal-fixed-footer {
-    padding: 0;
-    height: 70%
-}
-
-.modal.modal-fixed-footer .modal-content {
-    position: fixed;
-    max-height: 100%;
-    padding-bottom: 64px;
-    width: 100%;
-    overflow-y: auto
-}
-
-.modal.modal-fixed-footer .modal-footer {
-    border-top: 1px solid rgba(0, 0, 0, .1);
-    position: fixed;
-    bottom: 0
-}
-
-.modal.bottom-sheet {
-    top: auto;
-    bottom: -100%;
-    margin: 0;
-    width: 100%;
-    max-height: 45%;
-    border-radius: 0;
-    will-change: bottom, opacity
 }
 
 .collapsible {
@@ -18358,7 +18273,7 @@ select {
     height: -moz-calc(100%);
     padding-bottom: 60px;
     background-color: #FFF;
-    z-index: 999;
+    z-index: 8;
     overflow-y: auto;
     will-change: left
 }
@@ -18391,12 +18306,16 @@ select {
     padding: 0 15px
 }
 
+.side-nav .item {
+    border-width: 0
+}
+
 .drag-target {
     height: 100%;
     width: 10px;
     position: fixed;
     top: 0;
-    z-index: 998
+    z-index: 8
 }
 
 .side-nav.fixed a {
@@ -18441,7 +18360,7 @@ select {
     right: 0;
     height: 120vh;
     background-color: rgba(0, 0, 0, .5);
-    z-index: 997;
+    z-index: 6;
     will-change: opacity
 }
 
@@ -19493,7 +19412,7 @@ button.picker__clear:focus, button.picker__close:focus, button.picker__today:foc
     }
 }
 
-.nav-bar-has-subheader ion-header-bar {
+.fh-has-sub-header ion-header-bar, .nav-bar-block[nav-bar=cached] ion-header-bar {
     box-shadow: none;
     -webkit-box-shadow: none
 }
@@ -19505,4 +19424,30 @@ ion-tabs > .tabs {
 .tab-nav.tabs, ul.tabs {
     border: 0 !important;
     padding: 0 !important
+}
+
+hr {
+    margin: 1px;
+    padding: 0;
+    border-top: 0
+}
+
+.side-nav a.item-content {
+    padding: 0 15px
+}
+
+.side-nav a.item-content i {
+    color: rgba(0, 0, 0, .54)
+}
+
+.item h2 {
+    line-height: inherit
+}
+
+.text-white h2 {
+    color: #FFF
+}
+
+.text-white p {
+    color: rgba(255, 255, 255, .54)
 }

@@ -1,22 +1,60 @@
-<ion-side-menus class="fh-side-nav">
+<ion-side-menus class="fh-side-nav" ng-controller="MainController">
 
-    <ion-side-menu side="left" id="slide-out" class="side-nav">
-        <ul>
-            <li><a href="http://www.baidu.com"> First Sidebar Link</a></li>
-            <li><a href="http://www.google.com">Second Sidebar Link</a></li>
-        </ul>
+    <ion-side-menu id="slide-out" class="side-nav">
+        <ion-list>
+            <!--<ion-item class="item-icon-left"-->
+            <!--ng-click="login()">-->
+            <!--<i class="icon ion-log-in"></i>-->
+            <!--登录-->
+            <!--</ion-item>-->
+
+            <ion-item class="red accent-2 text-white" style="padding-bottom: 8px">
+
+                <img src="/img/default-avatar.jpeg"
+                     style="height: 56px; width: 56px; border-radius: 50%; margin-bottom: 8px">
+                <br>
+
+                <h2 style="padding-bottom: 0"> hello </h2>
+
+                <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
+
+            </ion-item>
+
+            <ion-item class="item-icon-left"
+                      ng-class="location.hash === '#/activity-list' ? 'active' : ''"
+                      ui-sref="main.activity-list">
+                <i class="icon mdi-action-accessibility"></i>
+                活动列表
+            </ion-item>
+            <ion-item class="item-icon-left"
+                      ng-class="location.hash === '#/friends' ? 'active' : ''"
+                      ui-sref="main.friends">
+                <i class="icon ion-android-people"></i>
+                我的好友
+            </ion-item>
+
+            <hr>
+
+            <ion-item class="item-icon-left"
+                      ng-class="location.hash === '#/setting' ? 'active' : ''"
+                      ui-sref="main.setting">
+                <i class="icon ion-android-settings"></i>
+                设置
+            </ion-item>
+        </ion-list>
     </ion-side-menu>
 
 
     <ion-side-menu-content>
 
         <ion-nav-bar
+            ng-class="hasSubHeader"
             class="bar-positive">
 
             <ion-nav-buttons side="left" class="nav-wrapper">
                 <a data-activates="slide-out" class="waves-effect waves-light button-collapse"
                    fh-side-nav-button/>
-                <i class="mdi-navigation-menu"></i>
+                <i class="mdi-navigation-menu" style="font-size: 26px"></i>
                 </a>
             </ion-nav-buttons>
 

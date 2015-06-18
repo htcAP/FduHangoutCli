@@ -13,10 +13,14 @@ FduHangoutApp
 
   .controller('ActivityListController',
   function ($scope, $rootScope, $timeout) {
-    $rootScope.hasSubHeader = 'hasSubHeader';
 
-    $timeout(function () {
-      $('ul.tabs').tabs();
-    }, 100);
+    $scope.$on('$ionicView.beforeEnter', function () {
+      $rootScope.hasSubHeader = 'fh-has-sub-header';
+    });
+
+    $scope.$on('$ionicView.afterLeave', function () {
+      $rootScope.hasSubHeader = '';
+    });
+
 
   });

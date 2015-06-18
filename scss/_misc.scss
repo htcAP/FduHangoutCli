@@ -1,4 +1,4 @@
-.nav-bar-has-subheader ion-header-bar {
+.fh-has-sub-header ion-header-bar, .nav-bar-block[nav-bar='cached'] ion-header-bar {
   box-shadow: none;
   -webkit-box-shadow: none;
 }
@@ -10,4 +10,30 @@ ion-tabs > .tabs {
 ul.tabs, .tab-nav.tabs {
   border: 0 !important;
   padding: 0 !important;
+}
+
+hr {
+  margin: 1px;
+  padding: 0;
+  border-top: 0;
+}
+
+.side-nav a.item-content {
+  padding: 0 15px;
+
+  i {
+    color: rgba(0, 0, 0, .54);
+  }
+}
+
+.item h2 {
+  line-height: inherit;
+}
+
+.text-white h2 {
+  color: #FFF;
+}
+
+.text-white p {
+  color: rgba(255, 255, 255, .54);
 }

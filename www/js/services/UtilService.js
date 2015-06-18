@@ -175,4 +175,6 @@ FduHangoutApp.service('utilService',
       $timeout(resize, 500);
     });
 
+    $rootScope.location = window.location;
+
   });

@@ -33,6 +33,7 @@ nav, ion-header-bar.bar {
     position: relative;
     z-index: 1;
     height: $navbar-height-mobile;
+    width: $navbar-height-mobile;
 
     i {
       font-size: 2.7rem;
@@ -131,7 +132,7 @@ nav, ion-header-bar.bar {
 .navbar-fixed {
   position: relative;
   height: $navbar-height-mobile;
-  z-index: 998;
+  z-index: 8;
 
   nav {
     position: fixed;

@@ -111,12 +111,6 @@
         }
 
         function removeMenu(restoreNav) {
-          setTimeout(function () {
-            _removeMenu(restoreNav);
-          }, 0);
-        }
-
-        function _removeMenu(restoreNav) {
           panning = false;
           menuOut = false;
           $('#sidenav-overlay').velocity({opacity: 0}, {

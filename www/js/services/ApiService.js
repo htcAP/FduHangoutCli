@@ -56,10 +56,10 @@ FduHangoutApp.service('apiService',
         return url;
       },
 
-      request: function (name, data, describe, body) {
+      request: function (name, describe, body) {
 
-        var url = this.getApiUrl(name, data);
-        var p = body ? $http.post(url, body) : $http.get(url, {cache: false});
+        var url = this.getApiUrl(name);
+        var p = $http.post(url, body);
         console.log(url);
         //if (body) {
         //    console.log(body);

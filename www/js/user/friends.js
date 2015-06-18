@@ -1,9 +1,13 @@
 FduHangoutApp
   .config(function ($stateProvider) {
 
-    $stateProvider.state('friends', {
+    $stateProvider.state('main.friends', {
       url: '/friends',
-      templateUrl: 'js/user/friends.html'
+      views: {
+        'mainContent': {
+          templateUrl: 'js/user/friends.html'
+        }
+      }
     })
   })
 
