@@ -1,48 +1,22 @@
-<ion-modal-view>
-    <ion-header-bar class="nav-title-slide-ios7 bar-positive">
-        <h1 class="title">登录</h1>
-
-        <div class="buttons">
-            <button class="button button-clear" ng-click="closeLogin()">关闭</button>
+<div class="card white">
+    <div class="card-content" style="margin-top: 5px">
+        <div class="input-field col s12">
+            <input id="phone" type="tel" ng-model="data.phone">
+            <label for="phone">手机号</label>
         </div>
-    </ion-header-bar>
-    <ion-content>
-        <style>
-            .login-modal input[type=text] {
-                font-size: 18px;
-                margin-top: -3px;
-                width: 100%;
-            }
-        </style>
-        <form ng-submit="doLogin()">
-            <div class="list login-modal">
-                <div class="item  item-input-inset">
-                    <label class="item-input-wrapper" style="background-color: #ffffff">
-                        <span class="input-label" style="width: 100px">手机号码</span>
-                        <input type="text" ng-model="loginData.phone" id="phoneInput">
-                    </label>
-                    <button type="button" class="item item-input button button-clear" ng-click="clearUserData()">
-                        <i class="icon ion-android-cancel" ng-click="clearUserData()"></i>
-                    </button>
-                </div>
-
-
-                <div class="item  item-input-inset">
-                    <label class="item-input-wrapper" style="background-color: #ffffff">
-                        <span class="input-label" style="width: 100px">密码</span>
-                        <input type="password" ng-model="loginData.password">
-                    </label>
-                </div>
-                <label class="item ly-no-border-bottom" style="padding-bottom: 6px;">
-                    <button class="button button-block button-positive ion-log-in icon-left" type="submit">登入</button>
-                    <button class="button button-calm button-block ion-plus icon-left"
-                            ng-click="doRegister()">
-                        注册
-                    </button>
-                </label>
-
-                <p style="text-align: center;color: #AAAAAA;font-size: 13px;" ng-click="forgetPassword()">忘记密码</p>
-            </div>
-        </form>
-    </ion-content>
-</ion-modal-view>
+        <div class="input-field col s12">
+            <input id="password" type="password" ng-model="data.password">
+            <label for="password">密码</label>
+        </div>
+    </div>
+    <div style="float: right; padding: 0 10px 10px 0">
+        <a class="waves-effect btn-flat grey-text"
+           ng-click="doRegister()">
+            注册
+        </a>
+        <a class="waves-effect btn-flat red-text text-accent-2"
+           ng-click="doLogin()">
+            登录
+        </a>
+    </div>
+</div>

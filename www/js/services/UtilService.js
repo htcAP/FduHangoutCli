@@ -38,10 +38,11 @@ FduHangoutApp.service('utilService',
       calcCrow: calcCrow,
 
       err: function (msg, describe) {
-        $ionicPopup.alert({
-          title: describe || "Fdu Hangout",
-          template: '<ion-item>' + msg + '</ion-item>'
-        });
+        this.toast(msg);
+        //$ionicPopup.alert({
+        //  title: describe || "Fdu Hangout",
+        //  template: '<ion-item>' + msg + '</ion-item>'
+        //});
       },
 
       resolved: function (data) {
@@ -111,7 +112,8 @@ FduHangoutApp.service('utilService',
       },
 
       toast: function (msg) {
-        if (window.plugins) plugins.toast.showShortBottom(msg);
+        //if (window.plugins) plugins.toast.showShortBottom(msg);
+        Materialize.toast(msg, 3000);
       },
 
       confirm: function (title, content) {
@@ -167,12 +169,12 @@ FduHangoutApp.service('utilService',
     }
 
     window.addEventListener('native.keyboardhide', function () {
-      $('body').removeClass('ly-keyboard-open');
-      $timeout(resize, 500);
+      $('body').removeClass('fh-keyboard-open');
+      $timeout(resize, 200);
     });
     window.addEventListener('native.keyboardshow', function () {
-      $('body').addClass('ly-keyboard-open');
-      $timeout(resize, 500);
+      $('body').addClass('fh-keyboard-open');
+      $timeout(resize, 200);
     });
 
     $rootScope.location = window.location;

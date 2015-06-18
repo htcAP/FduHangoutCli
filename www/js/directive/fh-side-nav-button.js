@@ -1,4 +1,4 @@
-FduHangoutApp.directive('fhSideNavButton', function () {
+FduHangoutApp.directive('fhSideNavButton', function ($rootScope) {
   return {
     restrict: 'A',
     link: function (scope, element, attr) {
@@ -8,6 +8,12 @@ FduHangoutApp.directive('fhSideNavButton', function () {
           closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
         }
       );
+      $rootScope.showSideNav = function () {
+        $(element).sideNav('show');
+      };
+      $rootScope.hideSideNav = function () {
+        $(element).sideNav('hide');
+      }
     }
   };
 });

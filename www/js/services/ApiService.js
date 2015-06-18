@@ -65,18 +65,21 @@ FduHangoutApp.service('apiService',
         //    console.log(body);
         //}
         return p.then(function (rsp) {
-          var data = rsp.data;
-          // console.log(data);
-          if (data.errNo) {
-            if (data.errNo == -1 || data.errNo == -2) {
+          var data = rsp.data, error = data;
 
-              if (data.errNo == -2)
-                utilService.toast("您的账户在其他地方登入，您被迫下线");
+          if (data.hasOwnProperty('error')) {
+            error = data.error;
+          }
+
+          console.log(data);
+          if (error.errNo) {
+            if (error.errNo == 1) {
 
               $rootScope.$broadcast(AUTH_EVENTS.openLogin);
               return $q.reject(data);
             }
-            var msg = data.errMsg || "网络错误";
+
+            var msg = error.message || "写服务端的坑爹了...";
             utilService.err(msg, describe);
             return $q.reject(data);
           } else {
@@ -84,15 +87,15 @@ FduHangoutApp.service('apiService',
           }
         }, function (rsp) {
           var data = rsp.data;
-          if (data && data.errNo) {
-            var msg = data.errMsg || "网络错误";
+          if (data && data.error && data.error.errrNo) {
+            var msg = data.err.message || "汪呜...出错了";
             utilService.err(msg, describe);
             return $q.reject(data);
           } else {
-            utilService.err('网络错误', describe);
+            utilService.err('汪呜...服务器在哪里TuT', describe);
             return $q.reject({
-              errNo: '1',
-              errMsg: '网络错误'
+              errNo: '-1',
+              message: '网络错误'
             });
           }
         });

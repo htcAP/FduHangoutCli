@@ -6,7 +6,7 @@ FduHangoutApp.service('accountService',
   function (utilService, apiService, $resource, $q, $rootScope, AUTH_EVENTS, NOTIFICATION_EVENTS, $injector) {
     var userService, self;
 
-    return self = {
+    return $rootScope.accountService = self = {
       token: null,
 
       userInfo: {},
@@ -38,30 +38,31 @@ FduHangoutApp.service('accountService',
         }).then(function (data) {
           self.token = data.token;
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-          window.localStorage.setItem('phone', phone);
-          window.localStorage.setItem('password', password);
-          self.refreshNotification();
+          localStorage.setItem('phone', phone);
+          localStorage.setItem('password', password);
 
           if (!userService) {
             userService = $injector.get('userService');
           }
-          userService.getFriendList();
-          return self.getSelfInfo();
+          //userService.getFriendList();
+          //return self.getSelfInfo();
         });
       },
 
 
-      tryAutoLogin: function (callback) {
+      tryAutoLogin: function () {
+        var defer = $q.defer();
+
         if (localStorage["phone"] && localStorage["password"]) {
           self.userInfo = $.parseJSON(localStorage["userInfo"]);
 
-          self.login(localStorage["phone"], localStorage["password"], function (successful) {
-            callback(successful);
-          });
+          return self.login(localStorage["phone"], localStorage["password"]);
+
         } else {
-          callback(false);
-          return false;
+          defer.reject();
         }
+
+        return defer.promise;
       },
 
       /**
@@ -119,48 +120,6 @@ FduHangoutApp.service('accountService',
         return apiService.request('update-avatar', {}, '上传头像', {
           link: link,
           token: self.token
-        });
-      },
-
-      refreshNotification: function () {
-        return apiService.request('get-notification-count', {
-          token: self.token
-        }, '获取消息数量').then(function (data) {
-          self.notify.tweetCount = parseInt(data.tweetCount);
-          self.notify.friendRequestCount = parseInt(data.friendRequestCount);
-          self.notify.unreadMessageCount = parseInt(data.unreadMessageCount);
-          self.notify.fillInfoCount = parseInt(data.fillInfoCount);
-          self.notify.totalCount = self.notify.tweetCount + self.notify.friendRequestCount + self.notify.unreadMessageCount + self.notify.fillInfoCount;
-          $rootScope.$broadcast(NOTIFICATION_EVENTS.notificationRefresh);
-          return data;
-        });
-      },
-
-      clearNotification: function () {
-        self.notify.tweetCount = 0;
-        self.notify.friendRequestCount = 0;
-        self.notify.unreadMessageCount = 0;
-        self.notify.fillInfoCount = 0;
-        self.notify.totalCount = 0;
-        $rootScope.$broadcast(NOTIFICATION_EVENTS.notificationRefresh);
-      },
-
-      requestResetPassword: function (phone) {
-        return apiService.request('request-reset-password', {}, '获得密码重置短信', {
-          phone: phone
-        });
-      },
-      tryResetPasswordCode: function (phone, code) {
-        return apiService.request('try-reset-password-code', {}, '提交密码重置', {
-          phone: phone,
-          code: code
-        });
-      },
-      submitResetPassword: function (phone, code, password) {
-        return apiService.request('submit-reset-password', {}, '提交密码重置', {
-          phone: phone,
-          code: code,
-          password: password
         });
       }
 

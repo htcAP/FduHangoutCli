@@ -8,26 +8,43 @@ FduHangoutApp
   })
 
   .controller('MainController',
-  function ($scope, $rootScope, AUTH_EVENTS, $ionicModal, $ionicLoading) {
+  function ($scope, $rootScope, AUTH_EVENTS, $ionicModal, $ionicLoading, $ionicPopup, accountService, utilService) {
 
-    $scope.login = function () {
-      $rootScope.$broadcast(AUTH_EVENTS.openLogin);
-      //$ionicLoading.show({
-      //  template: '加载中'
-      //});
+    var data = $scope.data = {
+      phone: '',
+      password: ''
     };
 
+    var loginPopup;
+
+    $scope.login = function () {
+      $rootScope.hideSideNav();
+      $rootScope.$broadcast(AUTH_EVENTS.openLogin);
+    };
 
     $rootScope.$on(AUTH_EVENTS.openLogin, function () {
-      $scope.loginModal.show();
-      //if(!$scope.loginData.phone)
-      //  $("#phoneInput").focus().select();
+      data.phone = '';
+      data.password = '';
+      loginPopup = $ionicPopup.show({
+        templateUrl: 'js/login/login.html',
+        scope: $scope
+      });
     });
 
-    $ionicModal.fromTemplateUrl('js/login/login.html', {
-      scope: $scope
-    }).then(function (modal) {
-      $scope.loginModal = modal;
-    });
+    $scope.doLogin = function () {
+      $ionicLoading.show({
+        template: '登陆中...'
+
+      });
+      accountService.login(data.phone, data.password).then(function () {
+        utilService.toast('登录成功~汪呜');
+        loginPopup.hide();
+
+      }).finally(function () {
+        $ionicLoading.hide();
+
+      });
+
+    }
 
   });

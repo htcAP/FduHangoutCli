@@ -37,3 +37,43 @@ hr {
 .text-white p {
   color: rgba(255, 255, 255, .54);
 }
+
+input[type=text],
+input[type=tel],
+input[type=password] {
+  height: 1.8rem;
+  margin-bottom: 0;
+}
+
+.popup-head {
+  border-bottom: 0;
+}
+
+.input-field label {
+  left: 0.4rem;
+}
+
+.popup {
+  -webkit-transition-duration: 0.1s;
+  -moz-transition-duration: 0.1s;
+  -ms-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;;
+
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  width: 90% !important;
+}
+
+.fh-keyboard-open .popup {
+  top: 20px;
+}
+
+.popup-container .popup {
+  background-color: transparent;
+}
+
+.popup-container {
+  background-color: rgba(0, 0, 0, 0.2);
+}
