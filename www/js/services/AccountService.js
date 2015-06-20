@@ -85,8 +85,8 @@ FduHangoutApp.service('accountService',
        * 注册
        */
       register: function (name, phone, password) {
-        return apiService.request('register', {}, '注册新账号', {
-          name: name,
+        return apiService.request('user/register', '注册新账号', {
+          username: name,
           phone: phone,
           password: password
         });

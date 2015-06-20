@@ -75,5 +75,14 @@ input[type=password] {
 }
 
 .popup-container {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.44);
+}
+
+.bar .button.back-button {
+  margin-left: 16px;
+  margin-top: 10px;
+}
+
+.bar .back-button ~ .title {
+  padding-left: 12px;
 }

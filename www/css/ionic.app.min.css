@@ -3679,7 +3679,7 @@ a.subdued:last-child {
 
 .bar.bar-stable {
     border-color: #b2b2b2;
-    background-color: #f8f8f8;
+    background-color: #eee;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
     color: #444
 }
@@ -3957,7 +3957,7 @@ a.subdued:last-child {
 
 .bar-stable .button {
     border-color: #b2b2b2;
-    background-color: #f8f8f8;
+    background-color: #eee;
     color: #444
 }
 
@@ -4283,7 +4283,7 @@ a.subdued:last-child {
 
 .tabs .tab-item .badge {
     background-color: #444;
-    color: #f8f8f8
+    color: #eee
 }
 
 @media (min--moz-device-pixel-ratio: 1.5),(-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5),(min-resolution: 144dpi),(min-resolution: 1.5dppx) {
@@ -4311,14 +4311,14 @@ a.subdued:last-child {
 
 .tabs-stable > .tabs, .tabs.tabs-stable {
     border-color: #b2b2b2;
-    background-color: #f8f8f8;
+    background-color: #eee;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
     color: #444
 }
 
 .tabs-stable > .tabs .tab-item .badge, .tabs.tabs-stable .tab-item .badge {
     background-color: #444;
-    color: #f8f8f8
+    color: #eee
 }
 
 .tabs-positive > .tabs, .tabs.tabs-positive {
@@ -4447,7 +4447,7 @@ a.subdued:last-child {
 }
 
 .tabs-striped.tabs-stable .tabs {
-    background-color: #f8f8f8
+    background-color: #eee
 }
 
 .tabs-striped.tabs-stable .tab-item {
@@ -4624,7 +4624,7 @@ a.subdued:last-child {
 }
 
 .tabs-striped.tabs-background-stable .tabs {
-    background-color: #f8f8f8;
+    background-color: #eee;
     background-image: none
 }
 
@@ -4685,7 +4685,7 @@ a.subdued:last-child {
 }
 
 .tabs-striped.tabs-color-stable .tab-item {
-    color: rgba(248, 248, 248, .4);
+    color: rgba(238, 238, 238, .4);
     opacity: 1
 }
 
@@ -4695,8 +4695,8 @@ a.subdued:last-child {
 
 .tabs-striped.tabs-color-stable .tab-item.activated, .tabs-striped.tabs-color-stable .tab-item.active, .tabs-striped.tabs-color-stable .tab-item.tab-item-active {
     margin-top: -2px;
-    color: #f8f8f8;
-    border: 0 solid #f8f8f8;
+    color: #eee;
+    border: 0 solid #eee;
     border-top-width: 2px
 }
 
@@ -4859,7 +4859,7 @@ a.subdued:last-child {
 }
 
 .tabs-background-stable .tabs, .tabs-background-stable > .tabs {
-    background-color: #f8f8f8;
+    background-color: #eee;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
     border-color: #b2b2b2
 }
@@ -4925,7 +4925,7 @@ a.subdued:last-child {
 }
 
 .tabs-color-stable .tab-item {
-    color: rgba(248, 248, 248, .4);
+    color: rgba(238, 238, 238, .4);
     opacity: 1
 }
 
@@ -4934,8 +4934,8 @@ a.subdued:last-child {
 }
 
 .tabs-color-stable .tab-item.activated, .tabs-color-stable .tab-item.active, .tabs-color-stable .tab-item.tab-item-active {
-    color: #f8f8f8;
-    border: 0 solid #f8f8f8
+    color: #eee;
+    border: 0 solid #eee
 }
 
 .tabs-color-stable .tab-item.activated .badge, .tabs-color-stable .tab-item.active .badge, .tabs-color-stable .tab-item.tab-item-active .badge {
@@ -5081,7 +5081,7 @@ ion-tabs.tabs-color-active-stable .tab-item {
 }
 
 ion-tabs.tabs-color-active-stable .tab-item.activated, ion-tabs.tabs-color-active-stable .tab-item.active, ion-tabs.tabs-color-active-stable .tab-item.tab-item-active {
-    color: #f8f8f8
+    color: #eee
 }
 
 ion-tabs.tabs-color-active-positive .tab-item {
@@ -5280,7 +5280,7 @@ ion-tabs.tabs-color-active-dark .tab-item.activated, ion-tabs.tabs-color-active-
 }
 
 .tab-item.activated.tab-item-stable, .tab-item.active.tab-item-stable, .tab-item.tab-item-active.tab-item-stable {
-    color: #f8f8f8
+    color: #eee
 }
 
 .tab-item.activated.tab-item-positive, .tab-item.active.tab-item-positive, .tab-item.tab-item-active.tab-item-positive {
@@ -5899,7 +5899,7 @@ ion-tabs.tabs-color-active-dark .tab-item.activated, ion-tabs.tabs-color-active-
 
 .item.item-stable {
     border-color: #b2b2b2;
-    background-color: #f8f8f8;
+    background-color: #eee;
     color: #444
 }
 
@@ -6054,7 +6054,7 @@ a.item-content {
 
 .item-complex.item-stable > .item-content {
     border-color: #b2b2b2;
-    background-color: #f8f8f8;
+    background-color: #eee;
     color: #444
 }
 
@@ -6754,7 +6754,7 @@ a.item-content {
 }
 
 .badge.badge-stable, .tabs .tab-item .badge.badge-stable {
-    background-color: #f8f8f8;
+    background-color: #eee;
     color: #444
 }
 
@@ -6992,8 +6992,8 @@ a.item-content {
 }
 
 .spinner.spinner-stable {
-    stroke: #f8f8f8;
-    fill: #f8f8f8
+    stroke: #eee;
+    fill: #eee
 }
 
 .spinner.spinner-positive {
@@ -7053,7 +7053,7 @@ a.item-content {
 }
 
 .spinner-spiral.spinner-stable .stop2 {
-    stop-color: #f8f8f8
+    stop-color: #eee
 }
 
 .spinner-spiral.spinner-positive .stop2 {
@@ -7098,7 +7098,7 @@ legend {
 }
 
 legend small {
-    color: #f8f8f8;
+    color: #eee;
     font-size: 1.07143
 }
 
@@ -7376,7 +7376,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 }
 
 input[disabled], input[readonly]:not(.cloned-text-input), select[disabled], select[readonly], textarea[disabled], textarea[readonly]:not(.cloned-text-input) {
-    background-color: #f8f8f8;
+    background-color: #eee;
     cursor: not-allowed
 }
 
@@ -8156,7 +8156,7 @@ input[type=radio][disabled], input[type=radio][readonly], input[type=checkbox][d
 }
 
 .item-select.item-stable select {
-    background: #f8f8f8;
+    background: #eee;
     color: #444
 }
 
@@ -8238,7 +8238,7 @@ progress {
 
 .button {
     border-color: #b2b2b2;
-    background-color: #f8f8f8;
+    background-color: #eee;
     color: #444;
     position: relative;
     display: inline-block;
@@ -8351,7 +8351,7 @@ progress {
 
 .button.button-stable {
     border-color: #b2b2b2;
-    background-color: #f8f8f8;
+    background-color: #eee;
     color: #444
 }
 
@@ -9329,11 +9329,11 @@ a.button .icon:before, a.button.icon-left:before, a.button.icon-right:before, a.
 }
 
 .stable, a.stable {
-    color: #f8f8f8
+    color: #eee
 }
 
 .stable-bg {
-    background-color: #f8f8f8
+    background-color: #eee
 }
 
 .stable-border {
@@ -19483,5 +19483,14 @@ input[type=password], input[type=tel], input[type=text] {
 }
 
 .popup-container {
-    background-color: rgba(0, 0, 0, .2)
+    background-color: rgba(0, 0, 0, .44)
+}
+
+.bar .button.back-button {
+    margin-left: 16px;
+    margin-top: 10px
+}
+
+.bar .back-button ~ .title {
+    padding-left: 12px
 }

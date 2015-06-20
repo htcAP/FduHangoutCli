@@ -8,7 +8,7 @@ FduHangoutApp
   })
 
   .controller('MainController',
-  function ($scope, $rootScope, AUTH_EVENTS, $ionicModal, $ionicLoading, $ionicPopup, accountService, utilService) {
+  function ($scope, $rootScope, AUTH_EVENTS, $ionicModal, $ionicLoading, $ionicPopup, accountService, utilService, $state) {
 
     var data = $scope.data = {
       phone: '',
@@ -34,17 +34,19 @@ FduHangoutApp
     $scope.doLogin = function () {
       $ionicLoading.show({
         template: '登陆中...'
-
       });
       accountService.login(data.phone, data.password).then(function () {
         utilService.toast('登录成功~汪呜');
-        loginPopup.hide();
+        loginPopup.close();
 
       }).finally(function () {
         $ionicLoading.hide();
-
       });
+    };
 
+    $scope.doRegister = function () {
+      loginPopup.close();
+      $state.go('register');
     }
 
   });

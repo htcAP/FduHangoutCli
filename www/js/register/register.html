@@ -1,50 +1,44 @@
-<ion-view view-title="复旦Hangout"
+<ion-view view-title="注册 复旦Hangout"
           ng-controller="RegisterController as ctrl">
 
     <ion-content>
-        <ion-list>
 
-            <ion-item class="item-divider">
-            </ion-item>
+        <ion-item style="border-bottom: 0">
+            <div class="input-field col s12">
+                <input id="reg-phone" type="tel" ng-model="data.phone">
+                <label for="reg-phone">手机号</label>
+            </div>
 
-            <ion-item class="item-input">
-                <input type="text"
-                       ng-model="data.name"
-                       title="真实姓名"
-                       placeholder="真实姓名"
-                       ly-auto-focus>
-            </ion-item>
+            <div class="input-field col s12">
+                <input id="reg-name" type="text" ng-model="data.name">
+                <label for="reg-name">用户名</label>
+            </div>
 
-            <ion-item class="item-input">
-                <input type="number"
-                       ng-model="data.phone"
-                       title="手机号"
-                       placeholder="手机号">
-            </ion-item>
+            <div class="input-field col s12">
+                <input id="password" type="password" ng-model="data.password">
+                <label for="password">密码</label>
+            </div>
 
-            <ion-item class="item item-input">
-                <input type="password"
-                       ng-model="data.password"
-                       title="密码"
-                       placeholder="密码">
-            </ion-item>
-
-            <ion-item class="item item-input">
-                <input type="password"
-                       ng-model="data.passwordRepeat"
-                       title="重复密码"
-                       placeholder="重复密码">
-            </ion-item>
-
-
-            <ion-item class="ly-no-border-bottom">
-                <button class="button button-block button-calm ion-plus icon-left"
-                        ng-click="register()">
-                    注册
-                </button>
-            </ion-item>
-
-        </ion-list>
+        </ion-item>
     </ion-content>
+
+    <ion-footer-bar align-title="left"
+                    style="height: 46px"
+                    class="bar-stable">
+        <div class="buttons">
+        </div>
+        <h1 class="title"></h1>
+
+        <div class="buttons">
+            <button class="button button-clear button-stable"
+                    style="margin-right: 20px"
+                    ng-click="register()">
+                <i class="icon ion-ios-arrow-forward"
+                   style="float: right; padding-left: 8px">
+                </i>
+                注册
+            </button>
+        </div>
+    </ion-footer-bar>
 
 </ion-view>

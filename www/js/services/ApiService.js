@@ -61,9 +61,9 @@ FduHangoutApp.service('apiService',
         var url = this.getApiUrl(name);
         var p = $http.post(url, body);
         console.log(url);
-        //if (body) {
-        //    console.log(body);
-        //}
+        if (body) {
+          console.log(body);
+        }
         return p.then(function (rsp) {
           var data = rsp.data, error = data;
 
@@ -92,6 +92,7 @@ FduHangoutApp.service('apiService',
             utilService.err(msg, describe);
             return $q.reject(data);
           } else {
+            console.log(rsp);
             utilService.err('汪呜...服务器在哪里TuT', describe);
             return $q.reject({
               errNo: '-1',
