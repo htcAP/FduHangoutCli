@@ -8,42 +8,35 @@ FduHangoutApp
   })
 
   .controller('SearchFriendController',
-  function ($scope, userService, $state, $ionicLoading) {
+  function ($scope, userService, $state, $ionicLoading, $ionicHistory) {
 
-    var data = $scope.data = {};
-
-    $scope.doSearch = function () {
-      data.result = [];
-      if (!data.keyword) {
-        return;
-      }
-      $ionicLoading.show({
-        template: '搜索中...'
-      });
-      userService.searchFriend(data.keyword).then(function (res) {
-        data.result = [{
-          id: res.id,
-          name: res.name,
-          email: res.email,
-          image: res.image,
-          school: res.school,
-          ok: res.ok,
-          msg: res.msg
-        }]
-      }).finally(function () {
-        $ionicLoading.hide();
-      })
+    var data = $scope.data = {
+      searchText: '',
+      loading: 0,
+      users: []
     };
 
-    $scope.addFriend = function (user) {
-      $state.go('user-info', {
-        id: user.id,
-        type: 'addFriend',
-        info: {
-          ok: user.ok,
-          msg: user.msg,
-        }
-      });
+    $scope.goBack = function () {
+      $ionicHistory.goBack();
+    };
+
+    $scope.clearText = function () {
+      data.searchText = '';
+    };
+
+    $scope.doSearch = function () {
+      if (!data.searchText) {
+        return;
+      }
+
+      data.loading++;
+      userService.searchFriend(data.searchText).then(function (users) {
+        data.users = users;
+
+      }).finally(function () {
+        data.loading--;
+      })
     }
+
 
   });

@@ -13,7 +13,8 @@ FduHangoutApp
   })
 
   .controller('UserInfoController',
-  function ($scope, $stateParams, userService, $ionicLoading, nativeUrlPlugin) {
+  function ($scope, $stateParams, userService, $ionicLoading, nativeUrlPlugin, $ionicHistory, accountService, $state, utilService) {
+
     var data = $scope.data = {
       id: $stateParams.id,
       info: $stateParams.info,
@@ -39,7 +40,39 @@ FduHangoutApp
     };
     $scope.refresh();
 
-    $scope.openQQ = function () {
-      nativeUrlPlugin.showQQ(data.user.qq);
+    $scope.goBack = function () {
+      $ionicHistory.goBack();
+    };
+
+    $scope.tryEditProfile = function () {
+      if (data.id != accountService.userInfo.id) {
+        return;
+      }
+      $state.go('profile-edit');
+    };
+
+    $scope.addFriend = function () {
+      userService.sendFriendRequest(data.id).then(function () {
+        utilService.toast('已发送好友请求');
+      });
+    };
+
+    $scope.removeFriend = function () {
+      userService.removeFriend(data.id).then(function () {
+        utilService.toast('已删除好友');
+      })
+    };
+
+    $scope.acceptFriend = function () {
+      userService.acceptFriend(data.id).then(function () {
+        utilService.toast('你们成为好友啦~');
+      });
+    };
+
+    $scope.rejectFriend = function () {
+      userService.rejectFriend(data.id).then(function () {
+        utilService.toast('已拒绝...');
+      })
     }
+
   });

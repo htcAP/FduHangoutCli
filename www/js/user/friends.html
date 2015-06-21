@@ -2,7 +2,9 @@
           ng-controller="FriendsController">
 
     <ion-nav-buttons side="right">
-        <button class="button button-icon icon ion-plus-round"
+        <button class="button button-icon icon ion-android-search waves-effect waves-light"
+                style="border-radius: 50%"
+                ng-if="accountService.loggedIn()"
                 ui-sref="search-friend">
         </button>
     </ion-nav-buttons>
@@ -18,15 +20,20 @@
             <ion-item class="item-avatar-left"
                       ng-repeat="friend in data.friends"
                       ui-sref="user-info({id: friend.id})">
-                <img ly-src="{{friend.image_url}}"/>
+                <!--<img ly-src="{{friend.image_url}}"/>-->
+                <img src="img/default-avatar.jpeg">
 
-                <h2>{{friend.name}}</h2>
+                <h2>{{friend.username}}</h2>
 
-                <p>{{friend.description}}</p>
+                <p>{{friend.signature}}</p>
             </ion-item>
 
-            <ion-item ng-if="!data.friends.length" style="text-align: center;color: #808080;font-size: 11px">
-                您还没有好友...
+            <ion-item ng-if="accountService.loggedIn() && !data.friends.length">
+                还没有好友...
+            </ion-item>
+
+            <ion-item ng-if="!accountService.loggedIn()">
+                还没有登录...
             </ion-item>
         </ion-list>
     </ion-content>

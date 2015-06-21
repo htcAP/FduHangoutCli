@@ -13,6 +13,9 @@ FduHangoutApp
   })
 
   .controller('SettingController',
-  function ($scope) {
+  function ($scope, accountService) {
+    $scope.logout = function () {
+      accountService.logout();
+    }
 
   });

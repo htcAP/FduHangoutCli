@@ -1,157 +1,79 @@
-<ion-view title="详细资料"
-          cache-view="false"
+<ion-view cache-view="false"
+          hide-nav-bar="true"
+          class="hide-scroll-bar"
           ng-controller="UserInfoController">
 
-    <ion-nav-buttons side="right">
-        <button class="button button-clear"
-                ui-sref="profile-edit" ng-if="data.type === 'self'">
-            编辑
+    <ion-header-bar align-title="left" class="bar-positive"
+                    style="box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.2), 0 25px 55px 0 rgba(0, 0, 0, 0.22);">
+        <button class="button button-icon icon ion-android-arrow-back waves-effect waves-light"
+                style="margin-left: 5px; border-radius: 50%"
+                ng-click="goBack()">
         </button>
-    </ion-nav-buttons>
+        <h1 class="title">{{data.user.username}}</h1>
+    </ion-header-bar>
 
-    <ion-content>
-        <ion-refresher
-            pulling-text="刷新"
-            on-refresh="refresh(1)">
-        </ion-refresher>
+    <ion-content delegate-handle="mainScroll">
 
-        <ion-list>
+        <fh-special-affect-avatar src="img/default-avatar.jpeg" scroll-handle="mainScroll">
+        </fh-special-affect-avatar>
 
-            <ion-item class="item-thumbnail-left item-text-wrap">
-                <img class="icon" ly-src="{{data.user.image_url}}"/>
+        <div style="box-shadow: 0 -16px 28px 0 rgba(0, 0, 0, 0.2), 0 25px 55px 0 rgba(0, 0, 0, 0.22); ">
+            <div class="card collection"
+                 style="margin: 8px">
 
-                <h2>{{data.user.name}} {{getSexDesc(data.user.sex)}}</h2>
+                <div class="collection-item avatar waves-effect"
+                     ng-click="tryEditProfile()">
+                    <i class="mdi-editor-border-color circle"
+                       ng-class="accountService.userInfo.id == data.user.id ? 'red' : ''">
+                    </i>
+                    <span class="title">个人签名</span>
 
-                <p style="height: 52px;white-space: normal;overflow: hidden;">
-                    {{data.user.description || '(还没有自我介绍)'}}
-                </p>
-            </ion-item>
-
-            <ion-item class="item-divider"></ion-item>
-            <ion-item ui-sref="tweet-flow({id: data.user.id })">
-                {{ data.type === 'self' ? '我' : ( data.user.sex ? (data.user.gender == 1 ? '他' : '她') : 'ta' )}}
-                的新鲜事
-            </ion-item>
-            <ion-item class="item-divider"></ion-item>
-
-            <ion-item>
-                <span class="ly-title"> 积分 </span>
-                <span class="ly-value">{{ data.user.points }}</span>
-            </ion-item>
-
-            <ion-item>
-                <span class="ly-title"> 等级 </span>
-                <span class="ly-value" ng-bind-html="data.user.levelHTML"></span>
-            </ion-item>
-
-            <ion-item>
-                <span class="ly-title"> 已做志愿者时间 </span>
-                <span class="ly-value">{{ data.user.hours }} 小时</span>
-            </ion-item>
-
-            <ion-item>
-                <span class="ly-title"> 报名次数 </span>
-                <span class="ly-value">{{ data.user.book_count }}</span>
-            </ion-item>
-
-            <ion-item>
-                <span class="ly-title"> 缺席次数 </span>
-                <span class="ly-value">{{ data.user.absent_count }}</span>
-            </ion-item>
-
-            <ion-item>
-                <span class="ly-title"> 平均活动评分 </span>
-                <span class="ly-value">{{ data.user.average_rating }}</span>
-            </ion-item>
-
-            <ion-item>
-                <span class="ly-title"> 被评价次数 </span>
-                <span class="ly-value">{{ data.user.rating_count }}</span>
-            </ion-item>
-
-
-            <ion-item class="item-divider"></ion-item>
-
-            <ion-item>
-                <span class="ly-title"> 生日 </span>
-                <span class="ly-value">{{ data.user.birthday }}</span>
-            </ion-item>
-
-            <ion-item>
-                <span class="ly-title"> 学校 </span>
-                <span class="ly-value">{{ data.user.school_name }}</span>
-            </ion-item>
-
-            <ion-item ng-click="openQQ()">
-                <span class="ly-title"> QQ </span>
-                <span class="ly-value">{{ data.user.qq }}</span>
-            </ion-item>
-
-            <ion-item>
-                <span class="ly-title"> 微信 </span>
-                <span class="ly-value">{{ data.user.wechat }}</span>
-            </ion-item>
-
-            <ion-item>
-                <span class="ly-title"> 邮箱 </span>
-                <span class="ly-value">{{ data.user.email }}</span>
-            </ion-item>
-
-            <ion-item class="item-divider"></ion-item>
-
-            <ion-item ng-if="data.type.endsWith('Request')">
-                <h2> 附加留言 </h2>
-
-                <p>{{data.info.message}}</p>
-            </ion-item>
-
-            <ion-item ng-if="data.type.endsWith('Request')"
-                      class="item-divider">
-            </ion-item>
-
-            <ion-item class="ly-no-border-bottom">
-                <div
-                    ng-if="(data.type === 'addFriend' || (data.user.sensorInfo && data.type !== 'self')) && data.type !== 'handleRequest'">
-                    <button ng-if="(data.info.ok || data.user.sensorInfo)&&(data.type != 'cancelRequest')"
-                            ui-sref="add-friend({id: {{data.user.id}} })"
-                            class="button button-block button-positive icon-left ion-person-add">
-                        添加好友
-                    </button>
-
-                    <!--<button ng-if="!data.info.ok"-->
-                    <!--class="button button-block button-assertive icon-left ion-alert">-->
-                    <!--{{data.info.msg}}-->
-                    <!--</button>-->
-
-                </div>
-                <div ng-if="data.type === 'cancelRequest'">
-                    <button class="button button-block button-assertive icon-left ion-minus"
-                            ng-click="data.info.revoke()">
-                        取消好友请求
-                    </button>
+                    <p>{{data.user.signature || '(还没有...)'}}</p>
                 </div>
 
-                <div ng-if="data.type === 'handleRequest'">
-                    <button ng-click="data.info.accept()"
-                            class="button button-block button-positive icon-left ion-person-add">
-                        接受好友请求
-                    </button>
+                <div class="collection-item avatar waves-effect">
+                    <i class="mdi-maps-local-phone circle blue"></i>
+                    <span class="title">手机</span>
 
-                    <button ng-click="data.info.reject()"
-                            class="button button-block button-light icon-left ion-minus">
-                        忽略好友请求
-                    </button>
+                    <p>{{data.user.phone}}</p>
                 </div>
 
-                <div ng-if="data.type !== 'self'">
-                    <button class="button button-block button-calm icon-left ion-android-mail"
-                            ui-sref="message-send({id: data.id})">
-                        发站内信
-                    </button>
+                <div class="collection-item avatar waves-effect"
+                     ng-click="removeFriend()"
+                     ng-if="data.user.is_my_friend == 0">
+                    <i class="mdi-navigation-close circle red"></i>
+                    <span class="big-title">删除好友</span>
                 </div>
-            </ion-item>
-        </ion-list>
 
+                <div class="collection-item avatar waves-effect"
+                     ng-click="addFriend()"
+                     ng-if="data.user.is_my_friend == 3">
+                    <i class="mdi-social-person-add circle red"></i>
+                    <span class="big-title">请求添加为好友</span>
+                </div>
+
+                <div class="collection-item avatar waves-effect"
+                     ng-if="data.user.is_my_friend == 1">
+                    <i class="mdi-social-person-add circle light-green"></i>
+                    <span class="big-title">已发送好友请求</span>
+                </div>
+
+                <div class="collection-item avatar waves-effect"
+                     ng-click="acceptFriend()"
+                     ng-if="data.user.is_my_friend == 2">
+                    <i class="mdi-social-person-add circle red"></i>
+                    <span class="big-title">接受对方的好友请求</span>
+                </div>
+
+                <div class="collection-item avatar waves-effect"
+                     ng-click="rejectFriend()"
+                     ng-if="data.user.is_my_friend == 2">
+                    <i class="mdi-navigation-close circle red"></i>
+                    <span class="big-title">拒绝对方的好友请求</span>
+                </div>
+
+            </div>
+        </div>
     </ion-content>
 
 </ion-view>

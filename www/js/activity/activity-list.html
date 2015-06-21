@@ -1,6 +1,6 @@
 <ion-view ng-controller="ActivityListController">
 
-    <ion-nav-title>活动</ion-nav-title>
+    <ion-nav-title>活动列表</ion-nav-title>
 
     <ion-nav-buttons side="right">
         <button class="button button-clear">
@@ -13,10 +13,9 @@
 
     <ion-tabs>
         <ul class="tabs amber z-depth-1" fh-tabs>
-            <li class="tab col s3 waves-effect waves-yellow"><a>Test 1</a></li>
-            <li class="tab col s3 waves-effect waves-yellow"><a>Test 2</a></li>
-            <li class="tab col s3 waves-effect waves-yellow"><a>Test 3</a></li>
-            <li class="tab col s3 waves-effect waves-yellow"><a>Test 4</a></li>
+            <li class="tab col s3 waves-effect waves-yellow"><a>所有</a></li>
+            <li class="tab col s3 waves-effect waves-yellow"><a>好友</a></li>
+            <li class="tab col s3 waves-effect waves-yellow"><a>我的</a></li>
         </ul>
 
     </ion-tabs>
@@ -29,8 +28,8 @@
         </ion-refresher>
 
 
-        <ion-list>
-        </ion-list>
+        <ion-nav-view name="activityListContent">
+        </ion-nav-view>
 
     </ion-content>
 

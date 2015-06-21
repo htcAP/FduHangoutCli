@@ -1,0 +1,32 @@
+<ion-view ng-controller="SearchContactController">
+
+    <ion-nav-title>搜索通讯录好友</ion-nav-title>
+
+    <ion-content>
+
+        <ion-refresher
+            pulling-text="刷新"
+            on-refresh="searchContact()">
+        </ion-refresher>
+
+        <ion-list>
+            <ion-item ng-repeat="user in data.users"
+                      ng-if="!data.loading"
+                      ui-sref="user-info({id: user.id })"
+                      class="item-avatar-left">
+                <img src="img/default-avatar.jpeg">
+
+                <h2>{{user.username}}</h2>
+
+                <p>{{user.signature}}</p>
+            </ion-item>
+
+            <ion-item ng-if="data.users.length == 0 && !data.loading">
+                什么都没找到...
+            </ion-item>
+
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

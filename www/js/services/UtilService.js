@@ -4,7 +4,7 @@
 
 
 FduHangoutApp.service('utilService',
-  function ($http, $ionicPopup, $q, $rootScope, $timeout, $sce) {
+  function ($http, $ionicPopup, $q, $rootScope, $timeout, $sce, $cordovaToast) {
 
     function calcCrow(lat1, lon1, lat2, lon2) {
       if (lat1 == 0 || lat2 == 0) return null;
@@ -113,7 +113,8 @@ FduHangoutApp.service('utilService',
 
       toast: function (msg) {
         //if (window.plugins) plugins.toast.showShortBottom(msg);
-        Materialize.toast(msg, 3000);
+        //Materialize.toast(msg, 3000);
+        $cordovaToast.show(msg, 'short', 'bottom');
       },
 
       confirm: function (title, content) {

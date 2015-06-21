@@ -74,7 +74,7 @@ FduHangoutApp.service('apiService',
           console.log(data);
           if (error.errNo) {
             if (error.errNo == 1) {
-
+              utilService.toast('请先登录');
               $rootScope.$broadcast(AUTH_EVENTS.openLogin);
               return $q.reject(data);
             }

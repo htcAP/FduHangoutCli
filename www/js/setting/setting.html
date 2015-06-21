@@ -12,8 +12,16 @@
 
         <ion-list>
 
-            <ion-item>
-                汪~！暂时什么都没有
+            <ion-item style="border-bottom: 0"
+                      ng-if="accountService.loggedIn()">
+                <button class="button button-block button-assertive z-depth-1"
+                        ng-click="logout()">
+                    退出登录
+                </button>
+            </ion-item>
+
+            <ion-item style="border-bottom: 0" ng-if="!accountService.loggedIn()">
+                暂时什么都没有...
             </ion-item>
 
         </ion-list>

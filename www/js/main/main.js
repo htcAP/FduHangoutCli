@@ -10,6 +10,8 @@ FduHangoutApp
   .controller('MainController',
   function ($scope, $rootScope, AUTH_EVENTS, $ionicModal, $ionicLoading, $ionicPopup, accountService, utilService, $state) {
 
+    accountService.tryAutoLogin();
+
     var data = $scope.data = {
       phone: '',
       password: ''
@@ -35,6 +37,7 @@ FduHangoutApp
       $ionicLoading.show({
         template: '登陆中...'
       });
+
       accountService.login(data.phone, data.password).then(function () {
         utilService.toast('登录成功~汪呜');
         loginPopup.close();
@@ -47,6 +50,10 @@ FduHangoutApp
     $scope.doRegister = function () {
       loginPopup.close();
       $state.go('register');
-    }
+    };
 
+    $scope.gotoMyPage = function () {
+      $rootScope.hideSideNav();
+      $state.go('user-info', {id: accountService.userInfo.id});
+    }
   });

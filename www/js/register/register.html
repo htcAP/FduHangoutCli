@@ -3,7 +3,7 @@
 
     <ion-content>
 
-        <ion-item style="border-bottom: 0">
+        <ion-item style="border-bottom: 0; padding: 40px">
             <div class="input-field col s12">
                 <input id="reg-phone" type="tel" ng-model="data.phone">
                 <label for="reg-phone">手机号</label>
@@ -23,18 +23,18 @@
     </ion-content>
 
     <ion-footer-bar align-title="left"
-                    style="height: 46px"
+                    style="height: 56px; border-top-width: 0"
                     class="bar-stable">
         <div class="buttons">
         </div>
         <h1 class="title"></h1>
 
         <div class="buttons">
-            <button class="button button-clear button-stable"
-                    style="margin-right: 20px"
+            <button class="button button-clear"
+                    style="margin-right: 25px;  padding-top: 8px;"
                     ng-click="register()">
                 <i class="icon ion-ios-arrow-forward"
-                   style="float: right; padding-left: 8px">
+                   style="float: right; padding-left: 10px">
                 </i>
                 注册
             </button>

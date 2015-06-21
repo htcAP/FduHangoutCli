@@ -1,31 +1,67 @@
 <ion-view ng-controller="SearchFriendController"
-          cache-view="false">
+          hide-nav-bar="true">
 
-    <ion-nav-title>搜索用户</ion-nav-title>
+    <ion-nav-title>
+    </ion-nav-title>
 
-    <ion-content>
-        <div class="bar bar-header item-input-inset">
-            <input id="search-input"
+    <ion-header-bar align-title="left" class="bar-light">
+
+        <button class="button button-icon icon ion-android-arrow-back waves-effect waves-light"
+                style="margin-left: 5px; border-radius: 50%"
+                ng-click="goBack()">
+        </button>
+
+        <div class="h1 title" style="margin-top:14px">
+            <input id="search-text"
                    type="search"
-                   placeholder="关键字"
-                   ng-model="data.keyword"
-                   ly-auto-focus>
-            <a class="button button-positive"
-               ng-click="doSearch()">
-                搜索
-            </a>
+                   ng-model="data.searchText"
+                   ng-change="doSearch()"
+                   placeholder="手机号/用户名"
+                   fh-auto-focus>
         </div>
 
-        <ion-list>
-            <ion-item class="item-avatar"
-                      ng-repeat="user in data.result"
-                      ng-click="addFriend(user)">
-                <img ly-src="{{::user.image}}">
+        <button class="button button-icon icon ion-android-close"
+                ng-click="clearText()">
+        </button>
 
-                <h2>{{::user.name}}</h2>
+    </ion-header-bar>
 
-                <p>{{::user.email}}</p>
+    <ion-content>
+
+        <ion-list ng-if="data.searchText">
+            <ion-item ng-if="data.loading">
+                努力搜索中...
             </ion-item>
+
+            <ion-item ng-if="!data.loading"
+                      ng-repeat="user in data.users"
+                      ui-sref="user-info({id: user.id })"
+                      class="item-avatar-left">
+                <img src="img/default-avatar.jpeg">
+
+                <h2>{{user.username}}</h2>
+
+                <p>{{user.signature}}</p>
+
+            </ion-item>
+
+            <ion-item ng-if="!data.loading && !data.users">
+                没有找到用户T T
+            </ion-item>
+        </ion-list>
+
+        <ion-list ng-if="!data.searchText">
+
+            <ion-item class="item-divider-android">
+
+            </ion-item>
+
+            <ion-item class="item-icon-left"
+                      ui-sref="search-contact">
+                <i class="icon mdi-communication-contacts"></i>
+                添加手机通讯录中的好友
+            </ion-item>
+
         </ion-list>
     </ion-content>
 

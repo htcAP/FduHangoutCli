@@ -7,21 +7,38 @@ FduHangoutApp.service('accountService',
     var userService, self;
 
     return $rootScope.accountService = self = {
-      token: null,
+      token: '',
 
       userInfo: {},
 
+      editSignature: function (signature) {
+        return apiService.request('user/signature', '修改个人签名', {
+          token: self.token,
+          signature: signature
+        }).then(function () {
+          self.userInfo.signature = signature;
+        });
+      },
+
       getSelfInfo: function () {
-        if (!self.token)
+        if (!self.token) {
           return $q.reject(null);
-        return apiService.request('who-am-i', {
+        }
+        return apiService.request('user/get/user', '获取个人信息', {
+          user_id: -1,
           token: self.token
-        }, '获取个人信息').then(function (data) {
+
+        }).then(function (data) {
+          data.id = data.user_id;
+          delete data.user_id;
+          delete data.error;
+
           angular.extend(self.userInfo, data);
           window.localStorage.setItem('userInfo', JSON.stringify(data));
           return data;
+
         }, function (data) {
-          //self.logout();
+          self.logout();
           return $q.reject(data);
         });
       },
@@ -44,8 +61,8 @@ FduHangoutApp.service('accountService',
           if (!userService) {
             userService = $injector.get('userService');
           }
-          //userService.getFriendList();
-          //return self.getSelfInfo();
+          userService.getFriendList();
+          return self.getSelfInfo();
         });
       },
 
@@ -53,8 +70,8 @@ FduHangoutApp.service('accountService',
       tryAutoLogin: function () {
         var defer = $q.defer();
 
-        if (localStorage["phone"] && localStorage["password"]) {
-          self.userInfo = $.parseJSON(localStorage["userInfo"]);
+        if (localStorage["phone"] && localStorage["password"] && !this.loggedIn()) {
+          //self.userInfo = $.parseJSON(localStorage["userInfo"]);
 
           return self.login(localStorage["phone"], localStorage["password"]);
 
@@ -69,15 +86,9 @@ FduHangoutApp.service('accountService',
        *  用户注销操作
        */
       logout: function () {
-        self.token = undefined;
+        self.token = '';
         angular.copy({}, self.userInfo);
         window.localStorage.removeItem("password");
-        self.notify.tweetCount = 0;
-        self.notify.friendRequestCount = 0;
-        self.notify.unreadMessageCount = 0;
-        self.notify.fillInfoCount = 0;
-        $rootScope.$broadcast(NOTIFICATION_EVENTS.notificationRefresh);
-        $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
         return utilService.resolved();
       },
 

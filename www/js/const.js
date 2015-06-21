@@ -8,6 +8,7 @@ FduHangoutApp
     notAuthorized: 'auth-not-authorized',
     openLogin: 'auth-open-login'
   })
+
   .constant('NOTIFICATION_EVENTS', {
     notificationRefresh: 'notification-refresh'
   });
