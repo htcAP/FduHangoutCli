@@ -25,11 +25,13 @@ import java.util.ArrayList;
 public class MapActivity extends Activity implements OnGetRoutePlanResultListener {
 
     private MapView mapView;
-    private static ArrayList<Person> personArrayList = new ArrayList<Person>();
+    public static ArrayList<Person> personArrayList = new ArrayList<Person>();
     private Bitmap image;
     private RouteLine route = null;
     private RoutePlanSearch mSearch = null;    // 搜索模块，也可去掉地图模块独立使用
     private OverlayManager routeOverlay = null;
+    private ArrayList<Marker> markers = new ArrayList<Marker>();
+    public static CallbackContext cb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +57,27 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
         mSearch.setOnGetRoutePlanResultListener(this);
 
         Intent intent = getIntent();
-        PersonList list = (PersonList)intent.getSerializableExtra("person");
-        this.personArrayList = list.personArrayList;
+        PersonList list = (PersonList) intent.getSerializableExtra("person");
+        personArrayList = list.personArrayList;
 
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    refreshPerson();
+                }
+            }
+        }).start();
 //        personArrayList.add(new Person(31.1887220, 121.5960770, "htc"));
 //        personArrayList.add(new Person(31.2087220, 121.5760770, "lfs"));
 //        personArrayList.add(new Person(31.2087220, 121.5860770, "tzy"));
 //        personArrayList.add(new Person(31.1987220, 121.5860770, "TA"));
-
 
 
 //        routeProcess(personArrayList.get(1).getLatLng(), personArrayList.get(0).getLatLng());
@@ -72,13 +86,11 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
     }
 
 
-
-
     public void directionIntent(LatLng start, LatLng end) {
         Intent intent = null;
         try {
-            intent = Intent.getIntent("intent://map/direction?origin=latlng:"+start.latitude+","+start.longitude
-                    +"|name:我的位置&destination=latlng:"+end.latitude+","+end.longitude+"|name:活动地点&mode=driving&region=上海&src=fdu|fduhangout#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
+            intent = Intent.getIntent("intent://map/direction?origin=latlng:" + start.latitude + "," + start.longitude
+                    + "|name:我的位置&destination=latlng:" + end.latitude + "," + end.longitude + "|name:活动地点&mode=driving&region=上海&src=fdu|fduhangout#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -92,8 +104,12 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
 
     }
 
-    private void refreshPerson(){
-
+    private void refreshPerson() {
+        for (Marker marker : markers) {
+            if (marker != null) {
+                marker.remove();
+            }
+        }
         for (Person person : personArrayList) {
             addPerson(person);
         }
@@ -112,8 +128,7 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
                 .icon(BitmapDescriptorFactory.fromBitmap(toRoundCorner(bitmap)))
                 .zIndex(10)
                 .draggable(false);
-        mapView.getMap().addOverlay(options);
-
+        markers.add((Marker) mapView.getMap().addOverlay(options));
     }
 
     private Bitmap toRoundCorner(Bitmap bitmap) {
@@ -156,7 +171,7 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
 
     @Override
     public void onGetWalkingRouteResult(WalkingRouteResult result) {
-        if (result == null){
+        if (result == null) {
             Toast.makeText(MapActivity.this, "null", Toast.LENGTH_SHORT).show();
         }
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
@@ -245,6 +260,9 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
 
     @Override
     protected void onDestroy() {
+        if (cb != null) {
+            cb.success();
+        }
         mapView.onDestroy();
         super.onDestroy();
     }
