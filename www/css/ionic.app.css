@@ -15667,9 +15667,8 @@ input::-webkit-input-placeholder {
     right: 0; }
 
 .date-selector {
-    width: 60%;
-}
+  width: 60%; }
 
 .time-selector {
-    width: 35%;
+  width: 35%;
   float: right; }
