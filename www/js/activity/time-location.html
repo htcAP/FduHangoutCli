@@ -31,8 +31,9 @@
                         {{getTimeDesc(tm.time.end_time)}}
                     </ion-item>
                 </div>
-                <div class="row" style="margin-bottom:0; padding: 0" ng-click="navigate(tm.location)">
-                    <ion-item class="item-icon-left col-50" style="border:0">
+                <div class="row" style="margin-bottom:0; padding: 0">
+                    <ion-item class="item-icon-left col-50" style="border:0"
+                              ng-click="navigate(tm.location)">
                         <i class="icon mdi-maps-place yellow-text text-darken-4"></i>
                         {{tm.location.place}}
                     </ion-item>
