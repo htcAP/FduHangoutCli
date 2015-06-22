@@ -12,7 +12,7 @@ FduHangoutApp
   })
 
   .controller('ActivityListController',
-  function ($scope, $rootScope, $timeout, activityService) {
+  function ($scope, $rootScope, $timeout, activityService, mapPlugin) {
 
     var data = $scope.data = {
       list: [activityService.allActivity, activityService.friendActivity, activityService.myActivity],
@@ -38,6 +38,13 @@ FduHangoutApp
     };
 
     $scope.refresh = function () {
+
+      mapPlugin.getLatitude().then(function (hasdahf) {
+        console.log(hasdahf);
+      });
+      mapPlugin.getLongitude().then(function (hsdsf) {
+        console.log(hsdsf);
+      });
       activityService.getAll().then(function () {
         $scope.$broadcast('scroll.refreshComplete');
       })

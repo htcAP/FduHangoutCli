@@ -46,7 +46,7 @@
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <meta-data
                     android:name="com.baidu.lbsapi.API_KEY"
-                    android:value="NEUijYjFkI7kFzj9bIlSAkZY"/>
+                    android:value="Wi0VhaVMZeonZjLFjkrk76Nd"/>
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
@@ -73,13 +73,24 @@
                      target-dir="src/cn/mingjikeji/leyi/plugin"/>
         <source-file src="src/android/cn/mingjikeji/leyi/plugin/TestPlugin.java"
                      target-dir="src/cn/mingjikeji/leyi/plugin"/>
+
+        <source-file src="src/android/edu/fdu/hangout/MapActivity.java" target-dir="src/edu/fdu/hangout"/>
+        <source-file src="src/android/edu/fdu/hangout/BaiduMapPlugin.java" target-dir="src/edu/fdu/hangout"/>
+        <source-file src="src/android/edu/fdu/hangout/PersonList.java" target-dir="src/edu/fdu/hangout"/>
+        <source-file src="src/android/edu/fdu/hangout/LocationApplication.java" target-dir="src/edu/fdu/hangout"/>
+
+
         <!--endinject-->
         <source-file src="lib/baidumapapi_v3_4_0.jar" target-dir="libs"/>
+        <source-file src="lib/BaiduLBS_Android.jar" target-dir="libs"/>
         <source-file src="lib/libBaiduMapSDK_v3_4_0_15.so" target-dir="libs/armeabi"/>
         <source-file src="lib/libBaiduMapSDK_v3_4_0_15.so" target-dir="libs/armeabi-v7a"/>
         <source-file src="lib/liblocSDK5.so" target-dir="libs/armeabi"/>
         <source-file src="lib/liblocSDK5.so" target-dir="libs/armeabi-v7a"/>
-
+        <source-file src="drawer/avatar.jpeg" target-dir="res/drawable"/>
+        <source-file src="drawer/icon_en.png" target-dir="res/drawable"/>
+        <source-file src="drawer/icon_st.png" target-dir="res/drawable"/>
+        <source-file src="layout/map.xml" target-dir="res/layout"/>
     </platform>
 
 </plugin>

@@ -5,8 +5,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
 import android.util.Pair;
-import cn.mingjikeji.leyi.plugin.NativeUrlPlugin;
-import cn.mingjikeji.leyi.plugin.TestPlugin;
+import cn.mingjikeji.leyi.plugin.*;
+import edu.fdu.hangout.BaiduMapPlugin;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
@@ -37,7 +37,8 @@ public class LeyiPlugin extends CordovaPlugin {
 //        Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(PluginMethod.class);
         Class<?>[] annotated = new Class<?>[]{
                 TestPlugin.class,
-                NativeUrlPlugin.class
+                NativeUrlPlugin.class,
+                BaiduMapPlugin.class
         };
         for (Class<?> claz : annotated) {
             try {
