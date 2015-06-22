@@ -61,7 +61,10 @@ FduHangoutApp.service('accountService',
           if (!userService) {
             userService = $injector.get('userService');
           }
-          userService.getFriendList();
+          if (userService) {
+            userService.getFriendList();
+            userService.getFriendRequest();
+          }
           return self.getSelfInfo();
         });
       },

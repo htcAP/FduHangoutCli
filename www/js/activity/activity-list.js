@@ -35,6 +35,12 @@ FduHangoutApp
     $scope.selectTab = function (n) {
       data.n = n;
       data.curList = data.list[n];
+    };
+
+    $scope.refresh = function () {
+      activityService.getAll().then(function () {
+        $scope.$broadcast('scroll.refreshComplete');
+      })
     }
 
 

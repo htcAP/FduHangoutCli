@@ -116,7 +116,10 @@ FduHangoutApp
       }).then(function () {
         utilService.toast('成功添加活动！');
         activityService.getAll();
-        $state.go('activity-detail', {id: id}, {location: 'replace'});
+        $ionicHistory.goBack();
+        $timeout(function () {
+          $state.go('activity-detail', {id: id});
+        }, 0);
 
       }).finally(function () {
         data.loading = false;

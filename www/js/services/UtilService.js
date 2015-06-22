@@ -91,12 +91,12 @@ FduHangoutApp.service('utilService',
 
         var delta = (now - date) / 1000 / 60;
 
-        if (delta <= 5) {
-          return '刚刚';
-        }
-        if (delta < 60) {
-          return Math.floor(delta) + '分钟前'
-        }
+        //if (delta <= 5) {
+        //  return '刚刚';
+        //}
+        //if (delta < 60) {
+        //  return Math.floor(delta) + '分钟前'
+        //}
         if (y != now.getFullYear()) {
           return M + '月' + d + '日 ' + h + ':' + m;
         }

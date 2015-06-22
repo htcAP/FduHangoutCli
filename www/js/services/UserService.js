@@ -1,10 +1,30 @@
-FduHangoutApp.service('userService', function (apiService, accountService, $q) {
-  var self = this;
+FduHangoutApp.service('userService', function (apiService, accountService, $q, $rootScope) {
+  var self;
 
-  self.friendList = [];
-  self.userList = {};
+  return self = $rootScope.userService = {
 
-  angular.extend(this, {
+    friendList: [],
+    requestList: [],
+    userList: {},
+
+    getFriendRequest: function () {
+      return apiService.request('user/get/list/friend_request', '获取好友请求列表', {
+        token: accountService.token
+      }).then(function (data) {
+        var list = self.requestList;
+        list.splice(0, list.length);
+        data.users.forEach(function (u) {
+          u.id = u.user_id;
+          delete u.user_id;
+          delete u.error;
+
+          list.push(u);
+          self.cacheUser(u);
+        });
+
+        return list;
+      });
+    },
 
     getFriendList: function () {
       return apiService.request('user/get/friend_list', '获取好友列表', {
@@ -103,6 +123,7 @@ FduHangoutApp.service('userService', function (apiService, accountService, $q) {
         token: accountService.token
       }).then(function () {
         self.getFriendList();
+        self.getFriendRequest();
         return self.getUserInfo(id);
       });
     },
@@ -122,29 +143,8 @@ FduHangoutApp.service('userService', function (apiService, accountService, $q) {
         token: accountService.token
       }).then(function () {
         self.getFriendList();
+        self.getFriendRequest();
         return self.getUserInfo(id);
-      });
-    },
-
-    getFriendRequests: function () {
-      return apiService.request('get-friend-requests', {
-        token: accountService.token
-      }, '获取好友请求').then(function (data) {
-
-        function cache(data) {
-          self.cacheUser({
-            id: data.user_id,
-            image_url: data.image_url,
-            name: data.name,
-            gender: data.gender,
-            email: data.email
-          });
-        }
-
-        data.incomingRequests.forEach(cache);
-        data.outgoingRequests.forEach(cache);
-
-        return data;
       });
     },
 
@@ -215,5 +215,5 @@ FduHangoutApp.service('userService', function (apiService, accountService, $q) {
       }
       return user;
     }
-  });
+  };
 });

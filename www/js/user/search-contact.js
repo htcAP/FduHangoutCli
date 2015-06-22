@@ -53,14 +53,14 @@ FduHangoutApp
         }).finally(function () {
           $ionicLoading.hide();
           data.loading = false;
-          $scope.broadcast('scroll.refreshComplete');
+          $scope.$broadcast('scroll.refreshComplete');
         });
 
       }, function (error) {
         utilService.error('汪呜...出错了 ' + errorMsg);
         $ionicLoading.hide();
         data.loading = false;
-        $scope.broadcast('scroll.refreshComplete');
+        $scope.$broadcast('scroll.refreshComplete');
       })
 
     };

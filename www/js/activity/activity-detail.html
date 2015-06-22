@@ -25,7 +25,7 @@
             <ion-list>
                 <ion-item class="red lighten-1 white-text"
                           style="font-size: 22px; padding: 22px; border: 0; margin-bottom: -2px;">
-                    test
+                    {{data.activity.description || '(发起者比较懒，什么都没写...'}}
                 </ion-item>
             </ion-list>
 
@@ -34,26 +34,36 @@
                 <div class="row" style="margin-bottom:0; padding: 0">
                     <ion-item class="item-icon-left col-50" style="border:0">
                         <i class="icon mdi-device-access-time yellow-text text-darken-4"></i>
-                        9:30
+                        {{data.activity.status ? getTimeDesc(data.activity.timeLocations[0].time.start_time) : '未确定'}}
                     </ion-item>
                     <ion-item class="item-icon-left col-50" style="border:0">
-                        <i class="icon mdi-maps-place yellow-text text-darken-4"></i>
-                        上海
+                        <i class="icon mdi-device-access-time yellow-text text-darken-4"></i>
+                        {{data.activity.status ? getTimeDesc(data.activity.timeLocations[0].time.end_time) : '未确定'}}
                     </ion-item>
                 </div>
+                <ion-item class="item-icon-left col-100" style="border:0">
+                    <i class="icon mdi-maps-place yellow-text text-darken-4"></i>
+                    {{data.activity.status ? data.activity.timeLocations[0].location.place : '未确定'}}
+                </ion-item>
 
                 <ion-item class="waves-effect yellow-text text-darken-4"
+                          ng-if="data.activity.status == 0"
                           ui-sref="time-location({id: data.id})"
                           style="border-top: 0;">
                     查看或添加其它时间地点
                 </ion-item>
 
-                <ion-item class="item-icon-left" style="border-bottom: 0">
+                <ion-item class="item-icon-left"
+                          style="border-bottom: 0">
                     <i class="icon mdi-device-access-time yellow-text text-darken-4"></i>
-                    {{getTimeDesc(data.activity.deadline)}} 报名截止
+                    {{data.activity.status == 0 ? getTimeDesc(data.activity.deadline) + ' 报名截止' : ''}}
+                    {{data.activity.status == 1 ? '报名已经截止了哟~ 活动即将开始' : ''}}
+                    {{data.activity.status == 2 ? '活动进行中！' : ''}}
+                    {{data.activity.status == 3 ? '已经结束了' : ''}}
                 </ion-item>
 
                 <ion-item class="yellow-text text-darken-4"
+                          ng-if="data.activity.status == 0"
                           style="border-top: 0;">
                     我要报名活动
                 </ion-item>
@@ -64,6 +74,7 @@
                 </ion-item>
 
                 <ion-item class="yellow-text text-darken-4"
+                          ng-if="data.activity.status == 0"
                           style="border-top: 0;">
                     邀请朋友参加
                 </ion-item>

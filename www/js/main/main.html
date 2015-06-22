@@ -33,11 +33,24 @@
                 <i class="icon mdi-av-web"></i>
                 活动列表
             </ion-item>
+
             <ion-item class="item-icon-left"
                       ng-class="location.hash === '#/friends' ? 'active' : ''"
                       ui-sref="main.friends">
                 <i class="icon ion-android-people"></i>
                 我的好友
+            </ion-item>
+
+            <ion-item class="item-icon-left"
+                      ng-class="location.hash === '#/friend-requests' ? 'active' : ''"
+                      ui-sref="main.friend-requests">
+                <i class="icon mdi-social-group-add"></i>
+                好友请求
+                <span class="badge badge-assertive"
+                      ng-if="userService.requestList.length"
+                      style="line-height: 28px;">
+                    {{userService.requestList.length}}
+                </span>
             </ion-item>
 
             <hr>

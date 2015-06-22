@@ -13,7 +13,7 @@ FduHangoutApp
   })
 
   .controller('UserInfoController',
-  function ($scope, $stateParams, userService, $ionicLoading, nativeUrlPlugin, $ionicHistory, accountService, $state, utilService) {
+  function ($scope, $stateParams, userService, $ionicLoading, nativeUrlPlugin, $ionicHistory, accountService, $state, utilService, $state) {
 
     var data = $scope.data = {
       id: $stateParams.id,
@@ -73,6 +73,10 @@ FduHangoutApp
       userService.rejectFriend(data.id).then(function () {
         utilService.toast('已拒绝...');
       })
+    };
+
+    $scope.showAvatar = function () {
+      $state.go('big-avatar');
     }
 
   });
