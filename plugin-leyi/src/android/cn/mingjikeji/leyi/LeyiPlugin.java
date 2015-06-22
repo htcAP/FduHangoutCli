@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
 import android.util.Pair;
+import cn.mingjikeji.leyi.plugin.NLP.TimeNER;
 import cn.mingjikeji.leyi.plugin.NativeUrlPlugin;
 import cn.mingjikeji.leyi.plugin.TestPlugin;
 import org.apache.cordova.CallbackContext;
@@ -37,6 +38,7 @@ public class LeyiPlugin extends CordovaPlugin {
 //        Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(PluginMethod.class);
         Class<?>[] annotated = new Class<?>[]{
                 TestPlugin.class,
+                TimeNER.class,
                 NativeUrlPlugin.class
         };
         for (Class<?> claz : annotated) {

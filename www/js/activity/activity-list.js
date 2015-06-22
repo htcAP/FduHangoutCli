@@ -12,7 +12,7 @@ FduHangoutApp
   })
 
   .controller('ActivityListController',
-  function ($scope, $rootScope, $timeout, activityService) {
+  function ($scope, $rootScope, $timeout, activityService, nlpPlugin) {
 
     var data = $scope.data = {
       list: [activityService.allActivity, activityService.friendActivity, activityService.myActivity],
@@ -38,6 +38,11 @@ FduHangoutApp
     };
 
     $scope.refresh = function () {
+      nlpPlugin.nlp_get_time("今天到明天上午十点").then(function(ret) {
+        console.log(ret);
+      });
+
+
       activityService.getAll().then(function () {
         $scope.$broadcast('scroll.refreshComplete');
       })

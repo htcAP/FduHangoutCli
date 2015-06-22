@@ -73,12 +73,26 @@
                      target-dir="src/cn/mingjikeji/leyi/plugin"/>
         <source-file src="src/android/cn/mingjikeji/leyi/plugin/TestPlugin.java"
                      target-dir="src/cn/mingjikeji/leyi/plugin"/>
+
+        <source-file src="src/android/cn/mingjikeji/leyi/plugin/NLP/TimeNER.java"
+                     target-dir="src/cn/mingjikeji/leyi/plugin"/>
         <!--endinject-->
         <source-file src="lib/baidumapapi_v3_4_0.jar" target-dir="libs"/>
         <source-file src="lib/libBaiduMapSDK_v3_4_0_15.so" target-dir="libs/armeabi"/>
         <source-file src="lib/libBaiduMapSDK_v3_4_0_15.so" target-dir="libs/armeabi-v7a"/>
         <source-file src="lib/liblocSDK5.so" target-dir="libs/armeabi"/>
         <source-file src="lib/liblocSDK5.so" target-dir="libs/armeabi-v7a"/>
+
+        <source-file src="lib/commons-cli-1.2.jar" target-dir="libs"/>
+        <source-file src="lib/fnlp-app-2.1-SNAPSHOT.jar" target-dir="libs"/>
+        <source-file src="lib/fnlp-core-2.1-SNAPSHOT.jar" target-dir="libs"/>
+        <source-file src="lib/fnlp-train-2.1-SNAPSHOT.jar" target-dir="libs"/>
+        <source-file src="lib/hamcrest-core-1.3.jar" target-dir="libs"/>
+        <source-file src="lib/junit-4.11.jar" target-dir="libs"/>
+        <source-file src="lib/trove4j-3.0.3.jar" target-dir="libs"/>
+
+        <!--NLP models-->
+        <source-file src="src/android/cn/mingjikeji/leyi/plugin/NLP/models/time.m" target-dir="assets"/>
 
     </platform>
 
