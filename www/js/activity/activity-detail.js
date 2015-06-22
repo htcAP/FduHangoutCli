@@ -13,7 +13,7 @@ FduHangoutApp
   })
 
   .controller('ActivityDetailController',
-  function ($scope, dataService, ActivityDetailHelper, $ionicPopup, $location, $state, $ionicHistory, $timeout, utilService, $ionicModal, $ionicLoading, $stateParams, $ionicScrollDelegate, userService, nativeUrlPlugin, accountService, $rootScope, AUTH_EVENTS, activityService, mapPlugin, geoLocationService) {
+  function ($scope, dataService, ActivityDetailHelper, $ionicPopup, $location, $state, $ionicHistory, $timeout, utilService, $ionicModal, $ionicLoading, $stateParams, $ionicScrollDelegate, userService, nativeUrlPlugin, accountService, $rootScope, AUTH_EVENTS, activityService, mapPlugin, geoLocationService, mapActivityService) {
 
     var data = $scope.data = {
       id: $stateParams.id,
@@ -123,6 +123,10 @@ FduHangoutApp
       }
       var tm = data.activity.timeLocations[0];
       mapPlugin.directionIntent(tm.latitude, tm.longitude, geoLocationService.lat, geoLocationService.lng);
+    };
+
+    $scope.startActivity = function () {
+      mapActivityService.start(data.id);
     }
 
   });
