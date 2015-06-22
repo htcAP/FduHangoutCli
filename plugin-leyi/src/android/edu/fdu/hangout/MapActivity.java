@@ -66,10 +66,12 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
                 while (runThread) {
                     try {
                         Thread.sleep(5000);
-                    } catch (InterruptedException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    refreshPerson();
+                    if (runThread) {
+                        refreshPerson();
+                    }
                 }
             }
         });

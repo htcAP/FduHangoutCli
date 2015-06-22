@@ -32,6 +32,10 @@
     {
       "locator": "https://github.com/mrfoh/cordova-datepicker-plugin",
       "id": "org.apache.cordova.plugin.datepicker"
+    },
+    {
+      "id": "plugin-leyi",
+      "locator": "./plugin-leyi"
     }
   ],
   "cordovaPlatforms": [
