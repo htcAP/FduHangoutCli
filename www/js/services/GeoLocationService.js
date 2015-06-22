@@ -1,7 +1,6 @@
 FduHangoutApp.service('geoLocationService', function (mapPlugin, $interval, accountService) {
   //var posOptions = {timeout: 10000, enableHighAccuracy: false};
 
-  mapPlugin.startLocation();
   var self;
 
   $interval(function () {
