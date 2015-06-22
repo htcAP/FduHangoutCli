@@ -72,108 +72,36 @@ FduHangoutApp
       $scope.inviteModal.hide();
     };
 
-    $ionicModal.fromTemplateUrl('js/activity/confirm.html', {
-      scope: $scope
-    }).then(function (modal) {
-      $scope.confirmModal = modal;
-    });
-    $ionicModal.fromTemplateUrl('js/activity/cancel-confirm.html', {
-      scope: $scope
-    }).then(function (modal) {
-      $scope.cancelConfirmModal = modal;
-    });
-    $ionicModal.fromTemplateUrl('js/activity/invite-friend.html', {
-      scope: $scope
-    }).then(function (modal) {
-      $scope.inviteModal = modal;
-    });
-    $ionicModal.fromTemplateUrl('js/activity/rate.html', {
-      scope: $scope
-    }).then(function (modal) {
-      $scope.rateModal = modal;
-    });
-
-
-    $scope.submitRate = function () {
-      dataService.rateEvent(dataShareService.eventSeriesId, data.myRate.rating, data.myRate.comment).then(function (data) {
-        utilService.toast('评价成功！');
-        $scope.closeRate();
-        $scope.refresh();
-      });
-    };
-
-    $scope.showOrg = function (id) {
-      skipReloadOnLeave = true;
-      $state.go("organization", {
-        id: parseInt(data.organization_id),
-        name: data.org_name,
-        info_html: data.org_info_html,
-        contact_html: data.org_contact_html
-      });
-    };
-
-    $scope.showRatings = function () {
-      skipReloadOnLeave = true;
-      $state.go("rating", {
-        ratingData: $scope.data.ratings
-      });
-    };
-
-    $scope.cancelSignupEvent = function () {
-      $ionicLoading.show({
-        template: '取消中...'
-      });
-      eventApiService.cancelSignupEventSeries(dataShareService.eventSeriesId).then(function () {
-        utilService.toast('取消成功');
-        $scope.closeCancelSignup();
-        $scope.refresh(false, true);
-      }).finally(function () {
-        $ionicLoading.hide();
-      })
-    };
-    $scope.signupEvent = function () {
-      $ionicLoading.show({
-        template: '报名中...'
-      });
-      eventApiService.signupEventSeries(dataShareService.eventSeriesId).then(function () {
-        utilService.toast('报名成功');
-        $scope.closeSignup();
-        $scope.refresh(false, true);
-      }).finally(function () {
-        $ionicLoading.hide();
-      })
-    };
-
     $scope.refresh = function (isPull, forceRefresh) {
-      if (data.id === ActivityDetailHelper.id) {
+      if (ActivityDetailHelper.id == data.id && !isPull && !forceRefresh) {
         return;
       }
-      ActivityDetailHelper.id = data.id;
-      if (!isPull) {
-        data.loading = false;
-        data.loggedIn = accountService.loggedIn();
-        $scope.data.loading = true;
-        $ionicScrollDelegate.$getByHandle('activityScroll').scrollTop();
-        if (!isPull) {
-          $ionicLoading.show({
-            template: '加载中...'
-          })
-        }
+      activityService.getInvitedList();
 
-        activityService.getActivity(data.id).then(function (recv) {
-          //recv.distance = utilService.calcCrow(geoLocationService.lat, geoLocationService.lng, recv.location_lat,
-          // recv.location_lng);
-          data.activity = recv;
-        }).finally(function () {
-          data.loading = false;
-          if (isPull) {
-            $scope.$broadcast('scroll.refreshComplete');
-          } else {
-            $ionicLoading.hide();
-          }
-          $ionicScrollDelegate.scrollTop();
-        });
+      ActivityDetailHelper.id = data.id;
+      data.loading = false;
+      data.loggedIn = accountService.loggedIn();
+      $scope.data.loading = true;
+      $ionicScrollDelegate.$getByHandle('activityScroll').scrollTop();
+      if (!isPull) {
+        $ionicLoading.show({
+          template: '加载中...'
+        })
       }
+
+      activityService.getActivity(data.id).then(function (recv) {
+        //recv.distance = utilService.calcCrow(geoLocationService.lat, geoLocationService.lng, recv.location_lat,
+        // recv.location_lng);
+        data.activity = recv;
+      }).finally(function () {
+        data.loading = false;
+        if (isPull) {
+          $scope.$broadcast('scroll.refreshComplete');
+        } else {
+          $ionicLoading.hide();
+        }
+        $ionicScrollDelegate.scrollTop();
+      });
     };
 
     $scope.$on('$ionicView.enter', function () {
@@ -190,5 +118,31 @@ FduHangoutApp
 
     $scope.showLocation = function () {
       nativeUrlPlugin.showLocation(data.location_lat, data.location_lng, data.location);
+    };
+
+    $scope.isInvited = function () {
+      var list = data.activity.invites;
+      var selfId = accountService.userInfo.id;
+      for (var i = 0; i < list.length; ++i) {
+        if (list[i].user_id == selfId) {
+          return list[i].invite_status == 0;
+        }
+      }
+      return false;
+    };
+
+    $scope.acceptRequest = function () {
+      activityService.replyInvite(data.id, true).then(function () {
+        utilService.toast('成功参加');
+        $scope.refresh(false, true);
+      });
+    };
+
+    $scope.rejectRequest = function () {
+      activityService.replyInvite(data.id, false).then(function () {
+        utilService.toast('已残忍拒绝...');
+        $scope.refresh(false, true);
+      });
     }
+
   });

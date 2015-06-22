@@ -34,6 +34,10 @@ FduHangoutApp.service('accountService',
           delete data.error;
 
           angular.extend(self.userInfo, data);
+          if (!userService) {
+            userService = $injector.get('userService');
+          }
+          userService.cacheUser(self.userInfo);
           window.localStorage.setItem('userInfo', JSON.stringify(data));
           return data;
 

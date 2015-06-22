@@ -1,0 +1,32 @@
+<ion-view
+    cache-view="false"
+    ng-controller="ActivityInviteController">
+
+    <ion-nav-title>邀请好友参加活动</ion-nav-title>
+
+    <ion-nav-buttons side="right">
+        <button ng-click="submit()"
+                class="button button-icon mdi-action-done">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <ion-list>
+
+            <ion-checkbox class="item item-checkbox item-checkbox-right item-avatar-left"
+                          ng-model="data.isInvited[user.id]"
+                          style="height: 40px"
+                          ng-repeat="user in data.friends">
+                <img src="img/default-avatar.jpeg">
+
+                <h2>{{user.username}}</h2>
+
+                <p>{{user.signature}}</p>
+            </ion-checkbox>
+
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

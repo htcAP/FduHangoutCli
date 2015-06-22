@@ -7,7 +7,7 @@
 <ion-view has-bouncing="true"
           ng-controller="ActivityDetailController">
 
-    <ion-nav-title>{{data.loading ? "活动加载中..." : data.activity.title}}</ion-nav-title>
+    <ion-nav-title>{{data.activity.title}}</ion-nav-title>
 
     <!--<ion-nav-buttons side="right">-->
     <!--<button class="button button-clear"-->
@@ -18,12 +18,18 @@
 
     <ion-content delegate-handle="activityScroll">
 
+        <ion-refresher
+            pulling-text="刷新"
+            on-refresh="refresh(1)">
+        </ion-refresher>
+
         <ion-list>
             <fh-special-affect-avatar src="img/default-avatar.jpeg" scroll-handle="activityScroll">
             </fh-special-affect-avatar>
 
             <ion-list>
                 <ion-item class="red lighten-1 white-text"
+                          ng-if="!data.loading"
                           style="font-size: 22px; padding: 22px; border: 0; margin-bottom: -2px;">
                     {{data.activity.description || '(发起者比较懒，什么都没写...'}}
                 </ion-item>
@@ -63,9 +69,17 @@
                 </ion-item>
 
                 <ion-item class="yellow-text text-darken-4"
-                          ng-if="data.activity.status == 0"
+                          ng-if="data.activity.status == 0 && isInvited()"
+                          ng-click="acceptRequest()"
                           style="border-top: 0;">
-                    我要报名活动
+                    接受活动邀请
+                </ion-item>
+
+                <ion-item class="yellow-text text-darken-4"
+                          ng-if="data.activity.status == 0 && isInvited()"
+                          ng-click="rejectRequest()"
+                          style="border-top: 0;">
+                    拒绝活动邀请
                 </ion-item>
 
 
@@ -74,20 +88,20 @@
                 </ion-item>
 
                 <ion-item class="yellow-text text-darken-4"
-                          ng-if="data.activity.status == 0"
+                          ng-if="data.activity.status == 0 && canInvite()"
+                          ui-sref="activity-invite({id: data.id})"
                           style="border-top: 0;">
                     邀请朋友参加
                 </ion-item>
 
                 <ion-item
                     ng-repeat="invite in data.activity.invites"
+                    ui-sref="user-info({id: invite.user_id})"
                     class="item-avatar-left">
                     <img src="img/default-avatar.jpeg">
-
                     <h2>
-                        {{invite.user_id}}
+                        {{userService.getCachedUser(invite.user_id).username || '还不是好友的某人'}}
                     </h2>
-
                     <p>
                         {{invite.invite_status == 0 ? '已被邀请' : ''}}
                         {{invite.invite_status == 1 ? '已参加' : ''}}

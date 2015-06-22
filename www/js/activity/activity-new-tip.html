@@ -1,0 +1,46 @@
+<ion-view ng-controller="NewActivityTipController">
+
+    <ion-nav-title>新建活动时间地点</ion-nav-title>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon mdi-navigation-check"
+                ng-click="submit()">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <ion-list class="no-border-all">
+
+            <ion-item style="padding-top: 46px">
+                <input type="text"
+                       ng-model="data.location"
+                       placeholder="地点" style="font-size: 18px;">
+            </ion-item>
+
+            <ion-item>
+                <h3>开始时间</h3>
+
+                <div class="date-selector"
+                     ng-click="selectStartDate()">
+                    {{getDateDesc(data.startDate)}}
+                </div>
+                <div class="time-selector"
+                     ng-click="selectStartTime()">
+                    {{getTimeDesc(data.startTime)}}
+                </div>
+                <h3 style="padding-top: 10px">结束时间</h3>
+
+                <div class="date-selector"
+                     ng-click="selectEndDate()">
+                    {{getDateDesc(data.endDate)}}
+                </div>
+                <div class="time-selector"
+                     ng-click="selectEndTime()">
+                    {{getTimeDesc(data.endTime)}}
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

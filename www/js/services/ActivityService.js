@@ -7,12 +7,14 @@ FduHangoutApp.service('activityService',
       allActivity: [],
       myActivity: [],
       friendActivity: [],
+      invitedActivity: [],
 
       getAll: function () {
         return apiService.request('activity/get/list/all', '获取所有活动', {
           user_id: -1
         }).then(function (data) {
           var a = data.activities;
+          a = a.reverse();
           self.allActivity.splice(0, self.allActivity.length);
           a.forEach(function (a) {
             a.id = a.activity_id;
@@ -86,6 +88,38 @@ FduHangoutApp.service('activityService',
           activity_id: id,
           invites: users
         });
+      },
+
+      replyInvite: function (id, attend) {
+        return apiService.request('activity/post/reply_invite', '回复邀请', {
+          token: accountService.token,
+          activity_id: id,
+          attend: attend
+        });
+      },
+
+      getInvitedList: function () {
+        return apiService.request('activity/get/list/activity_request', '获取活动邀请列表', {
+          token: accountService.token
+        }).then(function (data) {
+          var a = data.activities;
+          self.invitedActivity.splice(0, self.invitedActivity.length);
+          a.forEach(function (a) {
+            a.id = a.activity_id;
+            delete a.activity_id;
+            self.invitedActivity.push(self.cacheActivity(a));
+          });
+          return self.invitedActivity;
+        });
+      },
+
+      isInvited: function (id) {
+        for (var i = 0; i < self.invitedActivity.length; ++i) {
+          if (self.invitedActivity[i].id == id) {
+            return true;
+          }
+        }
+        return false;
       },
 
       cacheActivity: function (a) {
