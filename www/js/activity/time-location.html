@@ -15,6 +15,7 @@
         <ion-list>
 
             <div ng-repeat="tm in data.activity.timeLocations"
+                 ng-click="tryDecide(tm.time_location_id)"
                  style="border-bottom: 2px solid #eee">
 
                 <div class="row" style="margin-bottom:0; padding: 0">

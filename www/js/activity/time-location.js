@@ -8,7 +8,7 @@ FduHangoutApp
   })
 
   .controller('TimeLocationController',
-  function ($scope, $stateParams, activityService, utilService, $state) {
+  function ($scope, $stateParams, activityService, utilService, $state, userService, $ionicLoading) {
     var id = $stateParams.id;
     var activity = activityService.getCachedActivity(id);
     var data = $scope.data = {
@@ -24,6 +24,40 @@ FduHangoutApp
 
     $scope.doAdd = function () {
       $state.go('activity-new-tip', {id: id});
+    };
+
+
+    var confirmPopup, tid;
+
+    $scope.tryDecide = function (id) {
+      tid = id;
+      if (data.activity.organizer_id != userService.userInfo.id) {
+        return;
+      }
+      confirmPopup = $ionicPopup.show({
+        templateUrl: 'js/activity/decide-confirm.html',
+        scope: $scope
+      });
+    };
+
+    $scope.doCancel = function () {
+      confirmPopup.close();
+    };
+
+    $scope.doConfirm = function () {
+      confirmPopup.close();
+      $ionicLoading.show({
+        template: '正在决定...'
+      });
+      activityService.decideTimeLocation(tid).then(function () {
+        utilService.toast('已结束活动邀请并决定活动时间地点!');
+        activityService.getActivity(id);
+        $ionicHistory.goBack();
+
+      }).finally(function () {
+        $ionicLoading.hide();
+      })
+
     }
 
   });

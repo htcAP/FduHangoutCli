@@ -27,6 +27,9 @@ FduHangoutApp
     $rootScope.$on(AUTH_EVENTS.openLogin, function () {
       data.phone = '';
       data.password = '';
+      if (loginPopup) {
+        return;
+      }
       loginPopup = $ionicPopup.show({
         templateUrl: 'js/login/login.html',
         scope: $scope
@@ -41,6 +44,7 @@ FduHangoutApp
       accountService.login(data.phone, data.password).then(function () {
         utilService.toast('登录成功~汪呜');
         loginPopup.close();
+        loginPopup = null;
 
       }).finally(function () {
         $ionicLoading.hide();

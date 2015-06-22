@@ -103,8 +103,10 @@
                         {{userService.getCachedUser(invite.user_id).username || '还不是好友的某人'}}
                     </h2>
                     <p>
+                        {{}}
                         {{invite.invite_status == 0 ? '已被邀请' : ''}}
-                        {{invite.invite_status == 1 ? '已参加' : ''}}
+                        {{invite.invite_status == 1 ? (invite.user_id == data.activity.organizer_id ? '组织者 ' : '已参加') :
+                        '' }}
                         {{invite.invite_status == -1 ? '残忍拒绝...' : ''}}
                     </p>
                 </ion-item>

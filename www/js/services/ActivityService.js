@@ -122,6 +122,13 @@ FduHangoutApp.service('activityService',
         return false;
       },
 
+      decideTimeLocation: function (id) {
+        return apiService.request('activity/post/decide', '决定活动时间地点', {
+          token: accountService.token,
+          time_location_id: id
+        });
+      },
+
       cacheActivity: function (a) {
         var id = a.id;
         var u = self.activityList[id];

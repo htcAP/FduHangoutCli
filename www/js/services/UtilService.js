@@ -56,11 +56,11 @@ FduHangoutApp.service('utilService',
       },
 
       timestampToDate: function (timestamp) {
-        return new Date(timestamp - tsOffset);
+        return new Date(timestamp + tsOffset);
       },
 
       dateToTimestamp: function (date) {
-        return date.getTime() + tsOffset;
+        return date.getTime() - tsOffset;
       },
 
       normalizeTime: function (a, ch) {
