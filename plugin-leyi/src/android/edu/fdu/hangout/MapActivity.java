@@ -108,7 +108,9 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
 
     private void refreshPerson(){
         for (Marker marker : markers) {
-            marker.remove();
+            if (marker != null) {
+                marker.remove();
+            }
         }
         for (Person person : personArrayList) {
             addPerson(person);
