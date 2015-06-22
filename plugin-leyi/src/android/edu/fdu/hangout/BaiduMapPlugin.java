@@ -67,10 +67,9 @@ public class BaiduMapPlugin {
             double longitude = object.getDouble("longitude");
             MapActivity.personArrayList.add(new Person(latitude, longitude));
         }
-
+        MapActivity.cb = cb;
 
         LeyiPlugin.activity.startActivity(null);
-        cb.success();
     }
 
     @PluginMethod(target = "reloadLocation")
