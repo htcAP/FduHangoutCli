@@ -32,11 +32,25 @@ FduHangoutApp.service('activityService',
         }).then(function (data) {
           data.id = data.activity_id;
           delete data.error;
-          delete data.id;
+          delete data.activity_id;
 
           self.cacheActivity(data);
           return data;
         });
+      },
+
+      postVote: function (id, tmId) {
+        return apiService.request('activity/post/vote', '投票', {
+          token: accountService.token,
+          time_location_id: tmId
+        }).then(function () {
+          var activity = self.getCachedActivity(id);
+          activity.timeLocations.forEach(function (tm) {
+            if (tm.time_location_id == tmId) {
+              ++tm.votes;
+            }
+          })
+        })
       },
 
       cacheActivity: function (a) {

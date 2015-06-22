@@ -61,7 +61,35 @@ FduHangoutApp.service('utilService',
 
       getTimeDesc: function (timestamp) {
         var date = self.timestampToDate(timestamp);
-        return date.toDateString();
+
+        var y = date.getFullYear();
+        var M = date.getMonth() + 1;
+        var d = date.getDate();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var now = new Date();
+
+        var delta = (now - date) / 1000 / 60;
+
+        if (delta <= 5) {
+          return '刚刚';
+        }
+        if (m < 10) {
+          m = '0' + m;
+        }
+        if (h < 10) {
+          h = '0' + h;
+        }
+        if (delta < 60) {
+          return Math.floor(delta) + '分钟前'
+        }
+        if (y != now.getFullYear()) {
+          return M + '月' + d + '日 ' + h + ':' + m;
+        }
+        if (M != now.getMonth() + 1 || d != now.getDate()) {
+          return M + '月' + d + '日 ' + h + ':' + m;
+        }
+        return '今天 ' + h + ':' + m;
       },
 
       toAbsoluteURL: function (relativeURL) {

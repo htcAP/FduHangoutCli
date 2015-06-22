@@ -2,11 +2,6 @@
 
     <ion-nav-title>活动列表</ion-nav-title>
 
-    <ion-nav-buttons side="right">
-        <button class="button button-clear">
-        </button>
-    </ion-nav-buttons>
-
     <ion-header-bar class="bar-subheader" no-tap-scroll="true" style="display: none">
     </ion-header-bar>
 
@@ -23,6 +18,13 @@
             </li>
         </ul>
     </ion-tabs>
+
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <div class="btn-floating btn-large waves-effect waves-light red"
+             ui-sref="activity-new">
+            <i class="mdi-content-add"></i>
+        </div>
+    </div>
 
     <ion-content class="has-subheader">
 

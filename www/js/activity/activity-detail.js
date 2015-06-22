@@ -6,8 +6,14 @@ FduHangoutApp
     })
   })
 
+  .service('ActivityDetailHelper', function () {
+    return {
+      id: null
+    }
+  })
+
   .controller('ActivityDetailController',
-  function ($scope, dataService, $ionicPopup, $location, $state, $ionicHistory, $timeout, utilService, $ionicModal, $ionicLoading, $stateParams, $ionicScrollDelegate, userService, nativeUrlPlugin, accountService, $rootScope, AUTH_EVENTS, activityService) {
+  function ($scope, dataService, ActivityDetailHelper, $ionicPopup, $location, $state, $ionicHistory, $timeout, utilService, $ionicModal, $ionicLoading, $stateParams, $ionicScrollDelegate, userService, nativeUrlPlugin, accountService, $rootScope, AUTH_EVENTS, activityService) {
 
     var data = $scope.data = {
       id: $stateParams.id,
@@ -139,11 +145,15 @@ FduHangoutApp
     };
 
     $scope.refresh = function (isPull, forceRefresh) {
+      if (data.id === ActivityDetailHelper.id) {
+        return;
+      }
+      ActivityDetailHelper.id = data.id;
       if (!isPull) {
         data.loading = false;
         data.loggedIn = accountService.loggedIn();
         $scope.data.loading = true;
-        $ionicScrollDelegate.scrollTop();
+        $ionicScrollDelegate.$getByHandle('activityScroll').scrollTop();
         if (!isPull) {
           $ionicLoading.show({
             template: '加载中...'

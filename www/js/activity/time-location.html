@@ -1,0 +1,50 @@
+<ion-view ng-controller="TimeLocationController">
+
+    <ion-nav-title>活动时间地点</ion-nav-title>
+
+
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <div class="btn-floating btn-large waves-effect waves-light red"
+             ng-click="doAdd()">
+            <i class="mdi-content-add"></i>
+        </div>
+    </div>
+
+    <ion-content>
+
+        <ion-list>
+
+            <div ng-repeat="tm in data.tmOptions"
+                 style="border-bottom: 2px solid #eee">
+
+                <div class="row" style="margin-bottom:0; padding: 0">
+                    <ion-item class="item-icon-left col-50" style="border:0">
+                        <i class="icon mdi-device-access-time yellow-text text-darken-4"></i>
+                        {{getTimeDesc(tm.time.start_time)}}
+                    </ion-item>
+                    <ion-item class="item-icon-left col-50" style="border:0">
+                        <i class="icon mdi-device-access-time yellow-text text-darken-4"></i>
+                        {{getTimeDesc(tm.time.end_time)}}
+                    </ion-item>
+                </div>
+                <div class="row" style="margin-bottom:0; padding: 0">
+                    <ion-item class="item-icon-left col-50" style="border:0">
+                        <i class="icon mdi-maps-place yellow-text text-darken-4"></i>
+                        {{tm.location.place}}
+                    </ion-item>
+                    <ion-item class="item-icon-left col-50 yellow-text text-darken-4"
+                              ng-click="postVote(tm.time_location_id)"
+                              style="border:0">
+                        <i class="icon ion-thumbsup yellow-text text-darken-4"></i>
+                        {{tm.votes}}
+                    </ion-item>
+
+                </div>
+            </div>
+
+
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>
