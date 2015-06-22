@@ -18,6 +18,10 @@ leyiPlugin.service('mapPlugin', function (pluginService) {
       return pluginService.invoke('MapActivity', personArray);
     },
 
+    reloadLocation: function (personArray) {
+      return pluginService.invoke('reloadLocation', personArray);
+    },
+
     directionIntent: function (start_latitude, start_longitude, end_latitude, end_longitude) {
       return pluginService.invoke('directionIntent', start_latitude, start_longitude, end_latitude, end_longitude);
     }
