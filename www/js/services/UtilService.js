@@ -55,6 +55,12 @@ FduHangoutApp.service('utilService',
         return deferred.promise;
       },
 
+      rejected: function (data) {
+        var deferred = $q.defer();
+        deferred.reject(data);
+        return deferred.promise;
+      },
+
       timestampToDate: function (timestamp) {
         return new Date(timestamp + tsOffset);
       },

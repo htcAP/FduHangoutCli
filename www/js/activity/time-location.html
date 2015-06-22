@@ -15,20 +15,23 @@
         <ion-list>
 
             <div ng-repeat="tm in data.activity.timeLocations"
-                 ng-click="tryDecide(tm.time_location_id)"
                  style="border-bottom: 2px solid #eee">
 
                 <div class="row" style="margin-bottom:0; padding: 0">
-                    <ion-item class="item-icon-left col-50" style="border:0">
+                    <ion-item class="item-icon-left col-50"
+                              ng-click="tryDecide(tm.time_location_id)"
+                              style="border:0">
                         <i class="icon mdi-device-access-time yellow-text text-darken-4"></i>
                         {{getTimeDesc(tm.time.start_time)}}
                     </ion-item>
-                    <ion-item class="item-icon-left col-50" style="border:0">
+                    <ion-item class="item-icon-left col-50"
+                              ng-click="tryDecide(tm.time_location_id)"
+                              style="border:0">
                         <i class="icon mdi-device-access-time yellow-text text-darken-4"></i>
                         {{getTimeDesc(tm.time.end_time)}}
                     </ion-item>
                 </div>
-                <div class="row" style="margin-bottom:0; padding: 0">
+                <div class="row" style="margin-bottom:0; padding: 0" ng-click="navigate(tm.location)">
                     <ion-item class="item-icon-left col-50" style="border:0">
                         <i class="icon mdi-maps-place yellow-text text-darken-4"></i>
                         {{tm.location.place}}

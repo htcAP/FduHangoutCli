@@ -13,7 +13,7 @@ FduHangoutApp
   })
 
   .controller('ActivityDetailController',
-  function ($scope, dataService, ActivityDetailHelper, $ionicPopup, $location, $state, $ionicHistory, $timeout, utilService, $ionicModal, $ionicLoading, $stateParams, $ionicScrollDelegate, userService, nativeUrlPlugin, accountService, $rootScope, AUTH_EVENTS, activityService) {
+  function ($scope, dataService, ActivityDetailHelper, $ionicPopup, $location, $state, $ionicHistory, $timeout, utilService, $ionicModal, $ionicLoading, $stateParams, $ionicScrollDelegate, userService, nativeUrlPlugin, accountService, $rootScope, AUTH_EVENTS, activityService, mapPlugin, geoLocationService) {
 
     var data = $scope.data = {
       id: $stateParams.id,
@@ -115,6 +115,14 @@ FduHangoutApp
         utilService.toast('已残忍拒绝...');
         $scope.refresh(false, true);
       });
+    };
+
+    $scope.navigate = function () {
+      if (data.activity.status == 0) {
+        return;
+      }
+      var tm = data.activity.timeLocations[0];
+      mapPlugin.directionIntent(tm.latitude, tm.longitude, geoLocationService.lat, geoLocationService.lng);
     }
 
   });

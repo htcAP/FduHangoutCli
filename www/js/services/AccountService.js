@@ -20,6 +20,18 @@ FduHangoutApp.service('accountService',
         });
       },
 
+      postLocation: function (lat, lng) {
+        if (!self.loggedIn()) {
+          return utilService.rejected();
+        }
+        return apiService.request('position/post', '提交用户位置', {
+          latitude: lat,
+          longitude: lng,
+          token: self.token,
+          time: utilService.dateToTimestamp(new Date())
+        });
+      },
+
       getSelfInfo: function () {
         if (!self.token) {
           return $q.reject(null);

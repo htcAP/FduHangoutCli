@@ -1,5 +1,5 @@
 FduHangoutApp.service('activityService',
-  function (apiService, accountService, utilService) {
+  function (apiService, accountService, utilService, geoLocationService) {
     var self;
 
     return self = {
@@ -108,10 +108,19 @@ FduHangoutApp.service('activityService',
             end_time: utilService.dateToTimestamp(endTime)
           },
           location: {
-            latitude: 0,
-            longitude: 0,
+            latitude: geoLocationService.lat,
+            longitude: geoLocationService.lng,
             place: location
           }
+        });
+      },
+
+      getPosition: function (id) {
+        return apiService.request('position/get', '获取位置', {
+          token: accountService.token,
+          activity_id: id
+        }).then(function (data) {
+          return data.positions;
         });
       },
 

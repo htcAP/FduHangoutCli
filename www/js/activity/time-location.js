@@ -8,7 +8,7 @@ FduHangoutApp
   })
 
   .controller('TimeLocationController',
-  function ($scope, $stateParams, activityService, utilService, $state, userService, $ionicLoading) {
+  function ($scope, $stateParams, activityService, utilService, $state, accountService, $ionicLoading, mapPlugin, geoLocationService) {
     var id = $stateParams.id;
     var activity = activityService.getCachedActivity(id);
     var data = $scope.data = {
@@ -31,7 +31,7 @@ FduHangoutApp
 
     $scope.tryDecide = function (id) {
       tid = id;
-      if (data.activity.organizer_id != userService.userInfo.id) {
+      if (data.activity.organizer_id != accountService.userInfo.id) {
         return;
       }
       confirmPopup = $ionicPopup.show({
@@ -57,7 +57,10 @@ FduHangoutApp
       }).finally(function () {
         $ionicLoading.hide();
       })
+    };
 
+    $scope.navigate = function (info) {
+      mapPlugin.directionIntent(geoLocationService.lat, geoLocationService.lng, info.latitude, info.longitude);
     }
 
   });

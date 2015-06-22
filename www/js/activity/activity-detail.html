@@ -47,7 +47,9 @@
                         {{data.activity.status ? getTimeDesc(data.activity.timeLocations[0].time.end_time) : '未确定'}}
                     </ion-item>
                 </div>
-                <ion-item class="item-icon-left col-100" style="border:0">
+                <ion-item class="item-icon-left col-100"
+                          ng-click="navitage()"
+                          style="border:0">
                     <i class="icon mdi-maps-place yellow-text text-darken-4"></i>
                     {{data.activity.status ? data.activity.timeLocations[0].location.place : '未确定'}}
                 </ion-item>
