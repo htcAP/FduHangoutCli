@@ -56,6 +56,12 @@ gulp.task('install', ['git-check'], function() {
     });
 });
 
+
+gulp.task('prepare-android', function() {
+  gulp.src('./keys/*.properties')
+    .pipe(gulp.dest('./platforms/android'));
+});
+
 gulp.task('git-check', function(done) {
   if (!sh.which('git')) {
     console.log(

@@ -22,7 +22,6 @@ FduHangoutApp
       loading: true,
       loggedIn: false
     };
-    var skipReloadOnLeave = false;
 
     $scope.openLogin = function () {
       $rootScope.$broadcast(AUTH_EVENTS.openLogin);
@@ -39,28 +38,7 @@ FduHangoutApp
       });
       $scope.closeInvite();
     };
-    $scope.closeSignup = function () {
-      $scope.confirmModal.hide();
-    };
-    $scope.openSignup = function () {
-      $scope.confirmModal.show();
-    };
-    $scope.openRate = function () {
-      $scope.data.myRate = {
-        rating: 5,
-        comment: ""
-      };
-      $scope.rateModal.show();
-    };
-    $scope.closeRate = function () {
-      $scope.rateModal.hide();
-    };
-    $scope.openCancelSignup = function () {
-      $scope.cancelConfirmModal.show();
-    };
-    $scope.closeCancelSignup = function () {
-      $scope.cancelConfirmModal.hide();
-    };
+
     $scope.openInvite = function () {
       data.friendsToInvite = [];
       data.invite_title = "邀请你与我一同参加" + data.name + "！";

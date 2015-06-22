@@ -12,7 +12,7 @@ FduHangoutApp
   })
 
   .controller('ActivityListController',
-  function ($scope, $rootScope, $timeout, activityService) {
+  function ($scope, $rootScope, $timeout, activityService, userService, utilService) {
 
     var data = $scope.data = {
       list: [activityService.allActivity, activityService.friendActivity, activityService.myActivity],
@@ -35,12 +35,33 @@ FduHangoutApp
     $scope.selectTab = function (n) {
       data.n = n;
       data.curList = data.list[n];
+      $scope.refresh();
     };
 
     $scope.refresh = function () {
-      activityService.getAll().then(function () {
+      var q;
+      switch (data.n) {
+        case 0:
+          q = activityService.getAll();
+          break;
+        case 1:
+          if (!userService.loggedIn()) {
+            utilService.toast('请先登录哦');
+            return;
+          }
+          q = activityService.getFriendActivity();
+          break;
+        case 2:
+          if (!userService.loggedIn()) {
+            utilService.toast('请先登录哦');
+            return;
+          }
+          q = activityService.getMyActivity();
+          break;
+      }
+      q.finally(function () {
         $scope.$broadcast('scroll.refreshComplete');
-      })
+      });
     }
 
 

@@ -27,6 +27,40 @@ FduHangoutApp.service('activityService',
 
       },
 
+      getFriendActivity: function () {
+        return apiService.request('activity/get/list/friend', '获取活动列表', {
+          user_id: accountService.userInfo.id
+        }).then(function (data) {
+          var a = data.activities;
+          a = a.reverse();
+          self.friendActivity.splice(0, self.friendActivity.length);
+          a.forEach(function (a) {
+            a.id = a.activity_id;
+            delete a.activity_id;
+
+            self.friendActivity.push(self.cacheActivity(a));
+          });
+          return self.friendActivity;
+        })
+      },
+
+      getMyActivity: function () {
+        return apiService.request('activity/get/list/mine', '获取当前用户活动列表', {
+          user_id: accountService.userInfo.id
+        }).then(function (data) {
+          var a = data.activities;
+          a = a.reverse();
+          self.myActivity.splice(0, self.myActivity.length);
+          a.forEach(function (a) {
+            a.id = a.activity_id;
+            delete a.activity_id;
+
+            self.myActivity.push(self.cacheActivity(a));
+          });
+          return self.myActivity;
+        })
+      },
+
       getActivity: function (id) {
         return apiService.request('activity/get/activity', '获取活动', {
           token: accountService.token,
