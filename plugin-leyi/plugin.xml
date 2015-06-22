@@ -46,7 +46,7 @@
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <meta-data
                     android:name="com.baidu.lbsapi.API_KEY"
-                    android:value="NEUijYjFkI7kFzj9bIlSAkZY"/>
+                    android:value="jTXLmLtjZq5tNg6auS7HP5KT"/>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <service

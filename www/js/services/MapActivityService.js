@@ -5,19 +5,21 @@ FduHangoutApp.service('mapActivityService', function (mapPlugin, $interval, acti
     running: false,
 
     start: function (activityId) {
-      self.timer = $interval(function () {
+      var func = function () {
         activityService.getPosition(activityId).then(function (arr) {
           if (!self.running) {
             self.running = true;
             mapPlugin.mapActivity(arr).then(function () {
               $interval.cancel(self.timer);
               self.running = false;
-            })
+            });
           } else {
             mapPlugin.reloadLocation(arr);
           }
         });
-      }, 10000);
+      };
+      self.timer = $interval(func, 10000);
+      func();
     }
   }
 
