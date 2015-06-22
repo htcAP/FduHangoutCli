@@ -53,6 +53,41 @@ FduHangoutApp.service('activityService',
         })
       },
 
+      addActivity: function (title, description, deadline) {
+        return apiService.request('activity/post/new', '新建活动', {
+          token: accountService.token,
+          title: title,
+          description: description,
+          deadline: utilService.dateToTimestamp(deadline)
+        }).then(function (data) {
+          return data.activity_id;
+        });
+      },
+
+      addTimeLocation: function (id, startTime, endTime, location) {
+        return apiService.request('activity/post/time_location', '添加活动时间地点', {
+          token: accountService.token,
+          activity_id: id,
+          time: {
+            start_time: utilService.dateToTimestamp(startTime),
+            end_time: utilService.dateToTimestamp(endTime)
+          },
+          location: {
+            latitude: 0,
+            longitude: 0,
+            place: location
+          }
+        });
+      },
+
+      inviteUsers: function (id, users) {
+        return apiService.request('activity/post/invite', '邀请好友参加活动', {
+          token: accountService.token,
+          activity_id: id,
+          invites: users
+        });
+      },
+
       cacheActivity: function (a) {
         var id = a.id;
         var u = self.activityList[id];

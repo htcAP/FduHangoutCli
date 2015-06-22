@@ -59,26 +59,40 @@ FduHangoutApp.service('utilService',
         return new Date(timestamp - tsOffset);
       },
 
-      getTimeDesc: function (timestamp) {
-        var date = self.timestampToDate(timestamp);
+      dateToTimestamp: function (date) {
+        return date.getTime() + tsOffset;
+      },
+
+      normalizeTime: function (a, ch) {
+        return a < 10 ? (ch ? ch : '0') + a : a;
+      },
+
+      getDateDesc: function (date) {
+        var y = date.getFullYear();
+        var M = date.getMonth() + 1;
+        var d = date.getDate();
+
+        return y + '年' + self.normalizeTime(M, ' ') + '月' + self.normalizeTime(d, ' ') + '日';
+      },
+
+      getTimeDesc: function (arg) {
+        if (_.isDate(arg)) {
+          return self.normalizeTime(arg.getHours()) + ':' + self.normalizeTime(arg.getMinutes());
+        }
+
+        var date = self.timestampToDate(arg);
 
         var y = date.getFullYear();
         var M = date.getMonth() + 1;
         var d = date.getDate();
-        var h = date.getHours();
-        var m = date.getMinutes();
+        var h = self.normalizeTime(date.getHours());
+        var m = self.normalizeTime(date.getMinutes());
         var now = new Date();
 
         var delta = (now - date) / 1000 / 60;
 
         if (delta <= 5) {
           return '刚刚';
-        }
-        if (m < 10) {
-          m = '0' + m;
-        }
-        if (h < 10) {
-          h = '0' + h;
         }
         if (delta < 60) {
           return Math.floor(delta) + '分钟前'
@@ -189,6 +203,28 @@ FduHangoutApp.service('utilService',
 
         sourceImage.src = url;
 
+        return defer.promise;
+      },
+
+      mergeDateTime: function (date, time) {
+        var ret = new Date(date);
+        ret.setHours(time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds());
+        return ret;
+      },
+
+      selectDateTime: function (mode, date) {
+        var defer = $q.defer();
+        window.plugins.datePicker.show({
+          date: date,
+          mode: mode,
+          allowOldDates: true
+        }, function (returnDate) {
+          if (mode === 'time') {
+            returnDate = '1997/01/01' + returnDate.slice(returnDate.indexOf(' '));
+          }
+          var newDate = new Date(returnDate);
+          defer.resolve(newDate);
+        });
         return defer.promise;
       }
     };

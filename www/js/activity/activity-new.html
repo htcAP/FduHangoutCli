@@ -3,30 +3,64 @@
     <ion-nav-title>新活动</ion-nav-title>
 
     <ion-nav-buttons side="right">
-        <button class="button button-icon mdi-navigation-check">
+        <button class="button button-icon mdi-navigation-check"
+                ng-click="submit()">
         </button>
     </ion-nav-buttons>
 
     <ion-content>
 
-        <form>
 
-            <ion-list class="no-border-all">
-                <ion-item style="padding-top: 40px">
-                    <input type="text" placeholder="标题" style="font-size: 24px;">
-                </ion-item>
-                <ion-item>
-                    <input type="text" placeholder="活动内容" style="font-size: 18px;">
-                </ion-item>
-                <ion-item>
-                    <h3>开始时间</h3>
+        <ion-list class="no-border-all">
+            <ion-item style="padding-top: 40px">
+                <input type="text" placeholder="标题"
+                       ng-model="data.title"
+                       style="font-size: 24px; height: 40px">
+            </ion-item>
+            <ion-item>
+                <input type="text"
+                       ng-model="data.description"
+                       placeholder="活动内容" style="font-size: 18px;">
+            </ion-item>
+            <ion-item>
+                <input type="text"
+                       ng-model="data.location"
+                       placeholder="地点" style="font-size: 18px;">
+            </ion-item>
 
-                    <div class="date-selector">aaa</div>
-                    <div class="time-selector">bbb</div>
-                </ion-item>
-            </ion-list>
-        </form>
+            <ion-item>
+                <h3>报名结束时间</h3>
 
+                <div class="date-selector"
+                     ng-click="selectDdlDate()">
+                    {{getDateDesc(data.ddlDate)}}
+                </div>
+                <div class="time-selector"
+                     ng-click="selectDdlTime()">
+                    {{getTimeDesc(data.ddlTime)}}
+                </div>
+                <h3 style="padding-top: 10px">开始时间</h3>
+
+                <div class="date-selector"
+                     ng-click="selectStartDate()">
+                    {{getDateDesc(data.startDate)}}
+                </div>
+                <div class="time-selector"
+                     ng-click="selectStartTime()">
+                    {{getTimeDesc(data.startTime)}}
+                </div>
+                <h3 style="padding-top: 10px">结束时间</h3>
+
+                <div class="date-selector"
+                     ng-click="selectEndDate()">
+                    {{getDateDesc(data.endDate)}}
+                </div>
+                <div class="time-selector"
+                     ng-click="selectEndTime()">
+                    {{getTimeDesc(data.endTime)}}
+                </div>
+            </ion-item>
+        </ion-list>
     </ion-content>
 
 </ion-view>
