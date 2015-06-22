@@ -69,7 +69,9 @@ public class BaiduMapPlugin {
         }
         MapActivity.cb = cb;
 
-        LeyiPlugin.activity.startActivity(null);
+        Intent intent = new Intent();
+        intent.setClass(LeyiPlugin.activity, MapActivity.class);
+        LeyiPlugin.activity.startActivity(intent);
     }
 
     @PluginMethod(target = "reloadLocation")
