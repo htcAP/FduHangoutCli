@@ -63,7 +63,4 @@ FduHangoutApp
         $scope.$broadcast('scroll.refreshComplete');
       });
     }
-
-
-
   });
