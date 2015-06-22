@@ -25,11 +25,12 @@ import java.util.ArrayList;
 public class MapActivity extends Activity implements OnGetRoutePlanResultListener {
 
     private MapView mapView;
-    private static ArrayList<Person> personArrayList = new ArrayList<Person>();
+    public static ArrayList<Person> personArrayList = new ArrayList<Person>();
     private Bitmap image;
     private RouteLine route = null;
     private RoutePlanSearch mSearch = null;    // 搜索模块，也可去掉地图模块独立使用
     private OverlayManager routeOverlay = null;
+    private ArrayList<Marker> markers = new ArrayList<Marker>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +57,22 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
 
         Intent intent = getIntent();
         PersonList list = (PersonList)intent.getSerializableExtra("person");
-        this.personArrayList = list.personArrayList;
+        personArrayList = list.personArrayList;
 
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    refreshPerson();
+                }
+            }
+        }).start();
 //        personArrayList.add(new Person(31.1887220, 121.5960770, "htc"));
 //        personArrayList.add(new Person(31.2087220, 121.5760770, "lfs"));
 //        personArrayList.add(new Person(31.2087220, 121.5860770, "tzy"));
@@ -93,7 +107,9 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
     }
 
     private void refreshPerson(){
-
+        for (Marker marker : markers) {
+            marker.remove();
+        }
         for (Person person : personArrayList) {
             addPerson(person);
         }
@@ -112,7 +128,7 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
                 .icon(BitmapDescriptorFactory.fromBitmap(toRoundCorner(bitmap)))
                 .zIndex(10)
                 .draggable(false);
-        mapView.getMap().addOverlay(options);
+        markers.add((Marker) mapView.getMap().addOverlay(options));
 
     }
 

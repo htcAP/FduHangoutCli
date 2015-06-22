@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 /**
  * Created by lifengshuang on 6/22/15.
@@ -58,34 +59,30 @@ public class BaiduMapPlugin {
 
     @PluginMethod(target = "MapActivity")
     public void startMapActivity(JSONArray args, CallbackContext cb) throws JSONException {
-        PersonList personList = new PersonList();
         JSONArray array = args.getJSONArray(0);
+        MapActivity.personArrayList = new ArrayList<Person>();
         for (int i = 0; i <array.length(); i++) {
             JSONObject object = array.getJSONObject(i);
             double latitude = object.getDouble("latitude");
             double longitude = object.getDouble("longitude");
-            personList.personArrayList.add(new Person(latitude, longitude));
+            MapActivity.personArrayList.add(new Person(latitude, longitude));
         }
 
-        Intent intent = new Intent();
-        intent.putExtra("person", personList);
 
-        LeyiPlugin.activity.startActivity(intent);
+        LeyiPlugin.activity.startActivity(null);
         cb.success();
     }
 
     @PluginMethod(target = "reloadLocation")
     public void reloadLocation(JSONArray args, CallbackContext cb) throws JSONException {
-        PersonList personList = new PersonList();
         JSONArray array = args.getJSONArray(0);
+        MapActivity.personArrayList = new ArrayList<Person>();
         for (int i = 0; i <array.length(); i++) {
             JSONObject object = array.getJSONObject(i);
             double latitude = object.getDouble("latitude");
             double longitude = object.getDouble("longitude");
-            personList.personArrayList.add(new Person(latitude, longitude));
+            MapActivity.personArrayList.add(new Person(latitude, longitude));
         }
-
-
     }
 
     @PluginMethod(target = "directionIntent")
