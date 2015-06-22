@@ -44,6 +44,8 @@ FduHangoutApp = angular.module('FduHangoutApp', [
       setTimeout(function () {
         navigator.splashscreen.hide();
       }, 0);
+
+      mapPlugin.startLocation();
     });
   })
 

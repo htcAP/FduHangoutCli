@@ -8,6 +8,8 @@ import android.util.Pair;
 import cn.mingjikeji.leyi.plugin.NLP.TimeNER;
 import cn.mingjikeji.leyi.plugin.NativeUrlPlugin;
 import cn.mingjikeji.leyi.plugin.TestPlugin;
+import cn.mingjikeji.leyi.plugin.*;
+import edu.fdu.hangout.BaiduMapPlugin;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
@@ -39,7 +41,9 @@ public class LeyiPlugin extends CordovaPlugin {
         Class<?>[] annotated = new Class<?>[]{
                 TestPlugin.class,
                 TimeNER.class,
-                NativeUrlPlugin.class
+                NativeUrlPlugin.class,
+                NativeUrlPlugin.class,
+                BaiduMapPlugin.class
         };
         for (Class<?> claz : annotated) {
             try {
