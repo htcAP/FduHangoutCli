@@ -48,6 +48,18 @@
                     android:name="com.baidu.lbsapi.API_KEY"
                     android:value="NEUijYjFkI7kFzj9bIlSAkZY"/>
         </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service
+                    android:name="com.baidu.location.f"
+                    android:enabled="true"
+                    android:process=":remote" >
+            </service>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+                    android:name=".MapActivity">
+            </activity>
+        </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.GET_ACCOUNTS"/>

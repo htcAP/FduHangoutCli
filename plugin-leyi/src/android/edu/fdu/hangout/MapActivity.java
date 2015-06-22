@@ -15,6 +15,7 @@ import com.baidu.mapapi.search.core.RouteLine;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.route.*;
 import edu.fdu.hangout.R;
+import org.apache.cordova.CallbackContext;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
     private OverlayManager routeOverlay = null;
     private ArrayList<Marker> markers = new ArrayList<Marker>();
     public static CallbackContext cb;
+    private Thread thread;
+    private boolean runThread = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +59,11 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
         mSearch = RoutePlanSearch.newInstance();
         mSearch.setOnGetRoutePlanResultListener(this);
 
-        Intent intent = getIntent();
-        PersonList list = (PersonList) intent.getSerializableExtra("person");
-        personArrayList = list.personArrayList;
 
-
-        new Thread(new Runnable() {
+        thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
+                while (runThread) {
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
@@ -73,7 +72,8 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
                     refreshPerson();
                 }
             }
-        }).start();
+        });
+        thread.start();
 //        personArrayList.add(new Person(31.1887220, 121.5960770, "htc"));
 //        personArrayList.add(new Person(31.2087220, 121.5760770, "lfs"));
 //        personArrayList.add(new Person(31.2087220, 121.5860770, "tzy"));
@@ -263,6 +263,7 @@ public class MapActivity extends Activity implements OnGetRoutePlanResultListene
         if (cb != null) {
             cb.success();
         }
+        runThread = false;
         mapView.onDestroy();
         super.onDestroy();
     }

@@ -8,7 +8,7 @@ FduHangoutApp = angular.module('FduHangoutApp', [
   'ionic.rating',
   'ngCordova'
 ])
-  .run(function ($ionicPlatform, routeService, accountService, geoLocationService, testPlugin, updateService, $q, nlpPlugin) {
+  .run(function ($ionicPlatform, routeService, accountService, geoLocationService, testPlugin, updateService, $q, nlpPlugin, mapPlugin) {
     $ionicPlatform.ready(function () {
       if (typeof String.prototype.startsWith !== 'function') {
         String.prototype.startsWith = function (str) {
@@ -44,8 +44,14 @@ FduHangoutApp = angular.module('FduHangoutApp', [
       setTimeout(function () {
         navigator.splashscreen.hide();
       }, 0);
-
       mapPlugin.startLocation();
+      var personList = [];
+      var person = {
+        latitude: 31.1887220,
+        longitude: 121.5960770
+      };
+      personList.push(person);
+      mapPlugin.mapActivity(personList);
     });
   })
 
