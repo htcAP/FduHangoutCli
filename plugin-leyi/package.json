@@ -1,0 +1,19 @@
+{
+  "version": "2.0.4",
+  "name": "plugin-leyi",
+  "cordova_name": "Plugin Leyi",
+  "description": "This plugin is for leyi app only",
+  "keywords": [
+    "leyi"
+  ],
+  "platforms": [
+    "ios",
+    "android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="plugin-leyi"
+        version="2.0.4">
+
+    <name>PluginLeyi</name>
+
+    <description>
+        Plugin for leyi app only
+    </description>
+
+    <author>htc</author>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
+
+    <!-- ios -->
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="Leyi">
+                <param name="ios-package" value="Leyi"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/Toast+UIView.h"/>
+        <source-file src="src/ios/Toast+UIView.m"/>
+        <header-file src="src/ios/Toast.h"/>
+        <source-file src="src/ios/Toast.m"/>
+
+        <framework src="QuartzCore.framework"/>
+    </platform>
+
+    <!-- android -->
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="LeyiPlugin">
+                <param name="android-package" value="cn.mingjikeji.leyi.LeyiPlugin"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <meta-data
+                    android:name="com.baidu.lbsapi.API_KEY"
+                    android:value="NEUijYjFkI7kFzj9bIlSAkZY"/>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+            <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+            <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+            <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+            <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+            <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+        </config-file>
+
+        <!--inject:java-->
+        <source-file src="src/android/cn/mingjikeji/leyi/LeyiPlugin.java" target-dir="src/cn/mingjikeji/leyi"/>
+        <source-file src="src/android/cn/mingjikeji/leyi/MainApplication.java" target-dir="src/cn/mingjikeji/leyi"/>
+        <source-file src="src/android/cn/mingjikeji/leyi/PluginMethod.java" target-dir="src/cn/mingjikeji/leyi"/>
+        <source-file src="src/android/cn/mingjikeji/leyi/plugin/NativeUrlPlugin.java"
+                     target-dir="src/cn/mingjikeji/leyi/plugin"/>
+        <source-file src="src/android/cn/mingjikeji/leyi/plugin/TestPlugin.java"
+                     target-dir="src/cn/mingjikeji/leyi/plugin"/>
+        <!--endinject-->
+        <source-file src="lib/baidumapapi_v3_4_0.jar" target-dir="libs"/>
+        <source-file src="lib/libBaiduMapSDK_v3_4_0_15.so" target-dir="libs/armeabi"/>
+        <source-file src="lib/libBaiduMapSDK_v3_4_0_15.so" target-dir="libs/armeabi-v7a"/>
+        <source-file src="lib/liblocSDK5.so" target-dir="libs/armeabi"/>
+        <source-file src="lib/liblocSDK5.so" target-dir="libs/armeabi-v7a"/>
+
+    </platform>
+
+</plugin>
