@@ -8,7 +8,7 @@ FduHangoutApp
   })
 
   .controller('NewActivityTipController',
-  function ($scope, utilService, activityService, accountService, $state, $ionicLoading, $ionicHistory, $rootScope, AUTH_EVENTS, $stateParams, $timeout) {
+  function ($scope, utilService, activityService, accountService, $state, $ionicLoading, $ionicHistory, $rootScope, AUTH_EVENTS, $stateParams, $timeout, nlpPlugin) {
     if (!accountService.loggedIn()) {
       utilService.toast('请先登录！');
       $ionicHistory.goBack();
@@ -21,7 +21,9 @@ FduHangoutApp
       endDate: new Date(),
       endTime: new Date(),
       location: '',
-      loading: false
+      loading: false,
+      upgraded: false,
+      text: ''
     };
 
     $scope.selectStartDate = function () {
@@ -51,12 +53,7 @@ FduHangoutApp
       });
     };
 
-
-    $scope.submit = function () {
-      if (data.loading) {
-        return;
-      }
-
+    $scope.defaultSubmit = function () {
       if (!data.location) {
         utilService.toast('填一下地点吧~');
         return;
@@ -78,15 +75,58 @@ FduHangoutApp
         utilService.toast('成功添加时间地点！');
         activityService.getActivity($stateParams.id);
         $ionicHistory.goBack();
-        $timeout(function () {
-          $state.go('activity-detail', {id: id});
-        }, 0);
 
       }).finally(function () {
         data.loading = false;
         $ionicLoading.hide();
       })
 
-    }
+    };
+
+
+    $scope.submit = function () {
+      if (data.loading) {
+        return;
+      }
+      if (!data.upgraded) {
+        $scope.defaultSubmit();
+        return;
+      }
+
+      $ionicLoading.show({
+        template: '正在尝试理解...'
+      });
+
+      nlpPlugin.nlp_get_time(data.text).then(function (recv) {
+        var startTime = new Date(recv.start_time);
+        var endTime = new Date(recv.end_time);
+        console.log(startTime);
+        console.log(endTime);
+
+        nlpPlugin.nlp_get_loction(data.text).then(function (location) {
+          if (!location) {
+            utilService.toast('并不能知道地点...');
+            data.loading = false;
+            $ionicLoading.hide();
+            return;
+          }
+
+          activityService.addTimeLocation($stateParams.id, startTime, endTime, location).then(function () {
+            utilService.toast('成功添加时间地点！');
+            activityService.getActivity($stateParams.id);
+            $ionicHistory.goBack();
+
+          }).finally(function () {
+            data.loading = false;
+            $ionicLoading.hide();
+          })
+        });
+      })
+
+    };
+
+    $scope.upgrade = function () {
+      data.upgraded = !data.upgraded;
+    };
 
   });

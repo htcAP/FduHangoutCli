@@ -24,7 +24,6 @@ FduHangoutApp.service('activityService',
           });
           return self.allActivity;
         });
-
       },
 
       getFriendActivity: function () {

@@ -12,7 +12,7 @@ FduHangoutApp
   })
 
   .controller('ActivityListController',
-  function ($scope, $rootScope, $timeout, activityService, userService, utilService) {
+  function ($scope, $rootScope, $timeout, activityService, userService, utilService, accountService) {
 
     var data = $scope.data = {
       list: [activityService.allActivity, activityService.friendActivity, activityService.myActivity],
@@ -45,14 +45,14 @@ FduHangoutApp
           q = activityService.getAll();
           break;
         case 1:
-          if (!userService.loggedIn()) {
+          if (!accountService.loggedIn()) {
             utilService.toast('请先登录哦');
             return;
           }
           q = activityService.getFriendActivity();
           break;
         case 2:
-          if (!userService.loggedIn()) {
+          if (!accountService.loggedIn()) {
             utilService.toast('请先登录哦');
             return;
           }

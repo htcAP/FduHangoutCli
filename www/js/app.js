@@ -8,7 +8,7 @@ FduHangoutApp = angular.module('FduHangoutApp', [
   'ionic.rating',
   'ngCordova'
 ])
-  .run(function ($ionicPlatform, routeService, accountService, geoLocationService, testPlugin, updateService, $q) {
+  .run(function ($ionicPlatform, routeService, accountService, geoLocationService, testPlugin, updateService, $q, nlpPlugin) {
     $ionicPlatform.ready(function () {
       if (typeof String.prototype.startsWith !== 'function') {
         String.prototype.startsWith = function (str) {
@@ -44,8 +44,6 @@ FduHangoutApp = angular.module('FduHangoutApp', [
       setTimeout(function () {
         navigator.splashscreen.hide();
       }, 0);
-
-
     });
   })
 

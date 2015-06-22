@@ -3,6 +3,9 @@
     <ion-nav-title>新建活动时间地点</ion-nav-title>
 
     <ion-nav-buttons side="right">
+        <button class="button button-icon mdi-action-android"
+                ng-click="upgrade()">
+        </button>
         <button class="button button-icon mdi-navigation-check"
                 ng-click="submit()">
         </button>
@@ -10,8 +13,7 @@
 
     <ion-content>
 
-        <ion-list class="no-border-all">
-
+        <ion-list class="no-border-all" ng-if="!data.upgraded">
             <ion-item style="padding-top: 46px">
                 <input type="text"
                        ng-model="data.location"
@@ -39,6 +41,14 @@
                      ng-click="selectEndTime()">
                     {{getTimeDesc(data.endTime)}}
                 </div>
+            </ion-item>
+        </ion-list>
+
+        <ion-list class="no-border-all" ng-if="data.upgraded">
+            <ion-item style="padding-top: 46px">
+                <input type="text"
+                       ng-model="data.text"
+                       placeholder="回复内容" style="font-size: 18px;">
             </ion-item>
         </ion-list>
     </ion-content>

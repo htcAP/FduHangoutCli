@@ -8,6 +8,7 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var inject = require('gulp-inject');
 var watch = require('gulp-watch');
+var shell = require('gulp-shell');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -35,6 +36,12 @@ gulp.task('index', function(){
     .pipe(inject(gulp.src('./www/js/**/*.js', {read: false}), {relative: true}))
     .pipe(gulp.dest('./www'));
 });
+
+
+gulp.task('reload-plugin', shell.task([
+  'ionic plugin remove plugin-leyi',
+  'ionic plugin add ./plugin-leyi'
+]));
 
 gulp.task('watch', function() {
   gulp.start('default');

@@ -87,12 +87,6 @@ FduHangoutApp
       $scope.$apply();
       $scope.refresh();
     });
-    $scope.$on('$ionicView.leave', function () {
-      if (skipReloadOnLeave)
-        skipReloadOnLeave = false;
-      else
-        $scope.data.loading = true;
-    });
 
     $scope.showLocation = function () {
       nativeUrlPlugin.showLocation(data.location_lat, data.location_lng, data.location);
