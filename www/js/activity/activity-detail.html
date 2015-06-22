@@ -7,7 +7,7 @@
 <ion-view has-bouncing="true"
           ng-controller="ActivityDetailController">
 
-    <ion-nav-title>{{data.loading ? "活动加载中..." : data.name}}</ion-nav-title>
+    <ion-nav-title>{{data.loading ? "活动加载中..." : data.activity.title}}</ion-nav-title>
 
     <!--<ion-nav-buttons side="right">-->
     <!--<button class="button button-clear"-->
@@ -16,133 +16,84 @@
     <!--</button>-->
     <!--</ion-nav-buttons>-->
 
-    <ion-content>
+    <ion-content delegate-handle="activityScroll">
 
-        <!--<ion-refresher ng-if="!data.loading"-->
-        <!--pulling-text="刷新"-->
-        <!--on-refresh="refresh(1)">-->
-        <!--</ion-refresher>-->
+        <ion-list>
+            <fh-special-affect-avatar src="img/default-avatar.jpeg" scroll-handle="activityScroll">
+            </fh-special-affect-avatar>
 
-        <ion-list ng-if="!data.loading">
-            <ion-item style="text-align: center">
-                <img ly-src="{{data.event_pic}}">
-            </ion-item>
+            <ion-list>
+                <ion-item class="red lighten-1 white-text"
+                          style="font-size: 22px; padding: 22px; border: 0; margin-bottom: -2px;">
+                    test
+                </ion-item>
+            </ion-list>
 
-            <ion-item class="item-icon-left">
-                <i class="icon ion-flag"></i>
+            <ion-list>
 
-                <p ng-bind-html="eventStatusDescription"></p></ion-item>
-            <ion-item class="item-icon-left otrEvent"
-                      ng-if="data.otherEventSeries.length"
-                      ng-click="selectEventSeries(0)">
-                <i class="icon ion-more"></i>
-                查看同系列的 {{data.otherEventSeries.length}} 个活动
-            </ion-item>
+                <div class="row" style="margin-bottom:0; padding: 0">
+                    <ion-item class="item-icon-left col-50" style="border:0">
+                        <i class="icon mdi-device-access-time yellow-text text-darken-4"></i>
+                        9:30
+                    </ion-item>
+                    <ion-item class="item-icon-left col-50" style="border:0">
+                        <i class="icon mdi-maps-place yellow-text text-darken-4"></i>
+                        上海
+                    </ion-item>
+                </div>
 
-            <ion-item class="item-icon-left" ng-if="!data.otherEventSeries.length">
-                <i class="icon ion-calendar"></i>
-                时间：{{data.datetime}}
-            </ion-item>
+                <ion-item class="waves-effect yellow-text text-darken-4"
+                          style="border-top: 0;">
+                    查看或添加其它时间地点
+                </ion-item>
 
-            <ion-item class="item-icon-left item-icon-right" ng-if="data.otherEventSeries.length"
-                      ng-click="selectEventSeries(1)">
-                <i class="icon ion-calendar"></i>
-                <i class="icon ion-ios-arrow-forward"></i>
-                时间：{{data.datetime}}
-            </ion-item>
+                <ion-item class="item-icon-left" style="border-bottom: 0">
+                    <i class="icon mdi-device-access-time yellow-text text-darken-4"></i>
+                    {{getTimeDesc(data.activity.deadline)}} 报名截止
+                </ion-item>
+
+                <ion-item class="waves-effect yellow-text text-darken-4"
+                          style="border-top: 0;">
+                    我要报名活动
+                </ion-item>
 
 
-            <ion-item class="item-icon-left item-text-wrap" ng-if="!data.otherEventSeries.length">
-                <i class="icon ion-location"></i>
-                地点：{{data.location}}
-            </ion-item>
+                <ion-item class="waves-effect yellow-text text-darken-4">
+                    添加图片
+                </ion-item>
 
-            <ion-item class="item-icon-left item-icon-right item-text-wrap" ng-if="data.otherEventSeries.length"
-                      ng-click="selectEventSeries(2)">
-                <i class="icon ion-location"></i>
-                <i class="icon ion-ios-arrow-forward" style="left: auto"></i>
-                地点：{{data.location}}
-            </ion-item>
+                <ion-item class="waves-effect yellow-text text-darken-4"
+                          style="border-top: 0;">
+                    邀请朋友参加
+                </ion-item>
 
-            <ion-item class="item-icon-left item-icon-right item-text-wrap"
-                      ng-click="showLocation()">
-                <i class="icon ion-location"></i>
-                <i class="icon ion-ios-arrow-forward" style="left: auto"></i>
-                在地图上显示
-                <p ng-if="data.distance"
-                   style="position: absolute;right: 44px;top: 16px;font-size: 12px;color: #696969">
-                    距您约{{data.distance|number:2}}km
-                </p>
-            </ion-item>
+                <ion-item
+                    ng-repeat="invite in data.activity.invites"
+                    class="item-avatar-left">
+                    <img src="img/default-avatar.jpeg">
 
-            <ion-item class="item-icon-left" href="#">
-                <i class="icon ion-clock"></i> 时长：{{data.hours}}小时
-                <span class="item-note" ng-if="data.otherEventSeries.length!=0">
-                  最多可获{{data.hours*50}}积分
-                </span>
-            </ion-item>
+                    <h2>
+                        {{invite.user_id}}
+                    </h2>
 
-            <ion-item class="item-icon-left" href="#" ng-click="showOrg(data.org_id)">
-                <i class="icon ion-person-stalker"></i>
-                组织者：{{data.org_name}}
-            </ion-item>
+                    <p>
+                        {{invite.invite_status == 0 ? '已被邀请' : ''}}
+                        {{invite.invite_status == 1 ? '已参加' : ''}}
+                        {{invite.invite_status == -1 ? '残忍拒绝...' : ''}}
+                    </p>
+                </ion-item>
 
-            <ion-item class="item-icon-left" ng-click="showRatings()">
-                <i class="icon ion-ios-star-half"></i>评价：{{data.average_rating}}/5 分
-                <span class="badge badge-assertive">{{data.rating_count}}</span>
-            </ion-item>
+            </ion-list>
 
-            <ion-item class="item-divider">
-                活动详情
-            </ion-item>
+            <ion-list>
+            </ion-list>
+
+
         </ion-list>
 
-        <!--<p style="white-space: normal;height: auto">{{data}}</p>-->
-        <div ng-bind-html="data.html" style="margin: 20px" ng-if="!data.loading"></div>
 
-        <ion-list ng-if="!data.loading">
-            <ion-item class="ly-no-border-bottom" ng-hide="data.loggedIn">
-                <button class="button ion-star icon-left button-positive button-block"
-                        ng-click="openLogin()">
-                    请先登入
-                </button>
-            </ion-item>
-            <ion-item class="ly-no-border-bottom" ng-if="data.loggedIn">
 
-                <button class="button ion-star icon-left button-positive button-block"
-                        ng-click="openSignup()"
-                        ng-if="data.status === 1 && data.alreadySignedUp==0">
-                    报名
-                </button>
-                <button class="button ion-ios-star-half icon-left button-positive button-block"
-                        ng-click="openRate()"
-                        ng-if="data.status == 4 && data.alreadySignedUp==1 && data.hasRated==0">
-                    评价
-                </button>
 
-                <button class="button ion-android-cancel icon-left button-assertive button-block"
-                        ng-click="openCancelSignup()"
-                        ng-if="data.status === 1 && data.alreadySignedUp==1">
-                    取消报名
-                </button>
-
-                <button class="button ion-person-add icon-left button-calm button-block"
-                        ng-if="data.status === 1" ng-click="openInvite()">
-                    邀请好友
-                </button>
-
-                <button class="button ion-star icon-left button-positive button-block"
-                        ng-if="data.status > 1 && data.alreadySignedUp==1">
-                    已报名
-                </button>
-
-                <button class="button ion-close icon-left button-assertive button-block"
-                        ng-if="data.status > 1 && data.alreadySignedUp==0">
-                    不能报名
-                </button>
-
-            </ion-item>
-        </ion-list>
 
     </ion-content>
 </ion-view>

@@ -2,7 +2,7 @@
  * 解释url，将url，例如a href="http://le.yi/news/1"转成a href=""tab/news/1"的类
  */
 FduHangoutApp.service('urlParserService',
-  function ($http, $q, utilService, $state, $rootScope, dataShareService) {
+  function ($http, $q, utilService, $state, $rootScope) {
 
     var logic = [{
       prefix: 'news/',
@@ -12,8 +12,7 @@ FduHangoutApp.service('urlParserService',
     }, {
       prefix: 'events/',
       func: function (data) {
-        dataShareService.eventSeriesId = parseInt(data);
-        $state.go('activity-detail');
+        $state.go('activity-detail?id=' + data);
       }
     }, {
       prefix: 'password/email',

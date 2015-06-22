@@ -1,16 +1,16 @@
 FduHangoutApp
   .config(function ($stateProvider) {
     $stateProvider.state('activity-detail', {
-      url: '/activity-detail',
+      url: '/activity-detail?id',
       templateUrl: 'js/activity/activity-detail.html'
     })
   })
 
   .controller('ActivityDetailController',
-  function ($scope, dataService, $ionicPopup, $location, $state, $ionicHistory, $timeout, eventApiService, utilService, $ionicModal, $ionicLoading, $stateParams, dataShareService, $ionicScrollDelegate, userService, nativeUrlPlugin, accountService, $rootScope, AUTH_EVENTS) {
+  function ($scope, dataService, $ionicPopup, $location, $state, $ionicHistory, $timeout, utilService, $ionicModal, $ionicLoading, $stateParams, $ionicScrollDelegate, userService, nativeUrlPlugin, accountService, $rootScope, AUTH_EVENTS, activityService) {
 
     var data = $scope.data = {
-      id: -1,
+      id: $stateParams.id,
       friends: userService.friendList,
       friendsToInvite: [],
       loading: true,
@@ -22,10 +22,6 @@ FduHangoutApp
       $rootScope.$broadcast(AUTH_EVENTS.openLogin);
     };
 
-    $scope.optionsChanged = function (id) {
-      dataShareService.eventSeriesId = id;
-      $scope.refresh();
-    };
     $scope.doInvite = function () {
       if ($scope.data.friendsToInvite.length == 0) {
         utilService.err("请选择至少一名好友", "邀请好友");
@@ -91,61 +87,7 @@ FduHangoutApp
       $scope.rateModal = modal;
     });
 
-    $scope.selectEventSeries = function (behavior) {
-      skipReloadOnLeave = true;
-      var title = "";
-      if (!$scope.data || !$scope.data.otherEventSeries.length) {
-        return;
-      }
-      switch (behavior) {
-        case 0:
-          title = '选择其它的活动';
-          break;
-        case 1:
-          title = '其他可选时间';
-          break;
-        case 2:
-          title = '其他可选地点';
-          break;
-      }
-      var list = angular.map($scope.data.otherEventSeries, function (event) {
-        var name = "", html = "";
-        switch (behavior) {
-          case 0:
-            name = '时间：' + event.datetime + '\n地点： ' + event.location;
-            html = utilService.getEventStatusDescription(event.status);
-            break;
-          case 1:
-            name = event.datetime;
-            html = utilService.getEventStatusDescription(event.status);
-            break;
-          case 2:
-            name = event.location;
-            html = utilService.getEventStatusDescription(event.status);
-            break;
 
-        }
-        return {
-          id: event.event_series_id,
-          name: name,
-          html: html,
-          distance: dataShareService.lat == 0 ? null : utilService.calcCrow(dataShareService.lat, dataShareService.lng, parseFloat(event.location_lat), parseFloat(event.location_lng))
-        }
-      });
-
-      $state.go('select', {
-        param: {
-          title: title,
-          list: list,
-          callback: function (item) {
-            data.loading = true;
-            //$("#ActivityDetailDiv").css("display", "none");
-            dataShareService.eventSeriesId = item.id;
-            $ionicHistory.goBack();
-          }
-        }
-      });
-    };
     $scope.submitRate = function () {
       dataService.rateEvent(dataShareService.eventSeriesId, data.myRate.rating, data.myRate.comment).then(function (data) {
         utilService.toast('评价成功！');
@@ -153,6 +95,7 @@ FduHangoutApp
         $scope.refresh();
       });
     };
+
     $scope.showOrg = function (id) {
       skipReloadOnLeave = true;
       $state.go("organization", {
@@ -196,73 +139,31 @@ FduHangoutApp
     };
 
     $scope.refresh = function (isPull, forceRefresh) {
-      if (!isPull && !forceRefresh && dataShareService.eventSeriesId === data.id) {
-        data.loading = false;
-        data.loggedIn = accountService.loggedIn();
-        if (dataShareService.delegate_activitydetail_action != -1) {
-          switch (dataShareService.delegate_activitydetail_action) {
-            case 0:
-              $scope.openCancelSignup();
-              break;
-            case 1:
-              $scope.openRate();
-              break;
-            case 2:
-              $scope.openInvite();
-              break;
-          }
-          dataShareService.delegate_activitydetail_action = -1;
-        }
-        return;
-      }
-      $scope.data.loading = true;
-      $ionicScrollDelegate.scrollTop();
       if (!isPull) {
-        $ionicLoading.show({
-          template: '加载中...'
-        })
-      }
-      $scope.toggleFriendSelection = function (friend) {
-        var idx = $scope.data.friendsToInvite.indexOf(friend.id);
-
-        if (idx > -1) {
-          $scope.data.friendsToInvite.splice(idx, 1);
-        } else {
-          $scope.data.friendsToInvite.push(friend.id);
-        }
-      };
-
-      dataService.getActivityDetail(dataShareService.eventSeriesId).then(function (recv) {
-        recv.distance = utilService.calcCrow(dataShareService.lat, dataShareService.lng, recv.location_lat, recv.location_lng);
-        angular.copy(recv, data);
-        data.id = dataShareService.eventSeriesId;
-        data.loggedIn = accountService.loggedIn();
-        $scope.eventStatusDescription = utilService.getEventStatusDescription(recv.status);
-
-        if (dataShareService.delegate_activitydetail_action != -1) {
-          switch (dataShareService.delegate_activitydetail_action) {
-            case 0:
-              $scope.openCancelSignup();
-              break;
-            case 1:
-              $scope.openRate();
-              break;
-            case 2:
-              $scope.openInvite();
-              break;
-          }
-          dataShareService.delegate_activitydetail_action = -1;
-        }
-
-      }).finally(function () {
         data.loading = false;
-        if (isPull) {
-          $scope.$broadcast('scroll.refreshComplete');
-        } else {
-          $ionicLoading.hide();
-        }
+        data.loggedIn = accountService.loggedIn();
+        $scope.data.loading = true;
         $ionicScrollDelegate.scrollTop();
-      });
+        if (!isPull) {
+          $ionicLoading.show({
+            template: '加载中...'
+          })
+        }
+
+        activityService.getActivity(data.id).then(function (recv) {
+          //recv.distance = utilService.calcCrow(geoLocationService.lat, geoLocationService.lng, recv.location_lat,
+          // recv.location_lng);
+          data.activity = recv;
+        }).finally(function () {
+          data.loading = false;
+          if (isPull) {
+            $scope.$broadcast('scroll.refreshComplete');
+          } else {
+            $ionicLoading.hide();
+          }
+          $ionicScrollDelegate.scrollTop();
+        });
+      }
     };
 
     $scope.$on('$ionicView.enter', function () {

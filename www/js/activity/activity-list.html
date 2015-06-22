@@ -7,17 +7,21 @@
         </button>
     </ion-nav-buttons>
 
-    <ion-header-bar class="bar-subheader" style="display: none">
-
+    <ion-header-bar class="bar-subheader" no-tap-scroll="true" style="display: none">
     </ion-header-bar>
 
     <ion-tabs>
         <ul class="tabs amber z-depth-1" fh-tabs>
-            <li class="tab col s3 waves-effect waves-yellow"><a>所有</a></li>
-            <li class="tab col s3 waves-effect waves-yellow"><a>好友</a></li>
-            <li class="tab col s3 waves-effect waves-yellow"><a>我的</a></li>
+            <li class="tab col s3 waves-effect waves-yellow">
+                <a href="#activity-tab0">所有</a>
+            </li>
+            <li class="tab col s3 waves-effect waves-yellow">
+                <a href="#activity-tab1">好友</a>
+            </li>
+            <li class="tab col s3 waves-effect waves-yellow">
+                <a href="#activity-tab2">我的</a>
+            </li>
         </ul>
-
     </ion-tabs>
 
     <ion-content class="has-subheader">
@@ -27,10 +31,32 @@
             on-refresh="refresh(1)">
         </ion-refresher>
 
+        <ion-list>
+            <div style="padding: 20px">
+                <div class="card"
+                     ng-repeat="activity in data.curList">
+                    <div class="card-image">
+                        <img src="img/default-avatar.jpeg">
+                        <span class="card-title grey-text text-lighten-3">{{activity.title}}</span>
+                    </div>
+                    <div class="card-content waves-effect" style="width: 100%"
+                         ui-sref="activity-detail({id: activity.id})">
+                        <span class="grey-text" style="font-size: 18px">{{activity.location || '暂无地点'}}</span>
+                        <span class="grey-text"
+                              style="float:right; font-size: 18px">{{getTimeDesc(activity.startTime)}} </span>
 
-        <ion-nav-view name="activityListContent">
-        </ion-nav-view>
+                        <p style="margin-top: 8px">
+                            {{activity.description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </ion-list>
 
     </ion-content>
+
+    <div id="activity-tab0" ng-click="selectTab(0)" style="display: none"></div>
+    <div id="activity-tab1" ng-click="selectTab(1)" style="display: none"></div>
+    <div id="activity-tab2" ng-click="selectTab(2)" style="display: none"></div>
 
 </ion-view>

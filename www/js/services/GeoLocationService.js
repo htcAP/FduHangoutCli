@@ -1,16 +1,20 @@
-FduHangoutApp.service('geoLocationService', function (dataShareService) {
+FduHangoutApp.service('geoLocationService', function () {
   //var posOptions = {timeout: 10000, enableHighAccuracy: false};
-  var ext = {
+  var self;
+  return self = {
+
+    lat: -1,
+    lng: -1,
+
     getGeoLocation: function () {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-          dataShareService.lat = position.coords.latitude;
-          dataShareService.lng = position.coords.longitude;
+          self.lat = position.coords.latitude;
+          self.lng = position.coords.longitude;
         });
       } else {
         console.log("Geolocation is not supported by this browser.");
       }
     }
   };
-  angular.extend(this, ext);
 });

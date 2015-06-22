@@ -1,5 +1,5 @@
 FduHangoutApp.service('activityService',
-  function (apiService) {
+  function (apiService, accountService, utilService) {
     var self;
 
     return self = {
@@ -15,6 +15,9 @@ FduHangoutApp.service('activityService',
           var a = data.activities;
           self.allActivity.splice(0, self.allActivity.length);
           a.forEach(function (a) {
+            a.id = a.activity_id;
+            delete a.activity_id;
+
             self.allActivity.push(self.cacheActivity(a));
           });
           return self.allActivity;
@@ -22,8 +25,18 @@ FduHangoutApp.service('activityService',
 
       },
 
-      getActivity: function () {
+      getActivity: function (id) {
+        return apiService.request('activity/get/activity', '获取活动', {
+          token: accountService.token,
+          activity_id: id
+        }).then(function (data) {
+          data.id = data.activity_id;
+          delete data.error;
+          delete data.id;
 
+          self.cacheActivity(data);
+          return data;
+        });
       },
 
       cacheActivity: function (a) {
@@ -36,7 +49,7 @@ FduHangoutApp.service('activityService',
         return u;
       },
 
-      getCachedUser: function (id) {
+      getCachedActivity: function (id) {
         var a = self.activityList[id];
         if (!a) {
           a = self.activityList[id] = {};

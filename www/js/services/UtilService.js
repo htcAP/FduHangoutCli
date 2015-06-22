@@ -6,6 +6,8 @@
 FduHangoutApp.service('utilService',
   function ($http, $ionicPopup, $q, $rootScope, $timeout, $sce, $cordovaToast) {
 
+    var tsOffset = new Date().getTimezoneOffset() * 60 * 1000;
+
     function calcCrow(lat1, lon1, lat2, lon2) {
       if (lat1 == 0 || lat2 == 0) return null;
       var R = 6371; // km
@@ -29,7 +31,9 @@ FduHangoutApp.service('utilService',
       return this.indexOf(start) === 0;
     };
 
-    var toExtend = {
+    var self;
+
+    var toExtend = self = {
       API_BASE: 'https://fduhangout.realmofmusic.org/api',
       URL_BASE: 'https://fduhangout.realmofmusic.org',
       //API_BASE: 'http://mingjikeji.cn/api',
@@ -49,6 +53,15 @@ FduHangoutApp.service('utilService',
         var deferred = $q.defer();
         deferred.resolve(data);
         return deferred.promise;
+      },
+
+      timestampToDate: function (timestamp) {
+        return new Date(timestamp - tsOffset);
+      },
+
+      getTimeDesc: function (timestamp) {
+        var date = self.timestampToDate(timestamp);
+        return date.toDateString();
       },
 
       toAbsoluteURL: function (relativeURL) {
@@ -173,6 +186,7 @@ FduHangoutApp.service('utilService',
       $('body').removeClass('fh-keyboard-open');
       $timeout(resize, 200);
     });
+
     window.addEventListener('native.keyboardshow', function () {
       $('body').addClass('fh-keyboard-open');
       $timeout(resize, 200);

@@ -50,12 +50,13 @@
     <script src="js/directive/fh-auto-focus.js"></script>
     <script src="js/directive/fh-side-nav-button.js"></script>
     <script src="js/directive/fh-special-affect-avatar.js"></script>
+    <script src="js/directive/fh-src.js"></script>
     <script src="js/directive/fh-tabs.js"></script>
-    <script src="js/directive/ly-src.js"></script>
     <script src="js/filter/parse-datetime.js"></script>
     <script src="js/filter/remove-img.js"></script>
     <script src="js/main/main.js"></script>
     <script src="js/materialize/sideNav.js"></script>
+    <script src="js/materialize/tabs.js"></script>
     <script src="js/plugin/NativeUrlPlugin.js"></script>
     <script src="js/plugin/testPlugin.js"></script>
     <script src="js/register/register.js"></script>
@@ -64,7 +65,6 @@
     <script src="js/services/ActivityService.js"></script>
     <script src="js/services/ApiService.js"></script>
     <script src="js/services/DataService.js"></script>
-    <script src="js/services/EventApiService.js"></script>
     <script src="js/services/GeoLocationService.js"></script>
     <script src="js/services/LocationService.js"></script>
     <script src="js/services/RouteService.js"></script>
@@ -74,7 +74,6 @@
     <script src="js/services/UrlParserService.js"></script>
     <script src="js/services/UserService.js"></script>
     <script src="js/services/UtilService.js"></script>
-    <script src="js/services/dataShareService.js"></script>
     <script src="js/setting/setting.js"></script>
     <script src="js/tabs/activity.js"></script>
     <script src="js/tabs/login.js"></script>
@@ -99,7 +98,7 @@
 <!--
   The nav bar that will be updated as we navigate between views.
 -->
-<ion-nav-bar class="bar-positive">
+<ion-nav-bar class="bar-positive" no-tap-scroll="true">
     <ion-nav-back-button class="button-clear waves-effect waves-light">
         <i class="ion-android-arrow-back" style="font-size:24px"></i>
     </ion-nav-back-button>

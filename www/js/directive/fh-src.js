@@ -1,8 +1,8 @@
-FduHangoutApp.directive('lySrc', function (utilService) {
+FduHangoutApp.directive('fhSrc', function (utilService) {
   return {
     restrict: 'A',
     link: function (scope, element, attr) {
-      attr.$observe('lySrc', function (value) {
+      attr.$observe('fhSrc', function (value) {
         if (!value) {
           return;
         }
