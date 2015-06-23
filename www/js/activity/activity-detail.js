@@ -121,7 +121,7 @@ FduHangoutApp
       if (data.activity.status == 0) {
         return;
       }
-      var tm = data.activity.timeLocations[0];
+      var tm = data.activity.timeLocations[0].location;
       mapPlugin.directionIntent(tm.latitude, tm.longitude, geoLocationService.lat, geoLocationService.lng);
     };
 

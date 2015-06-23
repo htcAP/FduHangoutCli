@@ -43,9 +43,9 @@
                     </div>
                     <div class="card-content waves-effect" style="width: 100%"
                          ui-sref="activity-detail({id: activity.id})">
-                        <span class="grey-text" style="font-size: 18px">{{activity.location || '暂无地点'}}</span>
+                        <span class="grey-text" style="font-size: 18px">{{activity.location || '地点待定'}}</span>
                         <span class="grey-text"
-                              style="float:right; font-size: 18px">{{getTimeDesc(activity.startTime)}} </span>
+                              style="float:right; font-size: 18px">{{activity.startTime ? getTimeDesc(activity.startTime) : '时间待定'}} </span>
 
                         <p style="margin-top: 8px">
                             {{activity.description}}
