@@ -35,6 +35,18 @@
             </ion-item>
 
             <ion-item class="item-icon-left"
+                      ng-class="location.hash === '#/activity-request' ? 'active' : ''"
+                      ui-sref="main.activity-request">
+                <i class="icon ion-android-people"></i>
+                邀请我的活动
+                <span class="badge badge-assertive"
+                      ng-if="activityService.invitedActivity.length"
+                      style="line-height: 28px;">
+                    {{activityService.invitedActivity.length}}
+                </span>
+            </ion-item>
+
+            <ion-item class="item-icon-left"
                       ng-class="location.hash === '#/friends' ? 'active' : ''"
                       ui-sref="main.friends">
                 <i class="icon ion-android-people"></i>

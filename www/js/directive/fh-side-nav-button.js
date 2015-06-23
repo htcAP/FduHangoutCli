@@ -1,4 +1,4 @@
-FduHangoutApp.directive('fhSideNavButton', function ($rootScope, userService) {
+FduHangoutApp.directive('fhSideNavButton', function ($rootScope, userService, activityService) {
   return {
     restrict: 'A',
     link: function (scope, element, attr) {
@@ -11,6 +11,7 @@ FduHangoutApp.directive('fhSideNavButton', function ($rootScope, userService) {
       );
       el.on('click', function () {
         userService.getFriendRequest();
+        activityService.getInvitedList();
       });
 
       $rootScope.showSideNav = function () {

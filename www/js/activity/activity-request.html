@@ -1,0 +1,40 @@
+<ion-view ng-controller="ActivityRequestController">
+
+    <ion-nav-title>邀请我的活动</ion-nav-title>
+
+    <ion-content>
+
+        <ion-refresher
+            pulling-text="刷新"
+            on-refresh="refresh(1)">
+        </ion-refresher>
+
+        <ion-list>
+            <ion-item ng-if="activityService.invitedActivity.length == 0">
+                还没有好友邀请你参加活动...
+            </ion-item>
+
+            <div style="padding: 20px; margin-bottom: 40px">
+                <div class="card"
+                     ng-repeat="activity in activityService.invitedActivity">
+                    <div class="card-image">
+                        <img src="img/default-avatar.jpeg">
+                        <span class="card-title grey-text text-lighten-3">{{activity.title}}</span>
+                    </div>
+                    <div class="card-content waves-effect" style="width: 100%"
+                         ui-sref="activity-detail({id: activity.id})">
+                        <span class="grey-text" style="font-size: 18px">{{activity.location || '暂无地点'}}</span>
+                        <span class="grey-text"
+                              style="float:right; font-size: 18px">{{getTimeDesc(activity.startTime)}} </span>
+
+                        <p style="margin-top: 8px">
+                            {{activity.description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </ion-list>
+    </ion-content>
+
+</ion-view>

@@ -8,7 +8,7 @@ FduHangoutApp
   })
 
   .controller('NewActivityController',
-  function ($scope, utilService, activityService, accountService, $state, $ionicLoading, $ionicHistory, $rootScope, AUTH_EVENTS) {
+  function ($scope, utilService, activityService, accountService, $state, $ionicLoading, $ionicHistory, $rootScope, AUTH_EVENTS, $timeout) {
     if (!accountService.loggedIn()) {
       utilService.toast('请先登录！');
       $ionicHistory.goBack();

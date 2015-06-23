@@ -8,7 +8,7 @@ FduHangoutApp
   })
 
   .controller('TimeLocationController',
-  function ($scope, $stateParams, activityService, utilService, $state, accountService, $ionicLoading, mapPlugin, geoLocationService) {
+  function ($scope, $stateParams, activityService, utilService, $state, accountService, $ionicLoading, mapPlugin, geoLocationService, $ionicPopup, $ionicHistory) {
     var id = $stateParams.id;
     var activity = activityService.getCachedActivity(id);
     var data = $scope.data = {
@@ -51,7 +51,7 @@ FduHangoutApp
       });
       activityService.decideTimeLocation(tid).then(function () {
         utilService.toast('已结束活动邀请并决定活动时间地点!');
-        activityService.getActivity(id);
+        activityService.getActivity($stateParams.id);
         $ionicHistory.goBack();
 
       }).finally(function () {

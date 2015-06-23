@@ -1,8 +1,8 @@
 FduHangoutApp.service('activityService',
-  function (apiService, accountService, utilService, geoLocationService) {
+  function (apiService, accountService, utilService, geoLocationService, $rootScope) {
     var self;
 
-    return self = {
+    return self = $rootScope.activityService = {
       activityList: {},
       allActivity: [],
       myActivity: [],

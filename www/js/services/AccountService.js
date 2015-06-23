@@ -4,7 +4,7 @@
 
 FduHangoutApp.service('accountService',
   function (utilService, apiService, $resource, $q, $rootScope, AUTH_EVENTS, NOTIFICATION_EVENTS, $injector) {
-    var userService, self;
+    var userService, activityService, self;
 
     return $rootScope.accountService = self = {
       token: '',
@@ -77,10 +77,13 @@ FduHangoutApp.service('accountService',
           if (!userService) {
             userService = $injector.get('userService');
           }
-          if (userService) {
-            userService.getFriendList();
-            userService.getFriendRequest();
+          userService.getFriendList();
+          userService.getFriendRequest();
+          if (!activityService) {
+            activityService = $injector.get('activityService');
           }
+          activityService.getInvitedList();
+
           return self.getSelfInfo();
         });
       },
@@ -101,9 +104,6 @@ FduHangoutApp.service('accountService',
         return defer.promise;
       },
 
-      /**
-       *  用户注销操作
-       */
       logout: function () {
         self.token = '';
         angular.copy({}, self.userInfo);
