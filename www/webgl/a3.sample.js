@@ -346,4 +346,6 @@ AEROTWIST.A3.Sample = new function () {
   }
 };
 
-AEROTWIST.A3.Sample.init();
+$(function () {
+  AEROTWIST.A3.Sample.init();
+});
