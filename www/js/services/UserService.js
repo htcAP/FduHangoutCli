@@ -129,7 +129,7 @@ FduHangoutApp.service('userService', function (apiService, accountService, $q, $
     },
 
     rejectFriend: function (id) {
-      return apiService.request('user/friend/accept', '拒绝好友请求', {
+      return apiService.request('user/friend/reject', '拒绝好友请求', {
         target_user: id,
         token: accountService.token
       }).then(function () {
