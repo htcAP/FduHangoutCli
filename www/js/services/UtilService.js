@@ -225,11 +225,9 @@ FduHangoutApp.service('utilService',
           mode: mode,
           allowOldDates: true
         }, function (returnDate) {
-          if (mode === 'time') {
-            returnDate = '1997/01/01' + returnDate.slice(returnDate.indexOf(' '));
-          }
-          var newDate = new Date(returnDate);
-          defer.resolve(newDate);
+          var a = new Date('1997/01/01' + returnDate.slice(returnDate.indexOf(' ')));
+          var b = new Date(returnDate);
+          defer.resolve(isNaN(b.getTime()) ? a : b);
         });
         return defer.promise;
       }
