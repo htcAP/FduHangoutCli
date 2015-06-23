@@ -127,6 +127,17 @@ FduHangoutApp
 
     $scope.startActivity = function () {
       mapActivityService.start(data.id);
+    };
+
+    $scope.canInvite = function () {
+      var list = data.activity.invites;
+      var selfId = accountService.userInfo.id;
+      for (var i = 0; i < list.length; ++i) {
+        if (list[i].user_id == selfId) {
+          return list[i].invite_status == 1;
+        }
+      }
+      return false;
     }
 
   });

@@ -18,7 +18,7 @@
 
     <ion-nav-buttons side="right">
         <button ng-click="startActivity()"
-                class="button button-icon mdi-maps-directions">
+                class="button button-icon mdi-maps-my-location">
         </button>
     </ion-nav-buttons>
 
@@ -54,7 +54,7 @@
                     </ion-item>
                 </div>
                 <ion-item class="item-icon-left col-100"
-                          ng-click="navitage()"
+                          ng-click="navigate()"
                           style="border:0">
                     <i class="icon mdi-maps-place yellow-text text-darken-4"></i>
                     {{data.activity.status ? data.activity.timeLocations[0].location.place : '未确定'}}
